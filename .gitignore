@@ -1,0 +1,11 @@
+/node_modules/
+/yarn.lock
+/.idea
+/.history
+docker-compose-multe.yml
+docker-compose.yml
+logs/
+logs1/
+logs2/
+logs3/
+使用说明.txt
