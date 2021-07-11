@@ -29,7 +29,9 @@ RUN set -ex \
     && mkdir logs \
     && npm config set registry https://registry.npm.taobao.org \
     && npm install \
-    && npm install -g typescript ts-node png-js date-fns && npm install axios --save \
+    && npm install ts-node png-js date-fns \
+    && npm install -g typescript \
+    && npm install axios --save \
     && cp /scripts/docker/docker_entrypoint.sh /usr/local/bin \
     && chmod +x /usr/local/bin/docker_entrypoint.sh
 

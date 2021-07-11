@@ -1,10 +1,10 @@
 # Page
-# 每3天的23:50分清理一次日志(互助码不清理，proc_file.sh对该文件进行了去重)
-50 23 */3 * * find /scripts/logs -name '*.log' | grep -v 'sharecodeCollection' | xargs rm -rf
+# 每1天的23:50分清理一次日志(互助码不清理，proc_file.sh对该文件进行了去重)
+50 23 */1 * * find /scripts/logs -name '*.log' | grep -v 'sharecodeCollection' | xargs rm -rf
 # 取关京东店铺商品
 30 11,23 * * * node /scripts/myActions/jd_unsubscribe.js >>/scripts/logs/jd_unsubscribe.log 2>&1
 
-#收集助力码
+# 收集助力码
 30 * * * * sh +x /scripts/myActions/docker/auto_help.sh collect >>/scripts/logs/auto_help_collect.log 2>&1
 # 导到所有互助码
 23 7 * * * node /scripts/myActions/jd_get_share_code.js >/scripts/logs/jd_get_share_code.log 2>&1
@@ -17,7 +17,9 @@
 41 0,11 * * * node /scripts/myActions/jd_priceProtect.js >>/scripts/logs/jd_priceProtect.log 2>&1
 
 # 京喜牧场
-20 0-23/3 * * * node /scripts/myActions/jd_jxmc.js >>/scripts/logs/jd_jxmc.log 2>&1
+20 0-23/4 * * * node /scripts/myActions/jd_jxmc.js >>/scripts/logs/jd_jxmc.log 2>&1
+07 6,13,17,22 * * * node /scripts/myActions/jd_jxmc1.js >>/scripts/logs/jd_jxmc1.log 2>&1
+# ts-node myActions/jd_jxmc.ts
 # 京喜农场
 30 9,12,18 * * * node /scripts/myActions/jd_jxnc.js >>/scripts/logs/jd_jxnc.log 2>&1
 # 财富岛提现
@@ -51,8 +53,9 @@
 # crazyJoy自动每日任务
 30 13 * * * node /scripts/myActions/jd_crazy_joy.js >>/scripts/logs/jd_crazy_joy.log 2>&1
 
-# 宠汪汪
-45 */2,23 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
+# 宠汪汪二代目
+45 */2 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
+05 */6 * * * node /scripts/myActions/jd_joy_new.js >>/scripts/logs/jd_joy_new.log 2>&1
 # 宠汪汪积分兑换京豆
 # 0 0-16/8 * * * node /scripts/myActions/jd_joy_reward.js >>/scripts/logs/jd_joy_reward.log 2>&1
 # 宠汪汪喂食
@@ -67,9 +70,9 @@
 # 汪汪乐园每日任务
 40 9 * * * node /scripts/myActions/jd_joy_park_task.js >>/scripts/logs/jd_joy_park_task.log 2>&1
 
-#京东极速版红包(活动时间：2021-5-5至2021-5-31)
+# 京东极速版红包(活动时间：2021-5-5至2021-5-31)
 45 0,23 * * * node /scripts/myActions/jd_speed_redpocke.js >>/scripts/logs/jd_speed_redpocke.log 2>&1
-#京东极速版签到+赚现金任务 - 活动入口：京东极速版app-现金签到
+# 京东极速版签到+赚现金任务 - 活动入口：京东极速版app-现金签到
 21 1,6 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1
 
 # 喜马拉雅极速版 (# sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk add --no-cache python3 && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && pip install requests rsa)
@@ -87,6 +90,7 @@
 # 京东签到图形验证
 0 1 * * * node /scripts/myActions/jd_NewSign.js >/scripts/logs/jd_NewSign.log 2>&1
 # 点点券二代目
+# 40 0,7,14,21 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1
 40 0,7,14,21 * * * node /scripts/myActions/jd_necklace_new.js >>/scripts/logs/jd_necklace_new.log 2>&1
 # 京东种豆得豆
 10 0-22/1 * * * node /scripts/myActions/jd_plantBean.js >>/scripts/logs/jd_plantBean.log 2>&1
@@ -180,88 +184,6 @@
 # 全民挖现金
 30 9 * * * node /scripts/myActions/jd_wxj.js >>/scripts/logs/jd_wxj.log 2>&1
 # 燃动夏季
-57 5-23/2 * * * node /scripts/myActions/jd_summer_movement.js >>/scripts/logs/jd_summer_movement.log 2>&1
+07 5-23/2 * * * node /scripts/myActions/jd_summer_movement.js >>/scripts/logs/jd_summer_movement.log 2>&1
 # 燃动夏季_SH助力
-17 8-23/2 * * * node /scripts/myActions/jd_summer_movement_help.js >>/scripts/logs/jd_summer_movement_help.log 2>&1
-
-###################################
-###################################
-###################################
-
-# #蒙牛有机牧场
-# 0 0,1-22/2 1-31 4-7 * node /scripts/myActions/jd_monk_pasture.js >>/scripts/logs/jd_monk_pasture.log 2>&1
-# #直播间抽奖(全局)
-# 30 0,6,12 * * * node /scripts/myActions/jd_live_lottery_social.js >>/scripts/logs/jd_live_lottery_social.log 2>&1
-# #店铺加购有礼
-# 15 4 * * * node /scripts/myActions/monk_shop_add_to_car.js >>/scripts/logs/monk_shop_add_to_car.log 2>&1
-
-# # 店铺签到+interCenter渠道店铺签到
-# 1 0 * * * node /scripts/myActions/jd_ShopSign.js >>/scripts/logs/jd_ShopSign.log 2>&1
-# # 飞利浦电视成长记
-# 15 5 * 5,6 * node /scripts/myActions/adolf_flp.js >>/scripts/logs/adolf_flp.log 2>&1
-# # 京喜阶梯红包
-# 15 1 * 5,6 * node /scripts/myActions/adolf_jxhb.js >>/scripts/logs/adolf_jxhb.log 2>&1
-# # 618大势新品赏
-# 15 1,12 * 5,6 * node /scripts/myActions/adolf_newInteraction.js >>/scripts/logs/adolf_newInteraction.log 2>&1
-# # 赢一加新品手机
-# 25 1 * 5,6 * node /scripts/myActions/adolf_oneplus.js >>/scripts/logs/adolf_oneplus.log 2>&1
-# # 京东超级盒子
-# 15 1,12 * 5,6 * node /scripts/myActions/adolf_superbox.js >>/scripts/logs/adolf_superbox.log 2>&1
-# # 京享值pk
-# 15 1,12 * 5,6 * node /scripts/myActions/jd_pk.js >>/scripts/logs/jd_pk.log 2>&1
-
-# # 粉丝互动
-# 21 20 * * * node /scripts/myActions/jd_fanslove.js >>/scripts/logs/jd_fanslove.log 2>&1
-# # 京东特物国创IP
-# 0 18,23 * * * node /scripts/myActions/jd_gcip.js >>/scripts/logs/jd_gcip.log 2>&1
-# # 京贴小程序
-# 10 19 * * * node /scripts/myActions/jd_jintie_wx.js >>/scripts/logs/jd_jintie_wx.log 2>&1
-# # joy总动员(手动运行一次即可，430豆)
-# 30 1 * * * node /scripts/myActions/jd_joy_zdy.js >>/scripts/logs/jd_joy_zdy.log 2>&1
-# # 京小兑
-# 1 0 * * * node /scripts/myActions/jd_jxd.js >>/scripts/logs/jd_jxd.log 2>&1
-
-# # 关注有礼
-# 15 7 * * * node /scripts/myActions/jd_shop_follow_sku.js >>/scripts/logs/jd_shop_follow_sku.log 2>&1
-
-# # 京喜签到+京东成长分+京东特权值
-# 30 0 * * * node /scripts/myActions/jx_sign.js >>/scripts/logs/jx_sign.log 2>&1
-# 32 0 * * * node /scripts/myActions/jdczf.js >>/scripts/logs/jdczf.log 2>&1
-# 34 0 * * * node /scripts/myActions/jdtqz.js >>/scripts/logs/jdtqz.log 2>&1
-
-# # 618手机狂欢城
-# 0 16,22,4,10 * * * node /scripts/myActions/z_carnivalcity.js >>/scripts/logs/z_carnivalcity.log 2>&1
-# # 京东保洁消消乐
-# 18 3 1-18 6 * node /scripts/myActions/zooBaojiexiaoxiaole.js >>/scripts/logs/zooBaojiexiaoxiaole.log 2>&1
-# # 与“粽”不同
-# 15 5 1-18 6 * node /scripts/myActions/zooLongzhou.js >>/scripts/logs/zooLongzhou.log 2>&1
-# # 整点京豆雨
-# 1 0-23/1 * * * node /scripts/myActions/jd_super_redrain.js >>/scripts/logs/jd_super_redrain.log 2>&1
-# # 半点京豆雨
-# 30 16-23/1 * * * node /scripts/myActions/jd_half_redrain.js >>/scripts/logs/jd_half_redrain.log 2>&1
-
-# # 送豆得豆
-# 07 1,11,22 * * * node /scripts/myActions/jd_sendBeans.js >>/scripts/logs/jd_sendBeans.log 2>&1
-
-# ##############短期活动##############
-# #金口碑奖投票
-# 1 0,8 * * * node /scripts/myActions/jd_mgold.js >>/scripts/logs/jd_mgold.log 2>&1
-
-# #手机狂欢城
-# 0 0,12,18,21 * * * node /scripts/myActions/jd_carnivalcity.js >>/scripts/logs/jd_carnivalcity.log 2>&1
-
-# #明星小店(星店长，2021-06-10)
-# 0 1,21 * * * node /scripts/myActions/jd_star_shop.js >/scripts/logs/jd_star_shop.log 2>&1
-
-# ##############长期活动##############
-
-# 10,0 0 * * * node /scripts/myActions/jd_blueCoin20.js >>/scripts/logs/jd_blueCoin20.log 2>&1
-
-# # 京东排行榜
-# 21 9 * * * node /scripts/myActions/jd_rankingList.js >>/scripts/logs/jd_rankingList.log 2>&1
-
-# #家庭号
-# 10 6,7 * * * node /scripts/myActions/jd_family.js >>/scripts/logs/jd_family.log 2>&1
-
-# # 天天加速
-# 8 0-23/3 * * * node /scripts/myActions/jd_speed.js >>/scripts/logs/jd_speed.log 2>&1
+# 17 8-23/2 * * * node /scripts/myActions/jd_summer_movement_help.js >>/scripts/logs/jd_summer_movement_help.log 2>&1

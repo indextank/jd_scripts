@@ -1,5 +1,5 @@
 /*
- Last Modified time: 2021-4-3 16:00:54
+ Last Modified time: 2021-06-19 00:00:00
  */
 /**
  * sendNotify 推送通知功能
@@ -9,6 +9,7 @@
  * @param author 作者仓库等信息  例：`本脚本免费使用 By：xxx`
  * @returns {Promise<unknown>}
  */
+const { resolve } = require("path");
 const querystring = require("querystring");
 const $ = new Env();
 const timeout = 15000;//超时时间(单位毫秒)
@@ -22,7 +23,8 @@ let SCKEY = '';
 let BARK_PUSH = '';
 //BARK app推送铃声,铃声列表去APP查看复制填写
 let BARK_SOUND = '';
-
+//BARK app推送消息的分组，默认为”JDHelloWorld”
+let BARK_GROUP = 'JDHelloWorld'
 
 // =======================================telegram机器人通知设置区域===========================================
 //此处填你telegram bot 的Token，telegram机器人通知推送必填项.例如：1077xxx4424:AAFjv0FcqxxxxxxgEMGfi22B4yh15R5uw
@@ -72,6 +74,16 @@ let IGOT_PUSH_KEY = '';
 let PUSH_PLUS_TOKEN = '';
 let PUSH_PLUS_USER = '';
 
+// =======================================cq-gohttp设置区域=======================================
+// Doc https://docs.go-cqhttp.org/api/
+let go_cqhttp_url = '' // 127.0.0.1:5702
+let go_cqhttp_qq = '' // 接收消息QQ或群
+let go_cqhttp_method = '' // send_private_msg or send_group_msg
+
+process.env.go_cqhttp_url ? go_cqhttp_url = process.env.go_cqhttp_url : ''
+process.env.go_cqhttp_qq ? go_cqhttp_qq = process.env.go_cqhttp_qq : ''
+process.env.go_cqhttp_method ? go_cqhttp_method = process.env.go_cqhttp_method : ''
+
 //==========================云端环境变量的判断与接收=========================
 if (process.env.PUSH_KEY) {
   SCKEY = process.env.PUSH_KEY;
@@ -96,6 +108,10 @@ if (process.env.BARK_PUSH) {
   if (process.env.BARK_SOUND) {
     BARK_SOUND = process.env.BARK_SOUND
   }
+  if (process.env.BARK_GROUP) {
+    BARK_GROUP = process.env.BARK_GROUP
+  }
+  
 } else {
   if (BARK_PUSH && BARK_PUSH.indexOf('https') === -1 && BARK_PUSH.indexOf('http') === -1) {
     //兼容BARK本地用户只填写设备码的情况
@@ -148,7 +164,7 @@ if (process.env.PUSH_PLUS_USER) {
  * @param author 作者仓库等信息  例：`本脚本免费使用 By：xxxx`
  * @returns {Promise<unknown>}
  */
-async function sendNotify(text, desp, params = {}, author = '') {
+async function sendNotify(text, desp, params = {}, author = '\n\n仅供用于学习') {
   //提供6种通知
   desp += author;//增加作者信息，防止被贩卖等
   await Promise.all([
@@ -164,8 +180,43 @@ async function sendNotify(text, desp, params = {}, author = '') {
     qywxBotNotify(text, desp), //企业微信机器人
     qywxamNotify(text, desp), //企业微信应用消息推送
     iGotNotify(text, desp, params),//iGot
-    //CoolPush(text, desp)//QQ酷推
+    goCQhttp(text, desp)  // go-cqhttp
   ])
+}
+
+function goCQhttp(text, desp) {
+  if (go_cqhttp_url && go_cqhttp_qq && go_cqhttp_method) {
+    let msg = (text + '\n' + desp).replace("\n\n仅供用于学习", '');
+
+    let recv_id = ''
+    if (go_cqhttp_method === 'send_private_msg') {
+      recv_id = 'user_id'
+    } else if (go_cqhttp_method === 'send_group_msg') {
+      recv_id = 'group_id'
+    }
+
+    return new Promise(resolve => {
+      $.get({
+        url: `http://${go_cqhttp_url}/${go_cqhttp_method}?${recv_id}=${go_cqhttp_qq}&message=${escape(msg)}`
+      }, (err, resp, data) => {
+        if (!err) {
+          try {
+            // console.log(data);
+            data = JSON.parse(data);
+            if (data.retcode === 0 && data.status === 'ok') {
+              console.log('go-cqhttp发送通知消息成功🎉\n')
+            } else {
+              console.log(`go-cqhttp发送通知消息异常\n${JSON.stringify(data)}`)
+            }
+          } catch (e) {
+            $.logErr(e, resp)
+          } finally {
+            resolve(200)
+          }
+        }
+      })
+    })
+  }
 }
 
 function serverNotify(text, desp, time = 2100) {
@@ -213,85 +264,11 @@ function serverNotify(text, desp, time = 2100) {
   })
 }
 
-function CoolPush(text, desp) {
-  return new Promise(resolve => {
-    if (QQ_SKEY) {
-      let options = {
-        url: `https://push.xuthus.cc/${QQ_MODE}/${QQ_SKEY}`,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-
-      // 已知敏感词
-      text = text.replace(/京豆/g, "豆豆");
-      desp = desp.replace(/京豆/g, "");
-      desp = desp.replace(/🐶/g, "");
-      desp = desp.replace(/红包/g, "H包");
-
-      switch (QQ_MODE) {
-        case "email":
-          options.json = {
-            "t": text,
-            "c": desp,
-          };
-          break;
-        default:
-          options.body = `${text}\n\n${desp}`;
-      }
-
-      let pushMode = function (t) {
-        switch (t) {
-          case "send":
-            return "个人";
-          case "group":
-            return "QQ群";
-          case "wx":
-            return "微信";
-          case "ww":
-            return "企业微信";
-          case "email":
-            return "邮件";
-          default:
-            return "未知方式"
-        }
-      }
-
-      $.post(options, (err, resp, data) => {
-        try {
-          if (err) {
-            console.log(`发送${pushMode(QQ_MODE)}通知调用API失败！！\n`)
-            console.log(err);
-          } else {
-            data = JSON.parse(data);
-            if (data.code === 200) {
-              console.log(`酷推发送${pushMode(QQ_MODE)}通知消息成功🎉\n`)
-            } else if (data.code === 400) {
-              console.log(`QQ酷推(Cool Push)发送${pushMode(QQ_MODE)}推送失败：${data.msg}\n`)
-            } else if (data.code === 503) {
-              console.log(`QQ酷推出错，${data.message}：${data.data}\n`)
-            } else {
-              console.log(`酷推推送异常: ${JSON.stringify(data)}`);
-            }
-          }
-        } catch (e) {
-          $.logErr(e, resp);
-        } finally {
-          resolve(data);
-        }
-      })
-    } else {
-      console.log('您未提供酷推的SKEY，取消QQ推送消息通知🚫\n');
-      resolve()
-    }
-  })
-}
-
 function BarkNotify(text, desp, params = {}) {
   return new Promise(resolve => {
     if (BARK_PUSH) {
       const options = {
-        url: `${BARK_PUSH}/${encodeURIComponent(text)}/${encodeURIComponent(desp)}?sound=${BARK_SOUND}&${querystring.stringify(params)}`,
+        url: `${BARK_PUSH}/${encodeURIComponent(text)}/${encodeURIComponent(desp)}?sound=${BARK_SOUND}&group=${BARK_GROUP}&${querystring.stringify(params)}`,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
@@ -531,7 +508,7 @@ function qywxamNotify(text, desp) {
               textcard: {
                 title: `${text}`,
                 description: `${desp}`,
-                url: 'https://github.com/lxk0301/jd_scripts',
+                url: '',
                 btntxt: '更多'
               }
             }
