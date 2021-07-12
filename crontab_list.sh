@@ -80,7 +80,7 @@
 21 1,6 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1
 
 # 喜马拉雅极速版 (# sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk add --no-cache python3 && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && pip install requests rsa)
-*/31 * * * * python3 /scripts/myActions/xmly_speed.py
+31 */1 * * * python3 /scripts/myActions/xmly_speed.py
 # 店铺签到，各类店铺签到，有新的店铺直接添加token即可
 1 0 * * * node /scripts/myActions/jd_dpqd.js >>/scripts/logs/jd_dpqd.log 2>&1
 # 京豆变动通知【昨日收益】
@@ -94,7 +94,7 @@
 # 京东签到图形验证
 0 1 * * * node /scripts/myActions/jd_NewSign.js >/scripts/logs/jd_NewSign.log 2>&1
 # 点点券二代目
-# 40 0,7,14,21 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1
+33 12,23 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1
 40 0,7,14,21 * * * node /scripts/myActions/jd_necklace_new.js >>/scripts/logs/jd_necklace_new.log 2>&1
 # 京东种豆得豆
 10 0-22/1 * * * node /scripts/myActions/jd_plantBean.js >>/scripts/logs/jd_plantBean.log 2>&1
