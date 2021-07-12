@@ -1,4 +1,4 @@
-# Page
+# Page1
 # 每1天的23:50分清理一次日志(互助码不清理，proc_file.sh对该文件进行了去重)
 50 23 */1 * * find /scripts/logs -name '*.log' | grep -v 'sharecodeCollection' | xargs rm -rf
 # 取关京东店铺商品
@@ -31,7 +31,7 @@
 # 京喜财富岛
 5 7,12,18 * * * node /scripts/myActions/jd_cfd.js >>/scripts/logs/jd_cfd.log 2>&1
 # 财富岛热气球挂后台
-13 6-23/2 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
+13 5-23/2 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
 # 京喜领88元红包(6.31到期)
 30 1,6,12,21 * * * node /scripts/myActions/jd_jxlhb.js >>/scripts/logs/jd_jxlhb.log 2>&1
 
@@ -57,7 +57,7 @@
 
 # 宠汪汪二代目
 # 45 */2 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
-05 */1 * * * node /scripts/myActions/jd_joy_new.js >>/scripts/logs/jd_joy_new.log 2>&1
+05 */2 * * * node /scripts/myActions/jd_joy_new.js >>/scripts/logs/jd_joy_new.log 2>&1
 # 宠汪汪积分兑换京豆
 # 0 0-16/8 * * * node /scripts/myActions/jd_joy_reward.js >>/scripts/logs/jd_joy_reward.log 2>&1
 # 宠汪汪喂食
@@ -65,8 +65,10 @@
 # 宠汪汪邀请助力
 # 10 13-20/1 * * * node /scripts/myActions/jd_joy_run.js >>/scripts/logs/jd_joy_run.log 2>&1
 # 宠汪汪偷狗粮🐕
-10 0-21/3 * * * node /scripts/myActions/jd_joy_steal.js >>/scripts/logs/jd_joy_steal.log 2>&1
+10 0-23/3 * * * node /scripts/myActions/jd_joy_steal.js >>/scripts/logs/jd_joy_steal.log 2>&1
 
+# 汪汪乐园养joy
+20 0-23/3 * * * node /scripts/myActions/jd_joy_park.js >>/scripts/logs/jd_joy_park.log 2>&1
 # 汪汪乐园开工位
 50 7 * * * node /scripts/myActions/jd_joy_park_open.js >>/scripts/logs/jd_joy_park_open.log 2>&1
 # 汪汪乐园每日任务

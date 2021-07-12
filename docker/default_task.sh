@@ -12,6 +12,7 @@ function initPythonEnv() {
   #合并
   cd /scripts/docker/bot
   pip3 install --upgrade pip
+  pip3 install requests rsa
   pip3 install -r requirements.txt
   python3 setup.py install
 }
@@ -249,4 +250,6 @@ cat /scripts/docker/docker_entrypoint.sh >/usr/local/bin/docker_entrypoint.sh
 echo "发送通知"
 export NOTIFY_CONTENT=""
 cd /scripts/docker
+npm install date-fns png-js typescript ts-node
+npm install axios --save
 node notify_docker_user.js
