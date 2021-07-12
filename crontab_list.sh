@@ -30,6 +30,8 @@
 # 20 1,6,22 * * * node /scripts/myActions/jd_dreamFactorytuan.js >>/scripts/logs/jd_dreamFactorytuan.log 2>&1
 # 京喜财富岛
 5 7,12,18 * * * node /scripts/myActions/jd_cfd.js >>/scripts/logs/jd_cfd.log 2>&1
+# 财富岛热气球挂后台
+13 6-23/2 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
 # 京喜领88元红包(6.31到期)
 30 1,6,12,21 * * * node /scripts/myActions/jd_jxlhb.js >>/scripts/logs/jd_jxlhb.log 2>&1
 
@@ -54,8 +56,8 @@
 30 13 * * * node /scripts/myActions/jd_crazy_joy.js >>/scripts/logs/jd_crazy_joy.log 2>&1
 
 # 宠汪汪二代目
-45 */2 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
-05 */6 * * * node /scripts/myActions/jd_joy_new.js >>/scripts/logs/jd_joy_new.log 2>&1
+# 45 */2 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
+05 */1 * * * node /scripts/myActions/jd_joy_new.js >>/scripts/logs/jd_joy_new.log 2>&1
 # 宠汪汪积分兑换京豆
 # 0 0-16/8 * * * node /scripts/myActions/jd_joy_reward.js >>/scripts/logs/jd_joy_reward.log 2>&1
 # 宠汪汪喂食
@@ -186,4 +188,6 @@
 # 燃动夏季
 07 5-23/2 * * * node /scripts/myActions/jd_summer_movement.js >>/scripts/logs/jd_summer_movement.log 2>&1
 # 燃动夏季_SH助力
-# 17 8-23/2 * * * node /scripts/myActions/jd_summer_movement_help.js >>/scripts/logs/jd_summer_movement_help.log 2>&1
+17 8-23/2 * * * node /scripts/myActions/jd_summer_movement_help.js >>/scripts/logs/jd_summer_movement_help.log 2>&1
+
+30 0 * * * node /scripts/myActions/jd_wishingPool.js >>/scripts/logs/jd_wishingPool.log 2>&1
