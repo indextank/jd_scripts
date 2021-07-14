@@ -15,7 +15,7 @@ const CryptoJS = require('crypto-js')
 // console.log('时间戳：', format(new Date(), 'yyyyMMddHHmmssSSS'));
 
 let appId: number = 10028, fingerprint: string | number, token: string, enCryptMethodJD: any;
-let cookie: string = '', cookiesArr: Array<string> = [], res: any = '', shareCodes: Array<string>;
+let cookie: string = '', cookiesArr: Array<string> = [], res: any = '', shareCodes: string[] = [];
 let homePageInfo: any;
 
 let UserName: string, index: number, isLogin: boolean, nickName: string
@@ -34,12 +34,25 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
 
     homePageInfo = await api('queryservice/GetHomePageInfo', 'channel,isgift,sceneid', {isgift: 0})
     let food: number = homePageInfo.data.materialinfo[0].value;
-    let petid: number = homePageInfo.data.petinfo[0].petid
+    let petid: number = homePageInfo.data.petinfo[0].petid;
     let coins = homePageInfo.data.coins;
-
+    shareCodes.push(homePageInfo.data.sharekey)
+    console.log('助力码：', homePageInfo.data.sharekey)
     console.log('pet id:', petid)
     console.log('现有草:', food);
     console.log('金币:', coins);
+
+    // 签到
+    res = await api('queryservice/GetSignInfo', 'channel,sceneid')
+    for (let day of res.data.signlist) {
+      if (day.fortoday && !day.hasdone) {
+        res = await api('operservice/GetSignReward', 'channel,currdate,sceneid', {currdate: res.data.currdate})
+        if(res.ret===0){
+          console.log('签到成功!')
+        }
+        break
+      }
+    }
 
     let taskRetCode: number = 0;
     while (taskRetCode === 0) {
@@ -51,8 +64,6 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
         break
       }
     }
-
-    /*
     while (coins >= 5000 && food <= 500) {
       res = await api('operservice/Buy', 'channel,sceneid,type', {type: '1'})
       if (res.ret === 0) {
@@ -66,7 +77,6 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
       await wait(1500)
     }
     await wait(2000)
-
     while (food >= 10) {
       res = await api('operservice/Feed', 'channel,sceneid')
       if (res.ret === 0) {
@@ -89,20 +99,43 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
     await wait(2000)
 
     while (1) {
-      res = await api('operservice/Action', 'channel,sceneid,type', {type: '2'})
-      if (res.data.addcoins === 0) break
-      console.log('锄草:', res.data.addcoins)
-      await wait(1500)
+      try {
+        res = await api('operservice/Action', 'channel,sceneid,type', {type: '2'})
+        if (res.data.addcoins === 0) break
+        console.log('锄草:', res.data.addcoins)
+        await wait(1500)
+      } catch (e) {
+        console.log('Error:', e)
+        break
+      }
     }
     await wait(2000)
 
     while (1) {
-      res = await api('operservice/Action', 'channel,sceneid,type', {type: '1', petid: petid})
-      if (res.data.addcoins === 0) break
-      console.log('挑逗:', res.data.addcoins)
-      await wait(1500)
+      try {
+        res = await api('operservice/Action', 'channel,sceneid,type', {type: '1', petid: petid})
+        if (res.data.addcoins === 0) break
+        console.log('挑逗:', res.data.addcoins)
+        await wait(1500)
+      } catch (e) {
+        console.log('Error:', e)
+        break
+      }
     }
-    */
+  }
+  for (let i = 0; i < cookiesArr.length; i++) {
+    cookie = cookiesArr[i]
+    for (let j = 0; j < shareCodes.length; j++) {
+      res = await api('operservice/EnrollFriend', 'channel,sceneid,sharekey', {sharekey: shareCodes[j]})
+      if (res.data.result === 1) {
+        console.log('不助力自己')
+      } else if (res.ret === 0) {
+        console.log('助力成功，获得：', res.data.addcoins)
+      } else {
+        break
+      }
+      await wait(2000)
+    }
   }
 })()
 
@@ -111,11 +144,13 @@ interface Params {
   petid?: number,
   type?: string,
   taskId?: number
-  configExtra?: string
+  configExtra?: string,
+  sharekey?: string,
+  currdate?: string
 }
 
 function api(fn: string, stk: string, params: Params = {}) {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve, reject) => {
     let url = `https://m.jingxi.com/jxmc/${fn}?channel=7&sceneid=1001&_stk=${encodeURIComponent(stk)}&_ste=1&sceneval=2`
     if (Object.keys(params).length !== 0) {
       let key: (keyof Params)
@@ -125,22 +160,26 @@ function api(fn: string, stk: string, params: Params = {}) {
       }
     }
     url += '&h5st=' + decrypt(stk, url)
-    let {data} = await axios.get(url, {
-      headers: {
-        'Cookie': cookie,
-        'Host': 'm.jingxi.com',
-        'User-Agent': 'jdpingou;iPhone;4.11.0;12.4.1;52cf225f0c463b69e1e36b11783074f9a7d9cbf0;network/wifi;model/iPhone11,6;appBuild/100591;ADID/C51FD279-5C69-4F94-B1C5-890BC8EB501F;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/0;hasOCPay/0;supportBestPay/0;session/503;pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
-        'Referer': 'https://st.jingxi.com/',
-      }
-    })
-    resolve(data)
+    try {
+      let {data} = await axios.get(url, {
+        headers: {
+          'Cookie': cookie,
+          'Host': 'm.jingxi.com',
+          'User-Agent': 'jdpingou;iPhone;4.11.0;12.4.1;52cf225f0c463b69e1e36b11783074f9a7d9cbf0;network/wifi;model/iPhone11,6;appBuild/100591;ADID/C51FD279-5C69-4F94-B1C5-890BC8EB501F;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/0;hasOCPay/0;supportBestPay/0;session/503;pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+          'Referer': 'https://st.jingxi.com/',
+        }
+      })
+      resolve(data)
+    } catch (e) {
+      reject(401)
+    }
   })
 }
 
 function getTask() {
   return new Promise<number>(async resolve => {
     let tasks: any = await taskAPI('GetUserTaskStatusList', 'bizCode,dateType,source')
-    let doTaskRes: any
+    let doTaskRes: any = {ret: 1}, code: number = 1
     for (let t of tasks.data.userTaskStatusList) {
       if ((t.dateType === 1 || t.dateType === 2) && t.completedTimes == t.targetTimes && t.awardStatus === 2) {
         // 成就任务
@@ -151,31 +190,23 @@ function getTask() {
           console.log('每日任务可领取:', t.taskName, t.completedTimes, t.targetTimes)
 
         doTaskRes = await taskAPI('Award', 'bizCode,source,taskId', {taskId: t.taskId})
-        await wait(2000)
+        await wait(4000)
         if (doTaskRes.ret === 0) {
           let awardCoin = doTaskRes['data']['prizeInfo'].match(/:(.*)}/)![1] * 1
           console.log('领奖成功:', awardCoin)
-          await wait(2000)
-          resolve(0)
-        } else {
-          resolve(1)
         }
       }
       if (t.dateType === 2 && t.completedTimes < t.targetTimes && t.awardStatus === 2 && t.taskType === 2) {
         console.log('可做每日任务:', t.taskName, t.taskId)
         doTaskRes = await taskAPI('DoTask', 'bizCode,configExtra,source,taskId', {taskId: t.taskId, configExtra: ''})
         console.log(doTaskRes)
-        await wait(5000)
         if (doTaskRes.ret === 0) {
           console.log('任务完成')
-          await wait(2000)
-          resolve(0)
-        } else {
-          resolve(1)
+          await wait(5000)
         }
       }
     }
-    resolve(1)
+    resolve(doTaskRes.ret)
   })
 }
 
@@ -330,7 +361,6 @@ function getQueryString(url: string, name: string) {
 function wait(t: number) {
   return new Promise<void>(resolve => {
     setTimeout(() => {
-      console.log('sleep...', t)
       resolve()
     }, t)
   })

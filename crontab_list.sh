@@ -14,7 +14,7 @@
 # 新品试用
 0 10 * * * node /scripts/myActions/jd_try.js >>/scripts/logs/jd_try.log 2>&1
 # 京东保价
-41 0,11 * * * node /scripts/myActions/jd_priceProtect.js >>/scripts/logs/jd_priceProtect.log 2>&1
+# 41 0,11 * * * node /scripts/myActions/jd_priceProtect.js >>/scripts/logs/jd_priceProtect.log 2>&1
 
 # 京喜牧场
 20 0-23/4 * * * node /scripts/myActions/jd_jxmc.js >>/scripts/logs/jd_jxmc.log 2>&1
@@ -30,8 +30,10 @@
 # 20 1,6,22 * * * node /scripts/myActions/jd_dreamFactorytuan.js >>/scripts/logs/jd_dreamFactorytuan.log 2>&1
 # 京喜财富岛
 5 7,12,18 * * * node /scripts/myActions/jd_cfd.js >>/scripts/logs/jd_cfd.log 2>&1
-# 财富岛热气球挂后台
-13 5-23/2 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
+# 财富岛热气球挂后台 - 挂机 手动执行为好
+#13 6 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
+13 6 * * * node /scripts/myActions/gua_wealth_island.js >>/scripts/logs/gua_wealth_island.log 2>&1
+
 # 京喜领88元红包(6.31到期)
 30 1,6,12,21 * * * node /scripts/myActions/jd_jxlhb.js >>/scripts/logs/jd_jxlhb.log 2>&1
 
@@ -46,7 +48,7 @@
 # 东东小窝
 46 6,23 * * * node /scripts/myActions/jd_small_home.js >>/scripts/logs/jd_small_home.log 2>&1
 # 东东超市
-31 0,1-23/2 * * * node /scripts/myActions/jd_superMarket.js >>/scripts/logs/jd_superMarket.log 2>&1
+31 0,1-23/4 * * * node /scripts/myActions/jd_superMarket.js >>/scripts/logs/jd_superMarket.log 2>&1
 
 # 监控crazyJoy分红
 10 12 * * * node /scripts/myActions/jd_crazy_joy_bonus.js >>/scripts/logs/jd_crazy_joy_bonus.log 2>&1
@@ -77,61 +79,61 @@
 # 京东极速版红包(活动时间：2021-5-5至2021-5-31)
 45 0,23 * * * node /scripts/myActions/jd_speed_redpocke.js >>/scripts/logs/jd_speed_redpocke.log 2>&1
 # 京东极速版签到+赚现金任务 - 活动入口：京东极速版app-现金签到
-21 1,6 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1
+21 0,18 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1
 
 # 喜马拉雅极速版 (# sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk add --no-cache python3 && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && pip install requests rsa)
 31 */1 * * * python3 /scripts/myActions/xmly_speed.py
 # 店铺签到，各类店铺签到，有新的店铺直接添加token即可
 1 0 * * * node /scripts/myActions/jd_dpqd.js >>/scripts/logs/jd_dpqd.log 2>&1
 # 京豆变动通知【昨日收益】
-20 10 * * * node /scripts/myActions/jd_bean_change.js >>/scripts/logs/jd_bean_change.log 2>&1
+20 8 * * * node /scripts/myActions/jd_bean_change.js >>/scripts/logs/jd_bean_change.log 2>&1
 # 进店领豆
 5 0 * * * node /scripts/myActions/jd_shop.js >>/scripts/logs/jd_shop.log 2>&1
 # 领京豆额外奖励(每日可获得3京豆)
-23 1,12,22 * * * node /scripts/myActions/jd_bean_home.js >>/scripts/logs/jd_bean_home.log 2>&1
+20 0,12,22 * * * node /scripts/myActions/jd_bean_home.js >> /scripts/logs/jd_bean_home.log 2>&1
 # 签到
-7 0,7,18 * * * node /scripts/myActions/jd_bean_sign.js >/scripts/logs/jd_bean_sign.log 2>&1
+7 0,7,18 * * * node /scripts/myActions/jd_bean_sign.js >> /scripts/logs/jd_bean_sign.log 2>&1
 # 京东签到图形验证
-0 1 * * * node /scripts/myActions/jd_NewSign.js >/scripts/logs/jd_NewSign.log 2>&1
+5 0,11 * * * node /scripts/myActions/jd_NewSign.js >> /scripts/logs/jd_NewSign.log 2>&1
 # 点点券二代目
-33 12,23 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1
-40 0,7,14,21 * * * node /scripts/myActions/jd_necklace_new.js >>/scripts/logs/jd_necklace_new.log 2>&1
+# 40 0,7,14,21 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1
+40 0,11,21 * * * node /scripts/myActions/jd_necklace_new.js >>/scripts/logs/jd_necklace_new.log 2>&1
 # 京东种豆得豆
-10 0-22/1 * * * node /scripts/myActions/jd_plantBean.js >>/scripts/logs/jd_plantBean.log 2>&1
+37 0,7,23 * * * node /scripts/myActions/jd_plantBean.js >>/scripts/logs/jd_plantBean.log 2>&1
 # 东东超市兑换奖品
 0 0 * * * node /scripts/myActions/jd_blueCoin.js >>/scripts/logs/jd_blueCoin.log 2>&1
 # 签到领现金
 10 */4 * * * node /scripts/myActions/jd_cash.js >>/scripts/logs/jd_cash.log 2>&1
 # 摇京豆
-10 15,16,23 * * * node /scripts/myActions/jd_club_lottery.js >>/scripts/logs/jd_club_lottery.log 2>&1
+20 0,16 * * * node /scripts/myActions/jd_club_lottery.js >>/scripts/logs/jd_club_lottery.log 2>&1
 # 10 15,16,23 * * * node /scripts/myActions/jd_shake.js >>/scripts/logs/jd_shake.log 2>&1
 # 领金贴
-5 0 * * * node /scripts/myActions/jd_jin_tie.js >>/scripts/logs/jd_jin_tie.log 2>&1
+5 6 * * * node /scripts/myActions/jd_jin_tie.js >>/scripts/logs/jd_jin_tie.log 2>&1
 # 跳跳乐瓜分京豆
 15 0,12,22 * * * node /scripts/myActions/jd_jump.js >>/scripts/logs/jd_jump.log 2>&1
 # 天天提鹅
-28 * * * * node /scripts/myActions/jd_daily_egg.js >>/scripts/logs/jd_daily_egg.log 2>&1
-#美丽研究院
-41 7,12,19 * * * node /scripts/myActions/jd_beauty.js >>/scripts/logs/jd_beauty.log 2>&1
+28 0 * * * node /scripts/myActions/jd_daily_egg.js >>/scripts/logs/jd_daily_egg.log 2>&1
+# 美丽研究院
+41 5,12 * * * node /scripts/myActions/jd_beauty.js >>/scripts/logs/jd_beauty.log 2>&1
 # 省钱大赢家之翻翻乐
 25 0-23/2 * 6 * node /scripts/myActions/jd_big_winner.js >>/scripts/logs/jd_big_winner.log 2>&1
 # 口袋书店
-34 8,12,18 * * * node /scripts/myActions/jd_bookshop.js >>/scripts/logs/jd_bookshop.log 2>&1
+34 7,12,19 * * * node /scripts/myActions/jd_bookshop.js >>/scripts/logs/jd_bookshop.log 2>&1
 # 摇钱树
 23 */2 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1
 # 闪购盲盒
-47 8,22 * * * node /scripts/myActions/jd_sgmh.js >>/scripts/logs/jd_sgmh.log 2>&1
+47 7,21 * * * node /scripts/myActions/jd_sgmh.js >>/scripts/logs/jd_sgmh.log 2>&1
 # 京东汽车(签到满500赛点可兑换500京豆)
 0 0 * * * node /scripts/myActions/jd_car.js >>/scripts/logs/jd_car.log 2>&1
 # 京东汽车旅程赛点兑换金豆
-0 0 * * * node /scripts/myActions/jd_car_exchange.js >>/scripts/logs/jd_car_exchange.log 2>&1
+# 0 0 * * * node /scripts/myActions/jd_car_exchange.js >>/scripts/logs/jd_car_exchange.log 2>&1
 # 天天优惠大乐透 - 活动入口：京东app首页-券后9.9-顶部球球
-0 16 * * * node /scripts/myActions/jd_daydlt.js >>/scripts/logs/jd_daydlt.log 2>&1
-20 16 * * * node /scripts/myActions/jd_DrawEntrance.js >>/scripts/logs/jd_DrawEntrance.log 2>&1
+0 13 * * * node /scripts/myActions/jd_daydlt.js >>/scripts/logs/jd_daydlt.log 2>&1
+20 17 * * * node /scripts/myActions/jd_DrawEntrance.js >>/scripts/logs/jd_DrawEntrance.log 2>&1
 # 每日抽奖(活动时间：2021-05-01至2021-05-31)
-13 1,22,23 * * * node /scripts/myActions/jd_daily_lottery.js >>/scripts/logs/jd_daily_lottery.log 2>&1
+13 1,22 * * * node /scripts/myActions/jd_daily_lottery.js >>/scripts/logs/jd_daily_lottery.log 2>&1
 # 京豆*1888
-13 5 * * * node /scripts/myActions/jd_ddaixiaochu.js >>/scripts/logs/jd_ddaixiaochu.log 2>&1
+# 13 5 * * * node /scripts/myActions/jd_ddaixiaochu.js >>/scripts/logs/jd_ddaixiaochu.log 2>&1
 # 东东电竞经理
 10 10 * * * node /scripts/myActions/jd_djjl.js >>/scripts/logs/jd_djjl.log 2>&1
 # 柠檬大牌闪购红包雨
@@ -139,7 +141,7 @@
 # 金榜创造营 活动时间：2021-05-21至2021-12-31
 0 1,22 * * * node /scripts/myActions/jd_gold_creator.js >>/scripts/logs/jd_gold_creator.log 2>&1
 # 早起福利
-30 6 * * * node /scripts/myActions/jd_goodMorning.js >>/scripts/logs/jd_goodMorning.log 2>&1
+30 5 * * * node /scripts/myActions/jd_goodMorning.js >>/scripts/logs/jd_goodMorning.log 2>&1
 # 京东健康社区
 14 0-23/4 * * * node /scripts/myActions/jd_health.js >>/scripts/logs/jd_health.log 2>&1
 # 京东健康社区收集健康能量
@@ -152,7 +154,7 @@
 47 1 * * * node /scripts/myActions/jd_kd.js >>/scripts/logs/jd_kd.log 2>&1
 # 超级直播间红包雨(活动时间不定期，出现异常提示请忽略。红包雨期间会正常)
 1,31 0-23/1 * * * node /scripts/myActions/jd_live_redrain.js >>/scripts/logs/jd_live_redrain.log 2>&1
-#京东直播
+# 京东直播
 30-50/5 12,23 * * * node /scripts/myActions/jd_live.js >>/scripts/logs/jd_live.log 2>&1
 # 京东抽奖机
 0 0,12,23 * * * node /scripts/myActions/jd_lotteryMachine.js >>/scripts/logs/jd_lotteryMachine.log 2>&1
@@ -164,10 +166,10 @@
 30 1,8 1-18 6 * node /scripts/myActions/jd_mcxhd_brandcity.js >>/scripts/logs/jd_mcxhd_brandcity.log 2>&1
 # 京东秒秒币
 10 6,21 * * * node /scripts/myActions/jd_ms.js >>/scripts/logs/jd_ms.log 2>&1
-#5G超级盲盒(活动时间：2021-06-2到2021-07-31)
+# 5G超级盲盒(活动时间：2021-06-2到2021-07-31)
 0 0-23/4 * * * node /scripts/myActions/jd_mohe.js >>/scripts/logs/jd_mohe.log 2>&1
 # 0 0-23/4 * * * node /scripts/myActions/jd_super5g.js >>/scripts/logs/jd_super5g.log 2>&1
-#女装盲盒
+# 女装盲盒
 35 1,22 * * * node /scripts/myActions/jd_nzmh.js >>/scripts/logs/jd_nzmh.log 2>&1
 # 京东金融养猪猪
 32 0-23/6 * * * node /scripts/myActions/jd_pigPet.js >>/scripts/logs/jd_pigPet.log 2>&1
@@ -188,8 +190,8 @@
 # 全民挖现金
 30 9 * * * node /scripts/myActions/jd_wxj.js >>/scripts/logs/jd_wxj.log 2>&1
 # 燃动夏季
-07 5-23/2 * * * node /scripts/myActions/jd_summer_movement.js >>/scripts/logs/jd_summer_movement.log 2>&1
+07 5-23/3 * * * node /scripts/myActions/jd_summer_movement.js >>/scripts/logs/jd_summer_movement.log 2>&1
 # 燃动夏季_SH助力
-17 8-23/2 * * * node /scripts/myActions/jd_summer_movement_help.js >>/scripts/logs/jd_summer_movement_help.log 2>&1
+17 8-23/3 * * * node /scripts/myActions/jd_summer_movement_help.js >>/scripts/logs/jd_summer_movement_help.log 2>&1
 
 30 0 * * * node /scripts/myActions/jd_wishingPool.js >>/scripts/logs/jd_wishingPool.log 2>&1
