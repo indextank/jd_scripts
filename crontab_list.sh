@@ -32,7 +32,7 @@
 5 7,12,18 * * * node /scripts/myActions/jd_cfd.js >>/scripts/logs/jd_cfd.log 2>&1
 # 财富岛热气球挂后台 - 挂机 手动执行为好
 #13 6 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
-13 6 * * * node /scripts/myActions/gua_wealth_island.js >>/scripts/logs/gua_wealth_island.log 2>&1
+13 5,14,21 * * * node /scripts/myActions/gua_wealth_island.js >>/scripts/logs/gua_wealth_island.log 2>&1
 
 # 京喜领88元红包(6.31到期)
 30 1,6,12,21 * * * node /scripts/myActions/jd_jxlhb.js >>/scripts/logs/jd_jxlhb.log 2>&1
@@ -58,8 +58,8 @@
 30 13 * * * node /scripts/myActions/jd_crazy_joy.js >>/scripts/logs/jd_crazy_joy.log 2>&1
 
 # 宠汪汪二代目
-# 45 */2 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
-05 */2 * * * node /scripts/myActions/jd_joy_new.js >>/scripts/logs/jd_joy_new.log 2>&1
+45 */2 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
+# 05 */2 * * * node /scripts/myActions/jd_joy_new.js >>/scripts/logs/jd_joy_new.log 2>&1
 # 宠汪汪积分兑换京豆
 # 0 0-16/8 * * * node /scripts/myActions/jd_joy_reward.js >>/scripts/logs/jd_joy_reward.log 2>&1
 # 宠汪汪喂食
