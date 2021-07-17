@@ -42,7 +42,7 @@
 # 东东农场 - 活动入口：京东APP我的-更多工具-东东农场
 15 6-21/3 * * * node /scripts/myActions/jd_fruit.js >>/scripts/logs/jd_fruit.log 2>&1
 # 东东工厂
-26 * * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1
+26 0,15 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1
 # 东东萌宠
 35 0-21/6 * * * node /scripts/myActions/jd_pet.js >>/scripts/logs/jd_pet.log 2>&1
 # 东东小窝
@@ -195,3 +195,6 @@
 17 8-23/3 * * * node /scripts/myActions/jd_summer_movement_help.js >>/scripts/logs/jd_summer_movement_help.log 2>&1
 
 30 0 * * * node /scripts/myActions/jd_wishingPool.js >>/scripts/logs/jd_wishingPool.log 2>&1
+
+# 省钱大赢家之翻翻乐
+33 0 * * * node /scripts/myActions/jd_flipcards.js >>/scripts/logs/jd_flipcards.log 2>&1
