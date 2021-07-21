@@ -90,11 +90,11 @@
 # 进店领豆
 5 0 * * * node /scripts/myActions/jd_shop.js >>/scripts/logs/jd_shop.log 2>&1
 # 领京豆额外奖励(每日可获得3京豆)
-20 0,12,22 * * * node /scripts/myActions/jd_bean_home.js >> /scripts/logs/jd_bean_home.log 2>&1
+20 0,12,22 * * * node /scripts/myActions/jd_bean_home.js >>/scripts/logs/jd_bean_home.log 2>&1
 # 签到
-7 0,7,18 * * * node /scripts/myActions/jd_bean_sign.js >> /scripts/logs/jd_bean_sign.log 2>&1
+7 0,7,18 * * * node /scripts/myActions/jd_bean_sign.js >>/scripts/logs/jd_bean_sign.log 2>&1
 # 京东签到图形验证
-5 0,11 * * * node /scripts/myActions/jd_NewSign.js >> /scripts/logs/jd_NewSign.log 2>&1
+5 0,11 * * * node /scripts/myActions/jd_NewSign.js >>/scripts/logs/jd_NewSign.log 2>&1
 # 点点券二代目
 # 40 0,7,14,21 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1
 40 0,11,21 * * * node /scripts/myActions/jd_necklace_new.js >>/scripts/logs/jd_necklace_new.log 2>&1
@@ -126,7 +126,7 @@
 # 京东汽车(签到满500赛点可兑换500京豆)
 0 0 * * * node /scripts/myActions/jd_car.js >>/scripts/logs/jd_car.log 2>&1
 # 京东汽车旅程赛点兑换金豆
-# 0 0 * * * node /scripts/myActions/jd_car_exchange.js >>/scripts/logs/jd_car_exchange.log 2>&1
+0 0 * * * node /scripts/myActions/jd_car_exchange.js >>/scripts/logs/jd_car_exchange.log 2>&1
 # 天天优惠大乐透 - 活动入口：京东app首页-券后9.9-顶部球球
 0 13 * * * node /scripts/myActions/jd_daydlt.js >>/scripts/logs/jd_daydlt.log 2>&1
 20 17 * * * node /scripts/myActions/jd_DrawEntrance.js >>/scripts/logs/jd_DrawEntrance.log 2>&1
@@ -135,7 +135,8 @@
 # 京豆*1888
 # 13 5 * * * node /scripts/myActions/jd_ddaixiaochu.js >>/scripts/logs/jd_ddaixiaochu.log 2>&1
 # 东东电竞经理
-10 10 * * * node /scripts/myActions/jd_djjl.js >>/scripts/logs/jd_djjl.log 2>&1
+10 10 * * * node /scripts/myActions/jd_djjl2.js >>/scripts/logs/jd_djjl2.log 2>&1
+# 10 10 * * * node /scripts/myActions/jd_djjl.js >>/scripts/logs/jd_djjl.log 2>&1
 # 柠檬大牌闪购红包雨
 30 20 * * * node /scripts/myActions/jd_dphby.js >>/scripts/logs/jd_dphby.log 2>&1
 # 金榜创造营 活动时间：2021-05-21至2021-12-31
@@ -198,3 +199,5 @@
 
 # 省钱大赢家之翻翻乐
 33 0 * * * node /scripts/myActions/jd_flipcards.js >>/scripts/logs/jd_flipcards.log 2>&1
+
+0 0 * * * node /scripts/myActions/jd_car_reward.js >>/scripts/logs/jd_car_reward.log 2>&1

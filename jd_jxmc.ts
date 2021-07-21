@@ -5,10 +5,10 @@
  * 领奖、任务
  */
 
-import {format} from 'date-fns';
-import {writeFileSync} from 'fs'
+import { format } from 'date-fns';
+import { writeFileSync } from 'fs'
 import axios from 'axios';
-import USER_AGENT from './TS_USER_AGENTS';
+import USER_AGENT from './utils/TS_USER_AGENTS';
 
 const CryptoJS = require('crypto-js')
 
@@ -32,7 +32,7 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
     await TotalBean();
     console.log(`\n开始【京东账号${index}】${nickName || UserName}\n`);
 
-    homePageInfo = await api('queryservice/GetHomePageInfo', 'channel,isgift,sceneid', {isgift: 0})
+    homePageInfo = await api('queryservice/GetHomePageInfo', 'channel,isgift,sceneid', { isgift: 0 })
     let food: number = homePageInfo.data.materialinfo[0].value;
     let petid: number = homePageInfo.data.petinfo[0].petid;
     let coins = homePageInfo.data.coins;
@@ -46,8 +46,8 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
     res = await api('queryservice/GetSignInfo', 'channel,sceneid')
     for (let day of res.data.signlist) {
       if (day.fortoday && !day.hasdone) {
-        res = await api('operservice/GetSignReward', 'channel,currdate,sceneid', {currdate: res.data.currdate})
-        if(res.ret===0){
+        res = await api('operservice/GetSignReward', 'channel,currdate,sceneid', { currdate: res.data.currdate })
+        if (res.ret === 0) {
           console.log('签到成功!')
         }
         break
@@ -65,7 +65,7 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
       }
     }
     while (coins >= 5000 && food <= 500) {
-      res = await api('operservice/Buy', 'channel,sceneid,type', {type: '1'})
+      res = await api('operservice/Buy', 'channel,sceneid,type', { type: '1' })
       if (res.ret === 0) {
         console.log('买草成功:', res.data.newnum)
         coins -= 5000
@@ -85,7 +85,7 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
       } else if (res.ret === 2020) {
         if (res.data.maintaskId === 'pause') {
           console.log('收🥚')
-          res = await api('operservice/GetSelfResult', 'channel,itemid,sceneid,type', {petid: petid, type: '11'})
+          res = await api('operservice/GetSelfResult', 'channel,itemid,sceneid,type', { petid: petid, type: '11' })
           if (res.ret === 0) {
             console.log('收🥚成功:', res.data.newnum)
           }
@@ -100,7 +100,7 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
 
     while (1) {
       try {
-        res = await api('operservice/Action', 'channel,sceneid,type', {type: '2'})
+        res = await api('operservice/Action', 'channel,sceneid,type', { type: '2' })
         if (res.data.addcoins === 0) break
         console.log('锄草:', res.data.addcoins)
         await wait(1500)
@@ -113,7 +113,7 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
 
     while (1) {
       try {
-        res = await api('operservice/Action', 'channel,sceneid,type', {type: '1', petid: petid})
+        res = await api('operservice/Action', 'channel,sceneid,type', { type: '1', petid: petid })
         if (res.data.addcoins === 0) break
         console.log('挑逗:', res.data.addcoins)
         await wait(1500)
@@ -126,7 +126,7 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i]
     for (let j = 0; j < shareCodes.length; j++) {
-      res = await api('operservice/EnrollFriend', 'channel,sceneid,sharekey', {sharekey: shareCodes[j]})
+      res = await api('operservice/EnrollFriend', 'channel,sceneid,sharekey', { sharekey: shareCodes[j] })
       if (res.data.result === 1) {
         console.log('不助力自己')
       } else if (res.ret === 0) {
@@ -161,7 +161,7 @@ function api(fn: string, stk: string, params: Params = {}) {
     }
     url += '&h5st=' + decrypt(stk, url)
     try {
-      let {data} = await axios.get(url, {
+      let { data } = await axios.get(url, {
         headers: {
           'Cookie': cookie,
           'Host': 'm.jingxi.com',
@@ -179,7 +179,7 @@ function api(fn: string, stk: string, params: Params = {}) {
 function getTask() {
   return new Promise<number>(async resolve => {
     let tasks: any = await taskAPI('GetUserTaskStatusList', 'bizCode,dateType,source')
-    let doTaskRes: any = {ret: 1}, code: number = 1
+    let doTaskRes: any = { ret: 1 }, code: number = 1
     for (let t of tasks.data.userTaskStatusList) {
       if ((t.dateType === 1 || t.dateType === 2) && t.completedTimes == t.targetTimes && t.awardStatus === 2) {
         // 成就任务
@@ -189,7 +189,7 @@ function getTask() {
           :
           console.log('每日任务可领取:', t.taskName, t.completedTimes, t.targetTimes)
 
-        doTaskRes = await taskAPI('Award', 'bizCode,source,taskId', {taskId: t.taskId})
+        doTaskRes = await taskAPI('Award', 'bizCode,source,taskId', { taskId: t.taskId })
         await wait(4000)
         if (doTaskRes.ret === 0) {
           let awardCoin = doTaskRes['data']['prizeInfo'].match(/:(.*)}/)![1] * 1
@@ -198,7 +198,7 @@ function getTask() {
       }
       if (t.dateType === 2 && t.completedTimes < t.targetTimes && t.awardStatus === 2 && t.taskType === 2) {
         console.log('可做每日任务:', t.taskName, t.taskId)
-        doTaskRes = await taskAPI('DoTask', 'bizCode,configExtra,source,taskId', {taskId: t.taskId, configExtra: ''})
+        doTaskRes = await taskAPI('DoTask', 'bizCode,configExtra,source,taskId', { taskId: t.taskId, configExtra: '' })
         console.log(doTaskRes)
         if (doTaskRes.ret === 0) {
           console.log('任务完成')
@@ -221,7 +221,7 @@ function taskAPI(fn: string, stk: string, params: Params = {}) {
       }
     }
     url += '&h5st=' + decrypt(stk, url)
-    let {data} = await axios.get(url, {
+    let { data } = await axios.get(url, {
       headers: {
         'Origin': 'https://st.jingxi.com',
         'Accept-Language': 'zh-cn',
@@ -240,7 +240,7 @@ function taskAPI(fn: string, stk: string, params: Params = {}) {
 async function requestAlgo() {
   fingerprint = await generateFp();
   return new Promise(async resolve => {
-    let {data} = await axios.post('https://cactus.jd.com/request_algo?g_ty=ajax', {
+    let { data } = await axios.post('https://cactus.jd.com/request_algo?g_ty=ajax', {
       "version": "1.0",
       "fp": fingerprint,
       "appId": appId,

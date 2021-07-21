@@ -1,7 +1,7 @@
 const $ = new Env('点点券二代目');
 const https = require('https');
 const fs = require('fs/promises');
-const {R_OK} = require('fs').constants;
+const { R_OK } = require('fs').constants;
 const vm = require('vm');
 const UA = require('./USER_AGENTS.js').USER_AGENT;
 
@@ -10,7 +10,7 @@ const REG_SCRIPT = /<script src="([^><]+\/(main\.\w+\.js))\?t=\d+">/gm;
 const REG_ENTRY = /^(.*?\.push\(\[)(\d+,\d+)/;
 const REG_PIN = /pt_pin=([^;]*)/;
 const KEYWORD_MODULE = 'get_risk_result:';
-const DATA = {appid: '50082', sceneid: 'DDhomePageh5'};
+const DATA = { appid: '50082', sceneid: 'DDhomePageh5' };
 let smashUtils;
 
 class ZooFakerNecklace {
@@ -26,7 +26,7 @@ class ZooFakerNecklace {
 
     const t = Math.floor(1e+6 * Math.random()).toString().padEnd(6, '8');
     const pin = decodeURIComponent(this.cookie.match(REG_PIN)[1]);
-    const {log} = smashUtils.get_risk_result({
+    const { log } = smashUtils.get_risk_result({
       id: this.action,
       data: {
         ...data,
@@ -37,7 +37,7 @@ class ZooFakerNecklace {
     const body = {
       ...data,
       random: t,
-      extraData: {log, sceneid: DATA.sceneid},
+      extraData: { log, sceneid: DATA.sceneid },
     };
 
     // console.log(body);
@@ -55,13 +55,13 @@ class ZooFakerNecklace {
       const jsContent = await this.getJSContent(filename, scriptUrl);
       const fnMock = new Function;
       const ctx = {
-        window: {addEventListener: fnMock},
+        window: { addEventListener: fnMock },
         document: {
           addEventListener: fnMock,
           removeEventListener: fnMock,
           cookie: this.cookie,
         },
-        navigator: {userAgent: UA},
+        navigator: { userAgent: UA },
       };
       const _this = this;
       Object.defineProperty(ctx.document, 'cookie', {
@@ -82,7 +82,7 @@ class ZooFakerNecklace {
   async getJSContent(cacheKey, url) {
     try {
       await fs.access(cacheKey, R_OK);
-      const rawFile = await fs.readFile(cacheKey, {encoding: 'utf8'});
+      const rawFile = await fs.readFile(cacheKey, { encoding: 'utf8' });
 
       return rawFile;
     } catch (e) {
@@ -137,10 +137,10 @@ async function getBody($ = {}) {
   let riskData;
   switch ($.action) {
     case 'startTask':
-      riskData = {taskId: $.id};
+      riskData = { taskId: $.id };
       break;
     case 'chargeScores':
-      riskData = {bubleId: $.id};
+      riskData = { bubleId: $.id };
       break;
     case 'sign':
       riskData = {};
@@ -161,7 +161,7 @@ const ua = `jdltapp;iPhone;3.1.0;${Math.ceil(Math.random() * 4 + 10)}.${Math.cei
   await requireConfig();
 
   if (!cookiesArr[0]) {
-    $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
+    $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
     return;
   }
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -176,7 +176,7 @@ const ua = `jdltapp;iPhone;3.1.0;${Math.ceil(Math.random() * 4 + 10)}.${Math.cei
       await TotalBean();
       console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
       if (!$.isLogin) {
-        $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
+        $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
@@ -219,7 +219,7 @@ async function main() {
             console.log('startTask: ', res)
             await $.wait(3000)
           }
-          res = await api('necklace_reportTask', {"taskId": t.id})
+          res = await api('necklace_reportTask', { "taskId": t.id })
           console.log('reportTask: ', res)
           await $.wait(2000)
         } else if (t.taskType === 6) {
@@ -232,7 +232,7 @@ async function main() {
           res = await getTask(t.id)
           for (let t6 of res.data.result.taskItems) {
             console.log(t6.id, t6.title)
-            res = await api('necklace_reportTask', {taskId: t.id, itemId: t6.id})
+            res = await api('necklace_reportTask', { taskId: t.id, itemId: t6.id })
             console.log(res)
             await $.wait(2000)
           }
@@ -413,7 +413,7 @@ function TotalBean() {
         "Connection": "keep-alive",
         "Cookie": cookie,
         "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./utils/USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
       }
     }
     $.post(options, (err, resp, data) => {
@@ -487,7 +487,7 @@ function Env(t, e) {
     }
 
     send(t, e = "GET") {
-      t = "string" == typeof t ? {url: t} : t;
+      t = "string" == typeof t ? { url: t } : t;
       let s = this.get;
       return "POST" === e && (s = this.post), new Promise((e, i) => {
         s.call(this, t, (t, s, r) => {
@@ -562,7 +562,7 @@ function Env(t, e) {
 
     getScript(t) {
       return new Promise(e => {
-        this.get({url: t}, (t, s, i) => e(i))
+        this.get({ url: t }, (t, s, i) => e(i))
       })
     }
 
@@ -574,8 +574,8 @@ function Env(t, e) {
         r = r ? 1 * r : 20, r = e && e.timeout ? e.timeout : r;
         const [o, h] = i.split("@"), n = {
           url: `http://${h}/v1/scripting/evaluate`,
-          body: {script_text: t, mock_type: "cron", timeout: r},
-          headers: {"X-Key": o, Accept: "*/*"}
+          body: { script_text: t, mock_type: "cron", timeout: r },
+          headers: { "X-Key": o, Accept: "*/*" }
         };
         this.post(n, (t, e, i) => s(i))
       }).catch(t => this.logErr(t))
@@ -662,11 +662,11 @@ function Env(t, e) {
 
     get(t, e = (() => {
     })) {
-      t.headers && (delete t.headers["Content-Type"], delete t.headers["Content-Length"]), this.isSurge() || this.isLoon() ? (this.isSurge() && this.isNeedRewrite && (t.headers = t.headers || {}, Object.assign(t.headers, {"X-Surge-Skip-Scripting": !1})), $httpClient.get(t, (t, s, i) => {
+      t.headers && (delete t.headers["Content-Type"], delete t.headers["Content-Length"]), this.isSurge() || this.isLoon() ? (this.isSurge() && this.isNeedRewrite && (t.headers = t.headers || {}, Object.assign(t.headers, { "X-Surge-Skip-Scripting": !1 })), $httpClient.get(t, (t, s, i) => {
         !t && s && (s.body = i, s.statusCode = s.status), e(t, s, i)
-      })) : this.isQuanX() ? (this.isNeedRewrite && (t.opts = t.opts || {}, Object.assign(t.opts, {hints: !1})), $task.fetch(t).then(t => {
-        const {statusCode: s, statusCode: i, headers: r, body: o} = t;
-        e(null, {status: s, statusCode: i, headers: r, body: o}, o)
+      })) : this.isQuanX() ? (this.isNeedRewrite && (t.opts = t.opts || {}, Object.assign(t.opts, { hints: !1 })), $task.fetch(t).then(t => {
+        const { statusCode: s, statusCode: i, headers: r, body: o } = t;
+        e(null, { status: s, statusCode: i, headers: r, body: o }, o)
       }, t => e(t))) : this.isNode() && (this.initGotEnv(t), this.got(t).on("redirect", (t, e) => {
         try {
           if (t.headers["set-cookie"]) {
@@ -677,29 +677,29 @@ function Env(t, e) {
           this.logErr(t)
         }
       }).then(t => {
-        const {statusCode: s, statusCode: i, headers: r, body: o} = t;
-        e(null, {status: s, statusCode: i, headers: r, body: o}, o)
+        const { statusCode: s, statusCode: i, headers: r, body: o } = t;
+        e(null, { status: s, statusCode: i, headers: r, body: o }, o)
       }, t => {
-        const {message: s, response: i} = t;
+        const { message: s, response: i } = t;
         e(s, i, i && i.body)
       }))
     }
 
     post(t, e = (() => {
     })) {
-      if (t.body && t.headers && !t.headers["Content-Type"] && (t.headers["Content-Type"] = "application/x-www-form-urlencoded"), t.headers && delete t.headers["Content-Length"], this.isSurge() || this.isLoon()) this.isSurge() && this.isNeedRewrite && (t.headers = t.headers || {}, Object.assign(t.headers, {"X-Surge-Skip-Scripting": !1})), $httpClient.post(t, (t, s, i) => {
+      if (t.body && t.headers && !t.headers["Content-Type"] && (t.headers["Content-Type"] = "application/x-www-form-urlencoded"), t.headers && delete t.headers["Content-Length"], this.isSurge() || this.isLoon()) this.isSurge() && this.isNeedRewrite && (t.headers = t.headers || {}, Object.assign(t.headers, { "X-Surge-Skip-Scripting": !1 })), $httpClient.post(t, (t, s, i) => {
         !t && s && (s.body = i, s.statusCode = s.status), e(t, s, i)
-      }); else if (this.isQuanX()) t.method = "POST", this.isNeedRewrite && (t.opts = t.opts || {}, Object.assign(t.opts, {hints: !1})), $task.fetch(t).then(t => {
-        const {statusCode: s, statusCode: i, headers: r, body: o} = t;
-        e(null, {status: s, statusCode: i, headers: r, body: o}, o)
+      }); else if (this.isQuanX()) t.method = "POST", this.isNeedRewrite && (t.opts = t.opts || {}, Object.assign(t.opts, { hints: !1 })), $task.fetch(t).then(t => {
+        const { statusCode: s, statusCode: i, headers: r, body: o } = t;
+        e(null, { status: s, statusCode: i, headers: r, body: o }, o)
       }, t => e(t)); else if (this.isNode()) {
         this.initGotEnv(t);
-        const {url: s, ...i} = t;
+        const { url: s, ...i } = t;
         this.got.post(s, i).then(t => {
-          const {statusCode: s, statusCode: i, headers: r, body: o} = t;
-          e(null, {status: s, statusCode: i, headers: r, body: o}, o)
+          const { statusCode: s, statusCode: i, headers: r, body: o } = t;
+          e(null, { status: s, statusCode: i, headers: r, body: o }, o)
         }, t => {
-          const {message: s, response: i} = t;
+          const { message: s, response: i } = t;
           e(s, i, i && i.body)
         })
       }
@@ -724,19 +724,19 @@ function Env(t, e) {
     msg(e = t, s = "", i = "", r) {
       const o = t => {
         if (!t) return t;
-        if ("string" == typeof t) return this.isLoon() ? t : this.isQuanX() ? {"open-url": t} : this.isSurge() ? {url: t} : void 0;
+        if ("string" == typeof t) return this.isLoon() ? t : this.isQuanX() ? { "open-url": t } : this.isSurge() ? { url: t } : void 0;
         if ("object" == typeof t) {
           if (this.isLoon()) {
             let e = t.openUrl || t.url || t["open-url"], s = t.mediaUrl || t["media-url"];
-            return {openUrl: e, mediaUrl: s}
+            return { openUrl: e, mediaUrl: s }
           }
           if (this.isQuanX()) {
             let e = t["open-url"] || t.url || t.openUrl, s = t["media-url"] || t.mediaUrl;
-            return {"open-url": e, "media-url": s}
+            return { "open-url": e, "media-url": s }
           }
           if (this.isSurge()) {
             let e = t.url || t.openUrl || t["open-url"];
-            return {url: e}
+            return { url: e }
           }
         }
       };

@@ -8,9 +8,9 @@
  *
  */
 
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import axios from 'axios';
-import USER_AGENT from './TS_USER_AGENTS';
+import USER_AGENT from './utils/TS_USER_AGENTS';
 import * as dotenv from 'dotenv';
 
 const CryptoJS = require('crypto-js')
@@ -27,7 +27,7 @@ let target: string[] = process.env.CFD_STOCK
   await requestAlgo();
   await requireConfig();
   cookie = cookiesArr[0]
-  res = await api('user/ExchangeState', '_cfd_t,bizCode,dwEnv,dwType,ptag,source,strZone', {dwType: '0'})
+  res = await api('user/ExchangeState', '_cfd_t,bizCode,dwEnv,dwType,ptag,source,strZone', { dwType: '0' })
 
   for (let j of res.goods) {
     let name = j.strPrizeName.trim()
@@ -58,7 +58,7 @@ function api(fn: string, stk: string, params: Params = {}) {
       }
     }
     url += '&h5st=' + decrypt(stk, url)
-    let {data} = await axios.get(url, {
+    let { data } = await axios.get(url, {
       headers: {
         'Host': 'm.jingxi.com',
         'Referer': 'https://st.jingxi.com/',
@@ -73,7 +73,7 @@ function api(fn: string, stk: string, params: Params = {}) {
 async function requestAlgo() {
   fingerprint = await generateFp();
   return new Promise<void>(async resolve => {
-    let {data} = await axios.post('https://cactus.jd.com/request_algo?g_ty=ajax', {
+    let { data } = await axios.post('https://cactus.jd.com/request_algo?g_ty=ajax', {
       "version": "1.0",
       "fp": fingerprint,
       "appId": appId,

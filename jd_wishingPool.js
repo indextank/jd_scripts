@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function () { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -37,127 +37,130 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var axios_1 = require("axios");
-var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
+var TS_USER_AGENTS_1 = require("./utils/TS_USER_AGENTS");
 var $ = {};
 var cookie = '', cookiesArr = [];
 var balance;
-!(function () { return __awaiter(void 0, void 0, void 0, function () {
-    var i, taskVos, res, tasks, _i, tasks_1, t, _a, _b, tp, _c, _d, tp, _e, _f, tp;
-    return __generator(this, function (_g) {
-        switch (_g.label) {
-            case 0: return [4 /*yield*/, requireConfig()];
-            case 1:
-                _g.sent();
-                i = 0;
-                _g.label = 2;
-            case 2:
-                if (!(i < cookiesArr.length)) return [3 /*break*/, 24];
-                cookie = cookiesArr[i];
-                $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)[1]);
-                $.index = i + 1;
-                $.isLogin = true;
-                $.nickName = '';
-                return [4 /*yield*/, TotalBean()];
-            case 3:
-                _g.sent();
-                console.log("\n\u5F00\u59CB\u3010\u4EAC\u4E1C\u8D26\u53F7" + $.index + "\u3011" + ($.nickName || $.UserName) + "\n");
-                return [4 /*yield*/, api('healthyDay_getHomeData', { "appId": "1EFVQwQ", "taskToken": "", "channelId": 1 })];
-            case 4:
-                taskVos = _g.sent();
-                if (JSON.stringify(taskVos.data.success) === 'false') {
-                    console.log('此号活动火爆');
-                    return [3 /*break*/, 23];
-                }
-                balance = taskVos.data.result.userInfo.userScore * 1;
-                console.log('余额:', balance);
-                _g.label = 5;
-            case 5:
-                if (!(balance >= 500)) return [3 /*break*/, 7];
-                console.log('exchange()');
-                return [4 /*yield*/, api('interact_template_getLotteryResult', { "appId": "1EFVQwQ" })
+!(function () {
+    return __awaiter(void 0, void 0, void 0, function () {
+        var i, taskVos, res, tasks, _i, tasks_1, t, _a, _b, tp, _c, _d, tp, _e, _f, tp;
+        return __generator(this, function (_g) {
+            switch (_g.label) {
+                case 0: return [4 /*yield*/, requireConfig()];
+                case 1:
+                    _g.sent();
+                    i = 0;
+                    _g.label = 2;
+                case 2:
+                    if (!(i < cookiesArr.length)) return [3 /*break*/, 24];
+                    cookie = cookiesArr[i];
+                    $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)[1]);
+                    $.index = i + 1;
+                    $.isLogin = true;
+                    $.nickName = '';
+                    return [4 /*yield*/, TotalBean()];
+                case 3:
+                    _g.sent();
+                    console.log("\n\u5F00\u59CB\u3010\u4EAC\u4E1C\u8D26\u53F7" + $.index + "\u3011" + ($.nickName || $.UserName) + "\n");
+                    return [4 /*yield*/, api('healthyDay_getHomeData', { "appId": "1EFVQwQ", "taskToken": "", "channelId": 1 })];
+                case 4:
+                    taskVos = _g.sent();
+                    if (JSON.stringify(taskVos.data.success) === 'false') {
+                        console.log('此号活动火爆');
+                        return [3 /*break*/, 23];
+                    }
+                    balance = taskVos.data.result.userInfo.userScore * 1;
+                    console.log('余额:', balance);
+                    _g.label = 5;
+                case 5:
+                    if (!(balance >= 500)) return [3 /*break*/, 7];
+                    console.log('exchange()');
+                    return [4 /*yield*/, api('interact_template_getLotteryResult', { "appId": "1EFVQwQ" })
+                        // console.log('抽奖结果:', res.data.result.lotteryReturnCode)
+                    ];
+                case 6:
+                    res = _g.sent();
                     // console.log('抽奖结果:', res.data.result.lotteryReturnCode)
-                ];
-            case 6:
-                res = _g.sent();
-                // console.log('抽奖结果:', res.data.result.lotteryReturnCode)
-                console.log('抽奖结果:', res.data);
-                balance -= 500;
-                return [3 /*break*/, 5];
-            case 7:
-                tasks = taskVos.data.result.taskVos;
-                _i = 0, tasks_1 = tasks;
-                _g.label = 8;
-            case 8:
-                if (!(_i < tasks_1.length)) return [3 /*break*/, 21];
-                t = tasks_1[_i];
-                console.log(t.taskName);
-                if (!(t.status === 1)) return [3 /*break*/, 20];
-                if (!t.shoppingActivityVos) return [3 /*break*/, 12];
-                _a = 0, _b = t.shoppingActivityVos;
-                _g.label = 9;
-            case 9:
-                if (!(_a < _b.length)) return [3 /*break*/, 12];
-                tp = _b[_a];
-                return [4 /*yield*/, doTask(tp.taskToken, t.taskId, t.waitDuration)];
-            case 10:
-                _g.sent();
-                _g.label = 11;
-            case 11:
-                _a++;
-                return [3 /*break*/, 9];
-            case 12:
-                if (!t.productInfoVos) return [3 /*break*/, 16];
-                _c = 0, _d = t.productInfoVos;
-                _g.label = 13;
-            case 13:
-                if (!(_c < _d.length)) return [3 /*break*/, 16];
-                tp = _d[_c];
-                console.log(tp.skuName, tp.taskToken);
-                return [4 /*yield*/, doTask(tp.taskToken, t.taskId, t.waitDuration)];
-            case 14:
-                _g.sent();
-                _g.label = 15;
-            case 15:
-                _c++;
-                return [3 /*break*/, 13];
-            case 16:
-                if (!t.followShopVo) return [3 /*break*/, 20];
-                _e = 0, _f = t.followShopVo;
-                _g.label = 17;
-            case 17:
-                if (!(_e < _f.length)) return [3 /*break*/, 20];
-                tp = _f[_e];
-                console.log(tp.shopName, tp.taskToken);
-                return [4 /*yield*/, doTask(tp.taskToken, t.taskId, 0)];
-            case 18:
-                _g.sent();
-                _g.label = 19;
-            case 19:
-                _e++;
-                return [3 /*break*/, 17];
-            case 20:
-                _i++;
-                return [3 /*break*/, 8];
-            case 21:
-                console.log('-------------------------------');
-                return [4 /*yield*/, wait(1000)];
-            case 22:
-                _g.sent();
-                _g.label = 23;
-            case 23:
-                i++;
-                return [3 /*break*/, 2];
-            case 24: return [2 /*return*/];
-        }
+                    console.log('抽奖结果:', res.data);
+                    balance -= 500;
+                    return [3 /*break*/, 5];
+                case 7:
+                    tasks = taskVos.data.result.taskVos;
+                    _i = 0, tasks_1 = tasks;
+                    _g.label = 8;
+                case 8:
+                    if (!(_i < tasks_1.length)) return [3 /*break*/, 21];
+                    t = tasks_1[_i];
+                    console.log(t.taskName);
+                    if (!(t.status === 1)) return [3 /*break*/, 20];
+                    if (!t.shoppingActivityVos) return [3 /*break*/, 12];
+                    _a = 0, _b = t.shoppingActivityVos;
+                    _g.label = 9;
+                case 9:
+                    if (!(_a < _b.length)) return [3 /*break*/, 12];
+                    tp = _b[_a];
+                    return [4 /*yield*/, doTask(tp.taskToken, t.taskId, t.waitDuration)];
+                case 10:
+                    _g.sent();
+                    _g.label = 11;
+                case 11:
+                    _a++;
+                    return [3 /*break*/, 9];
+                case 12:
+                    if (!t.productInfoVos) return [3 /*break*/, 16];
+                    _c = 0, _d = t.productInfoVos;
+                    _g.label = 13;
+                case 13:
+                    if (!(_c < _d.length)) return [3 /*break*/, 16];
+                    tp = _d[_c];
+                    console.log(tp.skuName, tp.taskToken);
+                    return [4 /*yield*/, doTask(tp.taskToken, t.taskId, t.waitDuration)];
+                case 14:
+                    _g.sent();
+                    _g.label = 15;
+                case 15:
+                    _c++;
+                    return [3 /*break*/, 13];
+                case 16:
+                    if (!t.followShopVo) return [3 /*break*/, 20];
+                    _e = 0, _f = t.followShopVo;
+                    _g.label = 17;
+                case 17:
+                    if (!(_e < _f.length)) return [3 /*break*/, 20];
+                    tp = _f[_e];
+                    console.log(tp.shopName, tp.taskToken);
+                    return [4 /*yield*/, doTask(tp.taskToken, t.taskId, 0)];
+                case 18:
+                    _g.sent();
+                    _g.label = 19;
+                case 19:
+                    _e++;
+                    return [3 /*break*/, 17];
+                case 20:
+                    _i++;
+                    return [3 /*break*/, 8];
+                case 21:
+                    console.log('-------------------------------');
+                    return [4 /*yield*/, wait(1000)];
+                case 22:
+                    _g.sent();
+                    _g.label = 23;
+                case 23:
+                    i++;
+                    return [3 /*break*/, 2];
+                case 24: return [2 /*return*/];
+            }
+        });
     });
-}); })();
+})();
 function api(Fn, body) {
     var _this = this;
-    return new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
-        var data;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, axios_1["default"].post("https://api.m.jd.com/client.action", "functionId=" + Fn + "&body=" + JSON.stringify(body) + "&client=wh5&clientVersion=1.0.0", {
+    return new Promise(function (resolve) {
+        return __awaiter(_this, void 0, void 0, function () {
+            var data;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, axios_1["default"].post("https://api.m.jd.com/client.action", "functionId=" + Fn + "&body=" + JSON.stringify(body) + "&client=wh5&clientVersion=1.0.0", {
                         headers: {
                             'Referer': 'https://h5.m.jd.com/babelDiy/Zeus/UQwNm9fNDey3xNEUTSgpYikqnXR/index.html',
                             'Content-Type': 'application/x-www-form-urlencoded',
@@ -167,49 +170,52 @@ function api(Fn, body) {
                             'cookie': cookie
                         }
                     })];
-                case 1:
-                    data = (_a.sent()).data;
-                    resolve(data);
-                    return [2 /*return*/];
-            }
+                    case 1:
+                        data = (_a.sent()).data;
+                        resolve(data);
+                        return [2 /*return*/];
+                }
+            });
         });
-    }); });
+    });
 }
 function doTask(taskToken, taskId, timeout) {
     var _this = this;
-    return new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
-        var res;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    if (!(timeout !== 0)) return [3 /*break*/, 3];
-                    return [4 /*yield*/, api('harmony_collectScore', { "appId": "1EFVQwQ", "taskToken": taskToken, "taskId": taskId, "actionType": 1 })];
-                case 1:
-                    res = _a.sent();
-                    console.log('领取任务: ', res.data.bizMsg, '\n等待中...');
-                    return [4 /*yield*/, wait(timeout * 1000)];
-                case 2:
-                    _a.sent();
-                    _a.label = 3;
-                case 3: return [4 /*yield*/, api('harmony_collectScore', { "appId": "1EFVQwQ", "taskToken": taskToken, "taskId": taskId, "actionType": 0 })];
-                case 4:
-                    res = _a.sent();
-                    if (res.code === 0) {
-                        try {
-                            console.log("\u4EFB\u52A1\u6210\u529F: \u83B7\u5F97" + res.data.result.score * 1 + " \u4F59\u989D: " + res.data.result.userScore * 1);
+    return new Promise(function (resolve) {
+        return __awaiter(_this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(timeout !== 0)) return [3 /*break*/, 3];
+                        return [4 /*yield*/, api('harmony_collectScore', { "appId": "1EFVQwQ", "taskToken": taskToken, "taskId": taskId, "actionType": 1 })];
+                    case 1:
+                        res = _a.sent();
+                        console.log('领取任务: ', res.data.bizMsg, '\n等待中...');
+                        return [4 /*yield*/, wait(timeout * 1000)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3: return [4 /*yield*/, api('harmony_collectScore', { "appId": "1EFVQwQ", "taskToken": taskToken, "taskId": taskId, "actionType": 0 })];
+                    case 4:
+                        res = _a.sent();
+                        if (res.code === 0) {
+                            try {
+                                console.log("\u4EFB\u52A1\u6210\u529F: \u83B7\u5F97" + res.data.result.score * 1 + " \u4F59\u989D: " + res.data.result.userScore * 1);
+                            }
+                            catch (e) {
+                                console.log("\u4EFB\u52A1\u9519\u8BEF: ", JSON.stringify(res));
+                            }
                         }
-                        catch (e) {
-                            console.log("\u4EFB\u52A1\u9519\u8BEF: ", JSON.stringify(res));
-                        }
-                    }
-                    return [4 /*yield*/, wait(1000)];
-                case 5:
-                    _a.sent();
-                    resolve();
-                    return [2 /*return*/];
-            }
+                        return [4 /*yield*/, wait(1000)];
+                    case 5:
+                        _a.sent();
+                        resolve();
+                        return [2 /*return*/];
+                }
+            });
         });
-    }); });
+    });
 }
 function wait(t) {
     return new Promise(function (resolve) {
@@ -234,37 +240,39 @@ function requireConfig() {
 }
 function TotalBean() {
     var _this = this;
-    return new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            axios_1["default"].get('https://me-api.jd.com/user_new/info/GetJDUserInfoUnion', {
-                headers: {
-                    Host: "me-api.jd.com",
-                    Connection: "keep-alive",
-                    Cookie: cookie,
-                    "User-Agent": TS_USER_AGENTS_1["default"],
-                    "Accept-Language": "zh-cn",
-                    "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
-                    "Accept-Encoding": "gzip, deflate, br"
-                }
-            }).then(function (res) {
-                if (res.data) {
-                    var data = res.data;
-                    if (data['retcode'] === "1001") {
-                        $.isLogin = false; //cookie过期
-                        return;
+    return new Promise(function (resolve) {
+        return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                axios_1["default"].get('https://me-api.jd.com/user_new/info/GetJDUserInfoUnion', {
+                    headers: {
+                        Host: "me-api.jd.com",
+                        Connection: "keep-alive",
+                        Cookie: cookie,
+                        "User-Agent": TS_USER_AGENTS_1["default"],
+                        "Accept-Language": "zh-cn",
+                        "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
+                        "Accept-Encoding": "gzip, deflate, br"
                     }
-                    if (data['retcode'] === "0" && data['data'] && data.data.hasOwnProperty("userInfo")) {
-                        $.nickName = data.data.userInfo.baseInfo.nickname;
+                }).then(function (res) {
+                    if (res.data) {
+                        var data = res.data;
+                        if (data['retcode'] === "1001") {
+                            $.isLogin = false; //cookie过期
+                            return;
+                        }
+                        if (data['retcode'] === "0" && data['data'] && data.data.hasOwnProperty("userInfo")) {
+                            $.nickName = data.data.userInfo.baseInfo.nickname;
+                        }
                     }
-                }
-                else {
-                    console.log('京东服务器返回空数据');
-                }
-            })["catch"](function (e) {
-                console.log('Error:', e);
+                    else {
+                        console.log('京东服务器返回空数据');
+                    }
+                })["catch"](function (e) {
+                    console.log('Error:', e);
+                });
+                resolve();
+                return [2 /*return*/];
             });
-            resolve();
-            return [2 /*return*/];
         });
-    }); });
+    });
 }

@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function () { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -37,58 +37,59 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var axios_1 = require("axios");
-var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
+var TS_USER_AGENTS_1 = require("./utils/TS_USER_AGENTS");
 var qrcode = require('qrcode-terminal');
-!(function () { return __awaiter(void 0, void 0, void 0, function () {
-    var config, _a, headers, data, s_token, setCookie, _i, _b, h, guid, lsid, lstoken, cookies, body, res, token, okl_token, url, code, _c, _d, h;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
-            case 0:
-                console.log('支持异网');
-                config = {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Accept': 'application/json, text/plain, */*',
-                        'Referer': 'https://plogin.m.jd.com/login/login?appid=300&returnurl=https://wq.jd.com/passport/LoginRedirect?state=${Date.now()}&returnurl=https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&/myJd/home.action&source=wq_passport',
-                        'User-Agent': TS_USER_AGENTS_1["default"],
-                        'Host': 'plogin.m.jd.com'
+!(function () {
+    return __awaiter(void 0, void 0, void 0, function () {
+        var config, _a, headers, data, s_token, setCookie, _i, _b, h, guid, lsid, lstoken, cookies, body, res, token, okl_token, url, code, _c, _d, h;
+        return __generator(this, function (_e) {
+            switch (_e.label) {
+                case 0:
+                    console.log('支持异网');
+                    config = {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Accept': 'application/json, text/plain, */*',
+                            'Referer': 'https://plogin.m.jd.com/login/login?appid=300&returnurl=https://wq.jd.com/passport/LoginRedirect?state=${Date.now()}&returnurl=https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&/myJd/home.action&source=wq_passport',
+                            'User-Agent': TS_USER_AGENTS_1["default"],
+                            'Host': 'plogin.m.jd.com'
+                        }
+                    };
+                    return [4 /*yield*/, axios_1["default"].get("https://plogin.m.jd.com/cgi-bin/mm/new_login_entrance?lang=chs&appid=300&returnurl=https://wq.jd.com/passport/LoginRedirect?state=" + Date.now() + "&returnurl=https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&/myJd/home.action&source=wq_passport", config)];
+                case 1:
+                    _a = _e.sent(), headers = _a.headers, data = _a.data;
+                    s_token = data['s_token'];
+                    setCookie = '';
+                    for (_i = 0, _b = headers['set-cookie']; _i < _b.length; _i++) {
+                        h = _b[_i];
+                        setCookie += h + ';';
                     }
-                };
-                return [4 /*yield*/, axios_1["default"].get("https://plogin.m.jd.com/cgi-bin/mm/new_login_entrance?lang=chs&appid=300&returnurl=https://wq.jd.com/passport/LoginRedirect?state=" + Date.now() + "&returnurl=https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&/myJd/home.action&source=wq_passport", config)];
-            case 1:
-                _a = _e.sent(), headers = _a.headers, data = _a.data;
-                s_token = data['s_token'];
-                setCookie = '';
-                for (_i = 0, _b = headers['set-cookie']; _i < _b.length; _i++) {
-                    h = _b[_i];
-                    setCookie += h + ';';
-                }
-                guid = setCookie.match(/guid=([^;]*)/)[1];
-                lsid = setCookie.match(/lsid=([^;]*)/)[1];
-                lstoken = setCookie.match(/lstoken=([^;]*)/)[1];
-                cookies = "guid=" + guid + ";lang=chs;lsid=" + lsid + ";lstoken=" + lstoken + ";";
-                config.headers.cookie = cookies;
-                body = {
-                    'lang': 'chs',
-                    'appid': '300',
-                    'returnurl': "https://wqlogin2.jd.com/passport/LoginRedirect?state=" + Date.now() + "&returnurl=//home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&/myJd/home.action",
-                    'source': 'wq_passport'
-                };
-                return [4 /*yield*/, axios_1["default"].post("https://plogin.m.jd.com/cgi-bin/m/tmauthreflogurl?s_token=" + s_token + "&v=" + Date.now() + "&remember=true", encodeURIComponent(JSON.stringify(body)), config)
+                    guid = setCookie.match(/guid=([^;]*)/)[1];
+                    lsid = setCookie.match(/lsid=([^;]*)/)[1];
+                    lstoken = setCookie.match(/lstoken=([^;]*)/)[1];
+                    cookies = "guid=" + guid + ";lang=chs;lsid=" + lsid + ";lstoken=" + lstoken + ";";
+                    config.headers.cookie = cookies;
+                    body = {
+                        'lang': 'chs',
+                        'appid': '300',
+                        'returnurl': "https://wqlogin2.jd.com/passport/LoginRedirect?state=" + Date.now() + "&returnurl=//home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&/myJd/home.action",
+                        'source': 'wq_passport'
+                    };
+                    return [4 /*yield*/, axios_1["default"].post("https://plogin.m.jd.com/cgi-bin/m/tmauthreflogurl?s_token=" + s_token + "&v=" + Date.now() + "&remember=true", encodeURIComponent(JSON.stringify(body)), config)
                         .then(function (res) {
-                        return res;
-                    })];
-            case 2:
-                res = _e.sent();
-                token = res.data.token;
-                okl_token = res.headers['set-cookie'][0].match(/okl_token=([^;]*)/)[1];
-                url = "https://plogin.m.jd.com/cgi-bin/m/tmauth?appid=300&client_type=m&token=" + token;
-                console.log(url);
-                qrcode.generate(url, { small: true });
-                _e.label = 3;
-            case 3:
-                if (!1) return [3 /*break*/, 6];
-                return [4 /*yield*/, axios_1["default"].post("https://plogin.m.jd.com/cgi-bin/m/tmauthchecktoken?&token=" + token + "&ou_state=0&okl_token=" + okl_token, "lang=chs&appid=300&source=wq_passport&returnurl=https://wqlogin2.jd.com/passport/LoginRedirect?state=" + Date.now() + "&returnurl=//home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&/myJd/home.action", {
+                            return res;
+                        })];
+                case 2:
+                    res = _e.sent();
+                    token = res.data.token;
+                    okl_token = res.headers['set-cookie'][0].match(/okl_token=([^;]*)/)[1];
+                    url = "https://plogin.m.jd.com/cgi-bin/m/tmauth?appid=300&client_type=m&token=" + token;
+                    console.log(url);
+                    qrcode.generate(url, { small: true });
+                    _e.label = 3;
+                case 3:
+                    if (!1) return [3 /*break*/, 6];
+                    return [4 /*yield*/, axios_1["default"].post("https://plogin.m.jd.com/cgi-bin/m/tmauthchecktoken?&token=" + token + "&ou_state=0&okl_token=" + okl_token, "lang=chs&appid=300&source=wq_passport&returnurl=https://wqlogin2.jd.com/passport/LoginRedirect?state=" + Date.now() + "&returnurl=//home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&/myJd/home.action", {
                         headers: {
                             'Referer': "https://plogin.m.jd.com/login/login?appid=300&returnurl=https://wqlogin2.jd.com/passport/LoginRedirect?state=" + Date.now() + "&returnurl=//home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&/myJd/home.action&source=wq_passport",
                             'Cookie': cookies,
@@ -99,41 +100,42 @@ var qrcode = require('qrcode-terminal');
                         }
                     })
                         .then(function (res) {
-                        return res;
-                    })];
-            case 4:
-                res = _e.sent();
-                console.log(JSON.stringify(res.data));
-                code = res.data.errcode;
-                if (code === 0) {
-                    console.log('Cookie获取成功\n');
-                    for (_c = 0, _d = res.headers['set-cookie']; _c < _d.length; _c++) {
-                        h = _d[_c];
-                        setCookie += h + ';';
+                            return res;
+                        })];
+                case 4:
+                    res = _e.sent();
+                    console.log(JSON.stringify(res.data));
+                    code = res.data.errcode;
+                    if (code === 0) {
+                        console.log('Cookie获取成功\n');
+                        for (_c = 0, _d = res.headers['set-cookie']; _c < _d.length; _c++) {
+                            h = _d[_c];
+                            setCookie += h + ';';
+                        }
+                        cookies = setCookie.match(/(pt_key=\S*)/)[1] + setCookie.match(/(pt_pin=\S*)/)[1];
+                        console.log(cookies);
+                        console.log('\n哪个死妈东西说扫了此脚本被偷ck的？100行不到的代码你告诉我哪里是泄漏你ck的？');
+                        return [3 /*break*/, 6];
                     }
-                    cookies = setCookie.match(/(pt_key=\S*)/)[1] + setCookie.match(/(pt_pin=\S*)/)[1];
-                    console.log(cookies);
-                    console.log('\n哪个死妈东西说扫了此脚本被偷ck的？100行不到的代码你告诉我哪里是泄漏你ck的？');
-                    return [3 /*break*/, 6];
-                }
-                else if (code === 21) {
-                    console.log('二维码失效');
-                    return [3 /*break*/, 6];
-                }
-                else if (code === 176) {
-                }
-                else {
-                    console.log('Error:', JSON.stringify(res.data));
-                    return [3 /*break*/, 6];
-                }
-                return [4 /*yield*/, wait(1000)];
-            case 5:
-                _e.sent();
-                return [3 /*break*/, 3];
-            case 6: return [2 /*return*/];
-        }
+                    else if (code === 21) {
+                        console.log('二维码失效');
+                        return [3 /*break*/, 6];
+                    }
+                    else if (code === 176) {
+                    }
+                    else {
+                        console.log('Error:', JSON.stringify(res.data));
+                        return [3 /*break*/, 6];
+                    }
+                    return [4 /*yield*/, wait(1000)];
+                case 5:
+                    _e.sent();
+                    return [3 /*break*/, 3];
+                case 6: return [2 /*return*/];
+            }
+        });
     });
-}); })();
+})();
 function wait(t) {
     return new Promise(function (resolve) {
         setTimeout(function () {

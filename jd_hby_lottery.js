@@ -77,7 +77,7 @@ const JD_API_HOST = 'https://api.m.jd.com';
         }
     }
     if ($.isNode() && allMessage) {
-        await notify.sendNotify(`${$.name}`, `${allMessage}` )
+        await notify.sendNotify(`${$.name}`, `${allMessage}`)
     }
 })()
     .catch((e) => {
@@ -88,7 +88,7 @@ const JD_API_HOST = 'https://api.m.jd.com';
     })
 
 async function lottery() {
-    let body = {"source":2,"openId":""};
+    let body = { "source": 2, "openId": "" };
     return new Promise(resolve => {
         $.post(taskPostUrl('hby_lottery', body), (err, resp, data) => {
             try {
@@ -97,13 +97,13 @@ async function lottery() {
                     console.log(`${$.name} API请求失败，请检查网路重试`)
                 } else {
                     data = JSON.parse(data);
-                    if(data.data.bizCode === 0){
+                    if (data.data.bizCode === 0) {
                         let hbInfo = data.data.result.hbInfo.discount;
                         console.log(`领取成功，获得${JSON.stringify(data.data)}`);
                         allMessage += `京东账号${$.index}-${$.nickName || $.UserName}\n领取成功，获得 ${hbInfo} 红包${$.index !== cookiesArr.length ? '\n\n' : '\n\n'}`;
-                    }else if (data.data.bizCode === -1006) {
+                    } else if (data.data.bizCode === -1006) {
                         console.log(`次数已满: ${data.data.bizMsg}`);
-                    }else {
+                    } else {
                         console.log(`异常：${JSON.stringify(data.data)}`);
                     }
                 }
@@ -126,7 +126,7 @@ function taskPostUrl(functionId, body = {}) {
             'Cookie': cookie,
             'Connection': 'keep-alive',
             'Accept': 'application/json, text/plain, */*',
-            'User-Agent' : $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+            'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./utils/USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
             'Accept-Language': 'zh-cn'
         },
         body: `functionId=${functionId}&appid=publicUseApi&body=${JSON.stringify(body)}&client=wh5&clientVersion=1.0.0&uuid=`
@@ -145,7 +145,7 @@ function TotalBean() {
                 "Connection": "keep-alive",
                 "Cookie": cookie,
                 "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-                "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.2.2;14.2;%E4%BA%AC%E4%B8%9C/9.2.2 CFNetwork/1206 Darwin/20.1.0")
+                "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./utils/USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.2.2;14.2;%E4%BA%AC%E4%B8%9C/9.2.2 CFNetwork/1206 Darwin/20.1.0")
             }
         }
         $.post(options, (err, resp, data) => {
