@@ -16,13 +16,13 @@
 开启抓包app后, Safari浏览器登录 https://bean.m.jd.com/bean/signIndex.action 点击签到并且出现签到日历后, 返回抓包app搜索关键字 functionId=signBean 复制请求头Cookie填入以下Key处的单引号内即可 */
 
 var Key =
-  "pt_key=AAJgwcfrAECrMZZTjep9d9mu3jknHvm0f-sxPW1tO3FcekOM79zd_wQmPAYS-q8vdwUIyWV6P7ss4rKxt59TkOwljIXG_jYF; pt_pin=455979050-14287437;"; //单引号内自行填写您抓取的Cookie
+  "pt_key=AAJg4lUfADBzYR9N4YHmpi8cX0Lxo5ODjGREZxuahM1M2tIJTPRCkIFch3RdEaZBBmAN7RFTFcw; pt_pin=jd_RbuUwXHBNnJR;"; //单引号内自行填写您抓取的Cookie
 
 var DualKey =
-  "pt_key=AAJgwcfhADAtMTDFjQ1Sm7qbp-n4v7GLFOplpWhPPp3m4Js0KFb_OxCoyhiDw4hXt2KcTSgwvFI; pt_pin=jd_RbuUwXHBNnJR;"; //如需双账号签到,此处单引号内填写抓取的"账号2"Cookie, 否则请勿填写
+  "pt_key=AAJg4lVNAEA2oWAjxG4GXYBcdxutTsQ7h479Ok72RIlp21ibAy5V4f2JzDZzEM18TYnTp6ksZme3NvLoOhhNLlAdSMkNgDba; pt_pin=455979050-14287437; pt_token=isp8jo03;"; //如需双账号签到,此处单引号内填写抓取的"账号2"Cookie, 否则请勿填写
 
 var OtherKey =
-  '[{"cookie":"pt_key=AAJgwgDIADBYe4gCOpu7haPBiSnigDz1F6TO_BaKTpB1Tt7n04AXb18dG9rbt_VnNtfTMxG5TnU; pt_pin=jd_rkylFaEIkvBL;"},{"cookie":"pt_key=AAJgwgDrADBgX92SDkWjWkqYuqPMmdzkhmsAL1eFdQZtu0BzcMT21lqH0raPEjEIdRCD4OUNo8A; pt_pin=lman87;"},{"cookie":"pt_key=AAJgwgIcADCTXlTG6liwuEC1LG0hKcvLyKwIQlFPOO6_YEFniVs9vlBTlXEZZGdWV8oxRbjB1CQ; pt_pin=jd_7a84de20543eb;"},{"cookie":"pt_key=AAJgwgHGADAHzXxVDpiwfcaBi6tCMkyziHWBCiECgxNYMDQNr5NLibGK2zvSS-le_9LDs5uwV04; pt_pin=jd_fMRfXcJHjROT;"}]'; //第三账号或以上的Cookie json串数据, 以下样例为第三第四账号：var OtherKey = '[{"cookie":"pt_key=xxxxxx;pt_pin=yyyyyy"},{"cookie":"pt_key=xxxxxx;pt_pin=yyyyyy"}]'
+  '[{"cookie":"pt_key=AAJg5ZKzADCKByQzMph3YKjr7t-GnugEblTrM3ikhuzJgHQVscVukHkx8PHfjDXG7AShwv6UGZ0; pt_pin=jd_fMRfXcJHjROT; pt_token=pntxsov3;"},{"cookie":"pt_key=AAJg4lS0ADCTsCurfrTNWHZ-rhPfJ8afnl85friX531_ayYJto2p3gBeliw43JaLSyLNyqnsaZk; pt_pin=jd_7a84de20543eb; pt_token=de6p46fn;"},{"cookie":"pt_key=AAJg4lY6ADCAUofW4-Ysg4LaEacSN-UvXF5w7idqoSmaO-4jv8vAuU0EP5zd12NVS3JN4_ZCcSc; pt_pin=jd_rkylFaEIkvBL; pt_token=2c6jsnsk;"},{"cookie":"pt_key=AAJg4lWzADDJT-tIR1H46B1l2n3Cmo3knZ9ofHsI1BfrD4wuFbIYa3lZ6TkCvkpkBV-ujPlKMa4; pt_pin=lman87; pt_token=6mtowwfp;"}]'; //第三账号或以上的Cookie json串数据, 以下样例为第三第四账号：var OtherKey = '[{"cookie":"pt_key=xxxxxx;pt_pin=yyyyyy"},{"cookie":"pt_key=xxxxxx;pt_pin=yyyyyy"}]'
 
 /* 注1: 以上选项仅针对于JsBox或Node.js, 如果使用QX,Surge,Loon, 请使用脚本获取Cookie.
    注2: 双账号用户抓取"账号1"Cookie后, 请勿点击退出账号(可能会导致Cookie失效), 需清除浏览器资料或更换浏览器登录"账号2"抓取.
@@ -269,9 +269,8 @@ function notify() {
       const amount = disables ? disables.split(",").length : 0;
       const disa =
         !notify || amount
-          ? `【温馨提示】:  检测到${$nobyda.disable ? `上次执行意外崩溃, ` : ``}已禁用${
-              notify ? `${amount}个` : `所有`
-            }接口, 如需开启请前往BoxJs或查看脚本内第100行注释.\n`
+          ? `【温馨提示】:  检测到${$nobyda.disable ? `上次执行意外崩溃, ` : ``}已禁用${notify ? `${amount}个` : `所有`
+          }接口, 如需开启请前往BoxJs或查看脚本内第100行注释.\n`
           : ``;
       $nobyda.notify("", "", Name + one + two + three + four + five + disa + notify, {
         "media-url": $nobyda.headUrl || "https://cdn.jsdelivr.net/gh/NobyDa/mini@master/Color/jd.png",
@@ -472,7 +471,7 @@ function JingDongTurn(s) {
     (data) => {
       return JingDongTurnSign(s, data);
     },
-    () => {}
+    () => { }
   );
 }
 
@@ -503,9 +502,8 @@ function JingDongTurnSign(s, code) {
             } else if (data.match(/(京豆|\"910582\")/)) {
               console.log("\n" + "京东商城-转盘签到成功 " + Details);
               merge.JDTurn.bean += Number(cc.data.prizeSendNumber) || 0;
-              merge.JDTurn.notify += `${also ? `\n` : ``}京东商城-转盘: ${also ? `多次` : `成功`}, 明细: ${
-                cc.data.prizeSendNumber || `无`
-              }京豆 🐶`;
+              merge.JDTurn.notify += `${also ? `\n` : ``}京东商城-转盘: ${also ? `多次` : `成功`}, 明细: ${cc.data.prizeSendNumber || `无`
+                }京豆 🐶`;
               merge.JDTurn.success += 1;
               if (cc.data.chances != "0") {
                 await JingDongTurnSign(2000, code);
@@ -612,13 +610,11 @@ function JingDongShake(s) {
               merge.JDShake.success += 1;
               if (cc.data.prizeBean) {
                 merge.JDShake.bean += cc.data.prizeBean.count || 0;
-                merge.JDShake.notify += `${also ? `\n` : ``}京东商城-摇摇: ${also ? `多次` : `成功`}, 明细: ${
-                  merge.JDShake.bean || `无`
-                }京豆 🐶`;
+                merge.JDShake.notify += `${also ? `\n` : ``}京东商城-摇摇: ${also ? `多次` : `成功`}, 明细: ${merge.JDShake.bean || `无`
+                  }京豆 🐶`;
               } else if (cc.data.prizeCoupon) {
-                merge.JDShake.notify += `${also ? `\n` : ``}京东商城-摇摇: ${also ? `多次, ` : ``}获得满${
-                  cc.data.prizeCoupon.quota
-                }减${cc.data.prizeCoupon.discount}优惠券→ ${cc.data.prizeCoupon.limitStr}`;
+                merge.JDShake.notify += `${also ? `\n` : ``}京东商城-摇摇: ${also ? `多次, ` : ``}获得满${cc.data.prizeCoupon.quota
+                  }减${cc.data.prizeCoupon.discount}优惠券→ ${cc.data.prizeCoupon.limitStr}`;
               } else {
                 merge.JDShake.notify += `${also ? `\n` : ``}京东商城-摇摇: 成功, 明细: 未知 ⚠️${also ? ` (多次)` : ``}`;
               }
@@ -628,9 +624,8 @@ function JingDongShake(s) {
             } else {
               console.log("\n" + "京东商城-摇一摇签到失败 " + Details);
               if (data.match(/true/)) {
-                merge.JDShake.notify += `${also ? `\n` : ``}京东商城-摇摇: 成功, 明细: 无奖励 🐶${
-                  also ? ` (多次)` : ``
-                }`;
+                merge.JDShake.notify += `${also ? `\n` : ``}京东商城-摇摇: 成功, 明细: 无奖励 🐶${also ? ` (多次)` : ``
+                  }`;
                 merge.JDShake.success += 1;
                 if (cc.data.luckyBox.freeTimes != 0) {
                   await JingDongShake(s);
@@ -642,9 +637,8 @@ function JingDongShake(s) {
                 } else if (data.match(/(未登录|101)/)) {
                   merge.JDShake.notify = "京东商城-摇摇: 失败, 原因: Cookie失效‼️";
                 } else {
-                  merge.JDShake.notify += `${also ? `\n` : ``}京东商城-摇摇: 失败, 原因: 未知 ⚠️${
-                    also ? ` (多次)` : ``
-                  }`;
+                  merge.JDShake.notify += `${also ? `\n` : ``}京东商城-摇摇: 失败, 原因: 未知 ⚠️${also ? ` (多次)` : ``
+                    }`;
                 }
               }
             }
@@ -1108,9 +1102,8 @@ function JDMagicCube(s, sign) {
   return new Promise((resolve, reject) => {
     if (disable("JDCube")) return reject();
     const JDUrl = {
-      url: `https://api.m.jd.com/client.action?functionId=getNewsInteractionInfo&appid=smfe${
-        sign ? `&body=${encodeURIComponent(`{"sign":${sign}}`)}` : ``
-      }`,
+      url: `https://api.m.jd.com/client.action?functionId=getNewsInteractionInfo&appid=smfe${sign ? `&body=${encodeURIComponent(`{"sign":${sign}}`)}` : ``
+        }`,
       headers: {
         Cookie: KEY,
       },
@@ -1141,7 +1134,7 @@ function JDMagicCube(s, sign) {
     (data) => {
       return JDMagicCubeSign(s, data);
     },
-    () => {}
+    () => { }
   );
 }
 
@@ -1149,9 +1142,8 @@ function JDMagicCubeSign(s, id) {
   return new Promise((resolve) => {
     setTimeout(() => {
       const JDMCUrl = {
-        url: `https://api.m.jd.com/client.action?functionId=getNewsInteractionLotteryInfo&appid=smfe${
-          id ? `&body=${encodeURIComponent(`{${id.sign ? `"sign":${id.sign},` : ``}"interactionId":${id.id}}`)}` : ``
-        }`,
+        url: `https://api.m.jd.com/client.action?functionId=getNewsInteractionLotteryInfo&appid=smfe${id ? `&body=${encodeURIComponent(`{${id.sign ? `"sign":${id.sign},` : ``}"interactionId":${id.id}}`)}` : ``
+          }`,
         headers: {
           Cookie: KEY,
         },
@@ -1255,10 +1247,9 @@ function JingRongDoll(s, key, title, code, type, num, award, belong) {
           Cookie: KEY,
         },
         body: `reqData=${encodeURIComponent(
-          `{"actCode":"${code}","type":${type ? type : `3`}${
-            code == "F68B2C3E71"
-              ? `,"frontParam":{"belong":"${belong}"}`
-              : code == `1DF13833F7`
+          `{"actCode":"${code}","type":${type ? type : `3`}${code == "F68B2C3E71"
+            ? `,"frontParam":{"belong":"${belong}"}`
+            : code == `1DF13833F7`
               ? `,"frontParam":{"channel":"JR","belong":4}`
               : ``
           }}`
@@ -1316,15 +1307,13 @@ function JingRongDoll(s, key, title, code, type, num, award, belong) {
                   merge[key].subsidy = num || 0;
                 }
                 merge[key].success = 1;
-                merge[key].notify = `${title}: 成功, 明细: ${(award ? num : merge[key].bean) || `无`}${
-                  award ? `金贴 💰` : `京豆 🐶`
-                }`;
+                merge[key].notify = `${title}: 成功, 明细: ${(award ? num : merge[key].bean) || `无`}${award ? `金贴 💰` : `京豆 🐶`
+                  }`;
               } else {
                 console.log(`\n${title}领取异常 ${Details}`);
                 if (num)
                   console.log(
-                    `\n${title} 请尝试手动领取, 预计可得${num}${
-                      award ? `金贴` : `京豆`
+                    `\n${title} 请尝试手动领取, 预计可得${num}${award ? `金贴` : `京豆`
                     }: \nhttps://uf1.jr.jd.com/up/redEnvelopes/index.html?actCode=${code}\n`
                   );
                 merge[key].fail = 1;
@@ -1333,9 +1322,8 @@ function JingRongDoll(s, key, title, code, type, num, award, belong) {
             } else {
               console.log(`\n${title}签到失败 ${Details}`);
               const redata = typeof cc.resultData == "string" ? cc.resultData : "";
-              merge[key].notify = `${title}: 失败, ${
-                cc.resultCode == 3 ? `原因: Cookie失效‼️` : `${redata || "原因: 未知 ⚠️"}`
-              }`;
+              merge[key].notify = `${title}: 失败, ${cc.resultCode == 3 ? `原因: Cookie失效‼️` : `${redata || "原因: 未知 ⚠️"}`
+                }`;
               merge[key].fail = 1;
             }
           }
@@ -1428,8 +1416,8 @@ function JingDongStore(s) {
                 cc.data.bizCode == 811
                   ? `已签过`
                   : cc.data.bizCode == 300
-                  ? `Cookie失效`
-                  : `${cc.data.bizMsg || `未知`}`;
+                    ? `Cookie失效`
+                    : `${cc.data.bizMsg || `未知`}`;
               merge.JDGStore.notify = `京东商城-超市: 失败, 原因: ${tp}${cc.data.bizCode == 300 ? `‼️` : ` ⚠️`}`;
               merge.JDGStore.fail = 1;
             }
@@ -1512,9 +1500,8 @@ function JDSecKilling(s) {
               } else {
                 console.log(`\n京东秒杀-红包签到失败 ${Details}`);
                 merge.JDSecKill.fail = 1;
-                merge.JDSecKill.notify = `京东秒杀-红包: 失败, ${
-                  cc.subCode == 103 ? `原因: 已领取` : cc.msg ? cc.msg : `原因: 未知`
-                } ⚠️`;
+                merge.JDSecKill.notify = `京东秒杀-红包: 失败, ${cc.subCode == 103 ? `原因: 已领取` : cc.msg ? cc.msg : `原因: 未知`
+                  } ⚠️`;
               }
             } catch (eor) {
               $nobyda.AnError("京东秒杀-领取", "JDSecKill", eor, response, data);
@@ -1525,7 +1512,7 @@ function JDSecKilling(s) {
         );
       });
     },
-    () => {}
+    () => { }
   );
 }
 
@@ -1555,13 +1542,12 @@ function JingDongBuyCar(s, ActId) {
                 cc.status && cc.data && cc.data.firstLoginStatus === false
                   ? `已签过`
                   : cc.error && cc.error.code == 2000
-                  ? `Cookie失效`
-                  : cc.error && cc.error.msg
-                  ? cc.error.msg
-                  : `未知`;
-              merge.JDBuyCar.notify = `京东商城-汽车: 失败, 原因: ${qt}${
-                cc.error && cc.error.code == 2000 ? `‼️` : ` ⚠️`
-              }`;
+                    ? `Cookie失效`
+                    : cc.error && cc.error.msg
+                      ? cc.error.msg
+                      : `未知`;
+              merge.JDBuyCar.notify = `京东商城-汽车: 失败, 原因: ${qt}${cc.error && cc.error.code == 2000 ? `‼️` : ` ⚠️`
+                }`;
               merge.JDBuyCar.fail = 1;
               reject();
             }
@@ -1597,9 +1583,8 @@ function JingDongBuyCar(s, ActId) {
               } else {
                 console.log(`\n京东商城-汽车签到失败 ${Details}`);
                 merge.JDBuyCar.fail = 1;
-                merge.JDBuyCar.notify = `京东商城-汽车: 失败, ${
-                  cc.error && cc.error.msg ? cc.error.msg : `原因: 未知`
-                } ⚠️`;
+                merge.JDBuyCar.notify = `京东商城-汽车: 失败, ${cc.error && cc.error.msg ? cc.error.msg : `原因: 未知`
+                  } ⚠️`;
               }
             } catch (eor) {
               $nobyda.AnError("京东汽车-签到", "JDBuyCar", eor, response, data);
@@ -1610,7 +1595,7 @@ function JingDongBuyCar(s, ActId) {
         );
       });
     },
-    () => {}
+    () => { }
   );
 }
 
@@ -2208,10 +2193,8 @@ function nobyda() {
       merge[keyname].error = 1;
     }
     return console.log(
-      `\n‼️${name}发生错误\n‼️名称: ${er.name}\n‼️描述: ${er.message}${
-        JSON.stringify(er).match(/\"line\"/) ? `\n‼️行列: ${JSON.stringify(er)}` : ``
-      }${resp && resp.status ? `\n‼️状态: ${resp.status}` : ``}${
-        body ? `\n‼️响应: ${resp && resp.status != 503 ? body : `Omit.`}` : ``
+      `\n‼️${name}发生错误\n‼️名称: ${er.name}\n‼️描述: ${er.message}${JSON.stringify(er).match(/\"line\"/) ? `\n‼️行列: ${JSON.stringify(er)}` : ``
+      }${resp && resp.status ? `\n‼️状态: ${resp.status}` : ``}${body ? `\n‼️响应: ${resp && resp.status != 503 ? body : `Omit.`}` : ``
       }`
     );
   };
