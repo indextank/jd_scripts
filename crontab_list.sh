@@ -24,14 +24,17 @@
 30 9,12,18 * * * node /scripts/myActions/jd_jxnc.js >>/scripts/logs/jd_jxnc.log 2>&1
 # 财富岛提现
 0 0 * * * node /scripts/myActions/jx_cfdtx.js >>/scripts/logs/jx_cfdtx.log 2>&1
+0 0 * * * node /scripts/myActions/jd_cfd_cashOut.js >>/scripts/logs/jd_cfd_cashOut.log 2>&1
 # 京喜工厂
 50 * * * * node /scripts/myActions/jd_dreamFactory.js >>/scripts/logs/jd_dreamFactory.log 2>&1
 # 京喜工厂开团
 # 20 1,6,22 * * * node /scripts/myActions/jd_dreamFactorytuan.js >>/scripts/logs/jd_dreamFactorytuan.log 2>&1
 # 京喜财富岛
 5 7,12,18 * * * node /scripts/myActions/jd_cfd.js >>/scripts/logs/jd_cfd.log 2>&1
+# 京喜财富岛提现
+0 0 * * * node /scripts/myActions/jd_cfdtx.js >>/scripts/logs/jd_cfdtx.log 2>&1
 # 财富岛热气球挂后台 - 挂机 手动执行为好
-#13 6 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
+28 6-23/2 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
 13 5,14,21 * * * node /scripts/myActions/gua_wealth_island.js >>/scripts/logs/gua_wealth_island.log 2>&1
 
 # 京喜领88元红包(6.31到期)
@@ -83,6 +86,12 @@
 
 # 喜马拉雅极速版 (# sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk add --no-cache python3 && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && pip install requests rsa)
 31 */1 * * * python3 /scripts/myActions/xmly_speed.py
+
+0 0 * * * node /scripts/myActions/jd_car_reward.js >>/scripts/logs/jd_car_reward.log 2>&1
+1 0 * * * node /scripts/myActions/jd_bean_box.js >>/scripts/logs/jd_bean_box.log 2>&1
+
+# 入口：首页-领京豆-升级赚京豆
+1 0 * * * node /scripts/myActions/gua_MMdou.js >>/scripts/logs/gua_MMdou.log 2>&1
 # 店铺签到，各类店铺签到，有新的店铺直接添加token即可
 1 0 * * * node /scripts/myActions/jd_dpqd.js >>/scripts/logs/jd_dpqd.log 2>&1
 # 京豆变动通知【昨日收益】
@@ -119,8 +128,8 @@
 25 0-23/2 * 6 * node /scripts/myActions/jd_big_winner.js >>/scripts/logs/jd_big_winner.log 2>&1
 # 口袋书店
 34 7,12,19 * * * node /scripts/myActions/jd_bookshop.js >>/scripts/logs/jd_bookshop.log 2>&1
-# 摇钱树
-23 */2 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1
+# 京东摇钱树助力
+03 5-23/1 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1
 # 闪购盲盒
 47 7,21 * * * node /scripts/myActions/jd_sgmh.js >>/scripts/logs/jd_sgmh.log 2>&1
 # 京东汽车(签到满500赛点可兑换500京豆)
@@ -191,13 +200,13 @@
 # 全民挖现金
 30 9 * * * node /scripts/myActions/jd_wxj.js >>/scripts/logs/jd_wxj.log 2>&1
 # 燃动夏季
-07 5-23/3 * * * node /scripts/myActions/jd_summer_movement.js >>/scripts/logs/jd_summer_movement.log 2>&1
+07 0-21/3 * * * node /scripts/myActions/jd_summer_movement.js >>/scripts/logs/jd_summer_movement.log 2>&1
 # 燃动夏季_SH助力
-17 8-23/3 * * * node /scripts/myActions/jd_summer_movement_help.js >>/scripts/logs/jd_summer_movement_help.log 2>&1
+17 5-21/3 * * * node /scripts/myActions/jd_summer_movement_help.js >>/scripts/logs/jd_summer_movement_help.log 2>&1
 
 30 0 * * * node /scripts/myActions/jd_wishingPool.js >>/scripts/logs/jd_wishingPool.log 2>&1
 
 # 省钱大赢家之翻翻乐
-33 0 * * * node /scripts/myActions/jd_flipcards.js >>/scripts/logs/jd_flipcards.log 2>&1
+31 0-23/3 * * * node /scripts/myActions/jd_flipcards.js >>/scripts/logs/jd_flipcards.log 2>&1
 
-0 0 * * * node /scripts/myActions/jd_car_reward.js >>/scripts/logs/jd_car_reward.log 2>&1
+# 23 0 * * * node /scripts/myActions/jd_yili_cow.js >>/scripts/logs/jd_yili_cow.log 2>&1

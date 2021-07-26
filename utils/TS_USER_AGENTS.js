@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function () { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -88,14 +88,14 @@ function getBeanShareCode(cookie) {
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0: return [4 /*yield*/, axios_1["default"].post('https://api.m.jd.com/client.action', "functionId=plantBeanIndex&body=" + escape(JSON.stringify({ version: "9.0.0.1", "monitor_source": "plant_app_plant_index", "monitor_refer": "" })) + "&appid=ld&client=apple&area=5_274_49707_49973&build=167283&clientVersion=9.1.0", {
-                        headers: {
-                            Cookie: cookie,
-                            Host: "api.m.jd.com",
-                            Accept: "*/*",
-                            Connection: "keep-alive",
-                            "User-Agent": USER_AGENT
-                        }
-                    })];
+                    headers: {
+                        Cookie: cookie,
+                        Host: "api.m.jd.com",
+                        Accept: "*/*",
+                        Connection: "keep-alive",
+                        "User-Agent": USER_AGENT
+                    }
+                })];
                 case 1:
                     data = (_c.sent()).data;
                     if ((_b = (_a = data.data) === null || _a === void 0 ? void 0 : _a.jwordShareInfo) === null || _b === void 0 ? void 0 : _b.shareUrl)
@@ -114,14 +114,14 @@ function getFarmShareCode(cookie) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, axios_1["default"].post('https://api.m.jd.com/client.action?functionId=initForFarm', "body=" + escape(JSON.stringify({ "version": 4 })) + "&appid=wh5&clientVersion=9.1.0", {
-                        headers: {
-                            "cookie": cookie,
-                            "origin": "https://home.m.jd.com",
-                            "referer": "https://home.m.jd.com/myJd/newhome.action",
-                            "User-Agent": USER_AGENT,
-                            "Content-Type": "application/x-www-form-urlencoded"
-                        }
-                    })];
+                    headers: {
+                        "cookie": cookie,
+                        "origin": "https://home.m.jd.com",
+                        "referer": "https://home.m.jd.com/myJd/newhome.action",
+                        "User-Agent": USER_AGENT,
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    }
+                })];
                 case 1:
                     data = (_a.sent()).data;
                     if (data.farmUserPro)
@@ -177,7 +177,7 @@ function requireConfig() {
     var cookiesArr = [];
     return new Promise(function (resolve) {
         console.log('开始获取配置文件\n');
-        var jdCookieNode = require('./jdCookie.js');
+        var jdCookieNode = require('../jdCookie.js');
         Object.keys(jdCookieNode).forEach(function (item) {
             if (jdCookieNode[item]) {
                 cookiesArr.push(jdCookieNode[item]);
