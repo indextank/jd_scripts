@@ -210,3 +210,4 @@
 31 0-23/3 * * * node /scripts/myActions/jd_flipcards.js >>/scripts/logs/jd_flipcards.log 2>&1
 
 # 23 0 * * * node /scripts/myActions/jd_yili_cow.js >>/scripts/logs/jd_yili_cow.log 2>&1
+25,31 5 * * * node /scripts/myActions/jd_productZ4Brand.js >>/scripts/logs/jd_productZ4Brand.log 2>&1
