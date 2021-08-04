@@ -173,7 +173,7 @@ function doTask2() {
 function getAuthorShareCode() {
   return new Promise(resolve => {
     $.get({
-      url: "https://raw.githubusercontent.com/indextank/myjd3/master/shareCodes/jd_bean.json", headers: {
+      url: "https://raw.githubusercontent.com/indextank/jd_scripts/master/shareCodes/jd_bean.json", headers: {
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
       }
     }, async (err, resp, data) => {

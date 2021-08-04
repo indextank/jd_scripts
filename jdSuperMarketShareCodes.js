@@ -313,7 +313,7 @@ async function businessCircleActivity() {
     if (joinStatus === 0) {
       console.log(`\n注：PK会在每天的七点自动随机加入LXK9301创建的队伍\n`)
       await updatePkActivityId();
-      if (!$.updatePkActivityIdRes) await updatePkActivityIdCDN('https://raw.githubusercontent.com/indextank/myjd3/master/shareCodes/jd_updateTeam.json');
+      if (!$.updatePkActivityIdRes) await updatePkActivityIdCDN('https://raw.githubusercontent.com/indextank/jd_scripts/master/shareCodes/jd_updateTeam.json');
       console.log(`\nupdatePkActivityId[pkActivityId]:::${$.updatePkActivityIdRes.pkActivityId}`);
       console.log(`\n京东服务器返回的[pkActivityId] ${pkActivityId}`);
       if ($.updatePkActivityIdRes && ($.updatePkActivityIdRes.pkActivityId === pkActivityId)) {
@@ -840,7 +840,7 @@ function smtg_sellMerchandise(body) {
   })
 }
 //新版东东超市
-function updatePkActivityId(url = 'https://raw.githubusercontent.com/indextank/myjd3/master/shareCodes/jd_updateTeam.json') {
+function updatePkActivityId(url = 'https://raw.githubusercontent.com/indextank/jd_scripts/master/shareCodes/jd_updateTeam.json') {
   return new Promise(resolve => {
     $.get({ url }, async (err, resp, data) => {
       try {

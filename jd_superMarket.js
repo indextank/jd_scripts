@@ -312,7 +312,7 @@ async function businessCircleActivity() {
     if (joinStatus === 0) {
       if (joinPkTeam === 'true') {
         console.log(`\n注：PK会在每天的七点自动随机加入LXK9301创建的队伍\n`)
-        await updatePkActivityIdCDN('https://raw.githubusercontent.com/indextank/myjd3/master/shareCodes/jd_updateTeam.json');
+        await updatePkActivityIdCDN('https://raw.githubusercontent.com/indextank/jd_scripts/master/shareCodes/jd_updateTeam.json');
         console.log(`\nupdatePkActivityId[pkActivityId]:::${$.updatePkActivityIdRes && $.updatePkActivityIdRes.pkActivityId}`);
         console.log(`\n京东服务器返回的[pkActivityId] ${pkActivityId}`);
         if ($.updatePkActivityIdRes && ($.updatePkActivityIdRes.pkActivityId === pkActivityId)) {
@@ -839,7 +839,7 @@ function smtg_sellMerchandise(body) {
   })
 }
 //新版东东超市
-function updatePkActivityId(url = 'https://raw.githubusercontent.com/indextank/myjd3/master/shareCodes/jd_updateTeam.json') {
+function updatePkActivityId(url = 'https://raw.githubusercontent.com/indextank/jd_scripts/master/shareCodes/jd_updateTeam.json') {
   return new Promise(resolve => {
     $.get({ url }, async (err, resp, data) => {
       try {
@@ -1563,7 +1563,7 @@ function getTeam() {
   return new Promise(async resolve => {
     $.getTeams = [];
     $.get({
-      url: "https://raw.githubusercontent.com/indextank/myjd3/master/shareCodes/jd_updateTeam.json",
+      url: "https://raw.githubusercontent.com/indextank/jd_scripts/master/shareCodes/jd_updateTeam.json",
       headers: {
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
       }

@@ -34,9 +34,11 @@
 # 京喜财富岛提现
 0 0 * * * node /scripts/myActions/jd_cfdtx.js >>/scripts/logs/jd_cfdtx.log 2>&1
 # 财富岛热气球挂后台 - 挂机 手动执行为好
-28 6-23/2 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
-13 5,14,21 * * * node /scripts/myActions/gua_wealth_island.js >>/scripts/logs/gua_wealth_island.log 2>&1
-
+# 28 6-23/2 * * * ts-node /scripts/myActions/jd_cfd_loop.ts >>/scripts/logs/jd_cfd_loop.log 2>&1
+42 6-23/3 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
+30 1,3,23 * * * node /scripts/myActions/gua_wealth_island.js >>/scripts/logs/gua_wealth_island.log 2>&1
+# 京喜签到
+22 2 * * * node /scripts/myActions/jx_sign.js >>/scripts/logs/jx_sign.log 2>&1
 # 京喜领88元红包(6.31到期)
 30 1,6,12,21 * * * node /scripts/myActions/jd_jxlhb.js >>/scripts/logs/jd_jxlhb.log 2>&1
 
@@ -105,8 +107,7 @@
 # 京东签到图形验证
 5 0,11 * * * node /scripts/myActions/jd_NewSign.js >>/scripts/logs/jd_NewSign.log 2>&1
 # 点点券二代目
-# 40 0,7,14,21 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1
-40 0,11,21 * * * node /scripts/myActions/jd_necklace_new.js >>/scripts/logs/jd_necklace_new.log 2>&1
+40 0,7,14,21 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1
 # 京东种豆得豆
 37 0,7,23 * * * node /scripts/myActions/jd_plantBean.js >>/scripts/logs/jd_plantBean.log 2>&1
 # 东东超市兑换奖品
@@ -211,3 +212,9 @@
 
 # 23 0 * * * node /scripts/myActions/jd_yili_cow.js >>/scripts/logs/jd_yili_cow.log 2>&1
 25,31 5 * * * node /scripts/myActions/jd_productZ4Brand.js >>/scripts/logs/jd_productZ4Brand.log 2>&1
+
+# 奥运夺金牌开卡
+# 25 0,21 * * * node /scripts/myActions/gua_olympic_opencard.js >>/scripts/logs/gua_olympic_opencard.log 2>&1
+
+# 活动入口： 京东极速版-我的-发财大赢家
+# 3 5-23/3 * * * node /scripts/myActions/jd_fcdyj.js >>/scripts/logs/jd_fcdyj.log 2>&1

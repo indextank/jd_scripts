@@ -151,7 +151,7 @@ async function doChannelsListTask(taskId, taskType) {
 async function helpFriends() {
   await updateInviteCode();
   if (!$.inviteCodes) await updateInviteCodeCDN();
-  if (!$.inviteCodes) await updateInviteCodeCDN('https://raw.githubusercontent.com/indextank/myjd3/master/shareCodes/jd_updateSmallHomeInviteCode.json');
+  if (!$.inviteCodes) await updateInviteCodeCDN('https://raw.githubusercontent.com/indextank/jd_scripts/master/shareCodes/jd_updateSmallHomeInviteCode.json');
   for (let item of $.inviteCodes.inviteCode) {
     if (!item) continue
     await createAssistUser(item, $.createAssistUserID);
@@ -783,7 +783,7 @@ function login(userName) {
     })
   })
 }
-function updateInviteCode(url = 'https://raw.githubusercontent.com/indextank/myjd3/master/shareCodes/jd_updateSmallHomeInviteCode.json') {
+function updateInviteCode(url = 'https://raw.githubusercontent.com/indextank/jd_scripts/master/shareCodes/jd_updateSmallHomeInviteCode.json') {
   return new Promise(resolve => {
     $.get({ url }, async (err, resp, data) => {
       try {
@@ -800,7 +800,7 @@ function updateInviteCode(url = 'https://raw.githubusercontent.com/indextank/myj
     })
   })
 }
-function updateInviteCodeCDN(url = 'https://raw.githubusercontent.com/indextank/myjd3/master/shareCodes/jd_updateSmallHomeInviteCode.json') {
+function updateInviteCodeCDN(url = 'https://raw.githubusercontent.com/indextank/jd_scripts/master/shareCodes/jd_updateSmallHomeInviteCode.json') {
   return new Promise(async resolve => {
     $.get({ url }, async (err, resp, data) => {
       try {

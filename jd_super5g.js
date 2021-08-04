@@ -511,7 +511,7 @@ function taskurl(url) {
     }
   }
 }
-function updateShareCodesCDN(url = 'https://raw.githubusercontent.com/indextank/myjd3/master/shareCodes/jd_5g.json') {
+function updateShareCodesCDN(url = 'https://raw.githubusercontent.com/indextank/jd_scripts/master/shareCodes/jd_5g.json') {
   return new Promise(resolve => {
     $.get({
       url,
