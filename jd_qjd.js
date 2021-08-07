@@ -22,7 +22,7 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 !(async () => {
-  console.log(`\n【抢京豆脚本】账号内部互相助力\n`)
+  console.log(`\n【抢京豆脚本】优先账号内部互相助力\n`)
   await getAuthorShareCode();
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
@@ -51,32 +51,46 @@ if ($.isNode()) {
   }
   console.log(helpInfo)
   // return
-  for (let i = 0; i < cookiesArr.length; i++) {
-    if (cookiesArr[i]) {
-      cookie = cookiesArr[i];
-      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-      for (let helpItem in helpInfo) {
-        $.groupCode = helpInfo[helpItem].groupCode
-        $.shareCode = helpInfo[helpItem].shareCode
-        $.activityId = helpInfo[helpItem].activityId
-        if ($.UserName === helpItem) {
-          console.log(`${$.UserName}跳过助力自己`)
-          continue
-        }
-        if (cookiesArr.length > 2) {
-          console.log(`\n=====开始账号内互助=====\n`)
+  if (cookiesArr.length > 2) {
+    console.log(`\n=====开始账号内互助=====\n`)
+    for (let i = 0; i < cookiesArr.length; i++) {
+      if (cookiesArr[i]) {
+        cookie = cookiesArr[i];
+        $.canHelp = true
+        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+        for (let helpItem in helpInfo) {
+          $.groupCode = helpInfo[helpItem].groupCode
+          $.shareCode = helpInfo[helpItem].shareCode
+          $.activityId = helpInfo[helpItem].activityId
           await doHelp($.groupCode, $.shareCode, $.activityId)
-        } else {
-          console.log(`\n账号少于3个，不够成团，去帮助【zero205】\n`)
-          await $.wait(500)
+          if (!$.canHelp)
+            break
         }
       }
-      console.log(`\n${$.UserName} 去助力【zero205】，感谢\n`)
-      for (let code of $.authorCode) {
-        await doHelp(code.groupCode, code.shareCode, $.activityId);
-      }
-      await $.wait(1000)
+      console.log(`${$.UserName}账号内部互助已完成`)
+      // for (let code of $.authorCode) {
+      //   $.canHelp = false
+      //   await doHelp(code.groupCode, code.shareCode, $.activityId)
+      //   if (!$.canHelp)
+      //     break
+      // }
     }
+  } else {
+    console.log(`\n账号少于3个，不够成团`)
+    // for (let j = 0; j < cookiesArr.length; j++) {
+    //   if (cookiesArr[j]) {
+    //     cookie = cookiesArr[j];
+    //     $.canHelp = false
+    //     for (let helpItem in helpInfo) {
+    //       $.activityId = helpInfo[helpItem].activityId
+    //     }
+    //     for (let code of $.authorCode) {
+    //       await doHelp(code.groupCode, code.shareCode, $.activityId)
+    //       if (!$.canHelp)
+    //         break
+    //     }
+    //   }
+    // }
   }
 }
 )()
@@ -166,6 +180,9 @@ function doHelp(groupCode, shareCode, activityId) {
       data = JSON.parse(data.replace(/jsonp_\d*_\d*\(/, '').replace(/\);?/, ''))
       let { helpToast } = data.data
       console.log(helpToast)
+      if (data.data.respCode === 'SG209') {
+        $.canHelp = false
+      }
       resolve()
     })
   })

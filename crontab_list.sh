@@ -30,13 +30,13 @@
 # 京喜工厂开团
 # 20 1,6,22 * * * node /scripts/myActions/jd_dreamFactorytuan.js >>/scripts/logs/jd_dreamFactorytuan.log 2>&1
 # 京喜财富岛
-5 7,12,18 * * * node /scripts/myActions/jd_cfd.js >>/scripts/logs/jd_cfd.log 2>&1
+5 7,12,18 * * * node /scripts/myActions/jd_cfd.js >/scripts/logs/jd_cfd.log 2>&1
 # 京喜财富岛提现
 0 0 * * * node /scripts/myActions/jd_cfdtx.js >>/scripts/logs/jd_cfdtx.log 2>&1
 # 财富岛热气球挂后台 - 挂机 手动执行为好
 # 28 6-23/2 * * * ts-node /scripts/myActions/jd_cfd_loop.ts >>/scripts/logs/jd_cfd_loop.log 2>&1
-42 6-23/3 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
-30 1,3,23 * * * node /scripts/myActions/gua_wealth_island.js >>/scripts/logs/gua_wealth_island.log 2>&1
+42 6-23/4 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
+# 30 1,3,23 * * * node /scripts/myActions/gua_wealth_island.js >>/scripts/logs/gua_wealth_island.log 2>&1
 # 京喜签到
 22 1,23 * * * node /scripts/myActions/jx_sign.js >>/scripts/logs/jx_sign.log 2>&1
 # 京喜领88元红包(6.31到期)
@@ -221,16 +221,18 @@
 25,31 5 * * * node /scripts/myActions/jd_productZ4Brand.js >>/scripts/logs/jd_productZ4Brand.log 2>&1
 
 # 7月粉丝互动
-35 6 * * * node /scripts/myActions/jd_wxFans.js >>/scripts/logs/jd_wxFans.log 2>&1
+35 6,18 * * * node /scripts/myActions/jd_wxFans.js >>/scripts/logs/jd_wxFans.log 2>&1
 
 # 奥运夺金牌开卡
 # 25 0,21 * * * node /scripts/myActions/gua_olympic_opencard.js >>/scripts/logs/gua_olympic_opencard.log 2>&1
 
 # 活动入口： 京东极速版-我的-发财大赢家
-# 3 5-23/3 * * * node /scripts/myActions/jd_fcdyj.js >>/scripts/logs/jd_fcdyj.log 2>&1
+3 5-23/3 * * * node /scripts/myActions/jd_fcdyj.js >>/scripts/logs/jd_fcdyj.log 2>&1
 
 # 8.4-8.15 七夕情报局
 36 0,10,21 4-15 8 * node /scripts/myActions/gua_doge.js >>/scripts/logs/gua_doge.log 2>&1
 
 # 柠檬推一推
 0 6-23/4 * * * node /scripts/myActions/jd_tyt.js >>/scripts/logs/jd_tyt.log 2>&1
+# 我的-赚30
+13 6,21 * * * node /scripts/myActions/jd_earn30.js >>/scripts/logs/jd_earn30.log 2>&1

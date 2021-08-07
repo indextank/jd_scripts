@@ -85,7 +85,7 @@ const typeMap = {
                     try {
                         await getGoodList()
                         filterGoodList()
-                        await $.wait(Math.floor(Math.random() * 20000 + args.applyInterval))
+                        await $.wait(Math.floor(Math.random() * 30000 + args.applyInterval))
                         break
                     } catch (e) {
                         if (ii > 5) {
@@ -412,7 +412,7 @@ async function tryGoodList() {
         // 如果没有关注且关注失败
         if (good.shopId && !await isFollowed(good) && !await followShop(good)) continue
         // 两个申请间隔不能太短，放在下面有利于确保 follwShop 完成
-        await $.wait(Math.floor(Math.random() * 2000 + args.applyInterval))
+        await $.wait(Math.floor(Math.random() * 5000 + args.applyInterval))
         // 关注完毕，即将试用
         await doTry(good)
     }
