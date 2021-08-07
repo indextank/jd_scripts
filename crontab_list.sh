@@ -72,7 +72,7 @@
 # 宠汪汪邀请助力
 # 10 13-20/1 * * * node /scripts/myActions/jd_joy_run.js >>/scripts/logs/jd_joy_run.log 2>&1
 # 宠汪汪偷狗粮🐕
-10 0-23/3 * * * node /scripts/myActions/jd_joy_steal.js >>/scripts/logs/jd_joy_steal.log 2>&1
+10 1-23/3 * * * node /scripts/myActions/jd_joy_steal.js >>/scripts/logs/jd_joy_steal.log 2>&1
 
 # 汪汪乐园养joy
 20 0-23/3 * * * node /scripts/myActions/jd_joy_park.js >>/scripts/logs/jd_joy_park.log 2>&1
@@ -82,9 +82,11 @@
 40 9 * * * node /scripts/myActions/jd_joy_park_task.js >>/scripts/logs/jd_joy_park_task.log 2>&1
 
 # 京东极速版红包(活动时间：2021-5-5至2021-5-31)
-45 0,23 * * * node /scripts/myActions/jd_speed_redpocke.js >>/scripts/logs/jd_speed_redpocke.log 2>&1
+14 0,23 * * * node /scripts/myActions/jd_speed_redpocke.js >>/scripts/logs/jd_speed_redpocke.log 2>&1
 # 京东极速版签到+赚现金任务 - 活动入口：京东极速版app-现金签到
-21 0,18 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1
+25 0,18 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1
+# 活动入口： 京东极速版-我的-发财大赢家
+20 0,12 * * * node /scripts/myActions/jd_fcdyj.js >>/scripts/logs/jd_fcdyj.log 2>&1
 
 # 喜马拉雅极速版 (# sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk add --no-cache python3 && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && pip install requests rsa)
 31 */1 * * * python3 /scripts/myActions/xmly_speed.py
@@ -224,3 +226,6 @@
 
 # 8.4-8.15 七夕情报局
 36 0,10,21 4-15 8 * node /scripts/myActions/gua_doge.js >>/scripts/logs/gua_doge.log 2>&1
+
+# 柠檬推一推
+0 6-23/4 * * * node /scripts/myActions/jd_tyt.js >>/scripts/logs/jd_tyt.log 2>&1
