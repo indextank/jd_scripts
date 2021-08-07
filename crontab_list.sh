@@ -38,7 +38,7 @@
 42 6-23/3 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
 30 1,3,23 * * * node /scripts/myActions/gua_wealth_island.js >>/scripts/logs/gua_wealth_island.log 2>&1
 # 京喜签到
-22 2 * * * node /scripts/myActions/jx_sign.js >>/scripts/logs/jx_sign.log 2>&1
+22 1,23 * * * node /scripts/myActions/jx_sign.js >>/scripts/logs/jx_sign.log 2>&1
 # 京喜领88元红包(6.31到期)
 30 1,6,12,21 * * * node /scripts/myActions/jd_jxlhb.js >>/scripts/logs/jd_jxlhb.log 2>&1
 
@@ -107,7 +107,8 @@
 # 签到
 7 0,7,18 * * * node /scripts/myActions/jd_bean_sign.js >>/scripts/logs/jd_bean_sign.log 2>&1
 # 京东签到图形验证
-5 0,11 * * * node /scripts/myActions/jd_NewSign.js >>/scripts/logs/jd_NewSign.log 2>&1
+5 0 * * * node /scripts/myActions/jd_sign_graphics.js >>/scripts/logs/jd_sign_graphics.log 2>&1
+5 17 * * * node /scripts/myActions/jd_NewSign.js >>/scripts/logs/jd_NewSign.log 2>&1
 # 点点券二代目
 40 0,7,14,21 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1
 # 京东种豆得豆
@@ -117,8 +118,10 @@
 # 签到领现金
 10 */4 * * * node /scripts/myActions/jd_cash.js >>/scripts/logs/jd_cash.log 2>&1
 # 摇京豆
-20 0,16 * * * node /scripts/myActions/jd_club_lottery.js >>/scripts/logs/jd_club_lottery.log 2>&1
+22 0,16 * * * node /scripts/myActions/jd_club_lottery.js >>/scripts/logs/jd_club_lottery.log 2>&1
 # 10 15,16,23 * * * node /scripts/myActions/jd_shake.js >>/scripts/logs/jd_shake.log 2>&1
+# MM领京豆
+20 0,20 * * * node /scripts/myActions/jd_ljd.js >>/scripts/logs/jd_ljd.log 2>&1
 # 领金贴
 5 6 * * * node /scripts/myActions/jd_jin_tie.js >>/scripts/logs/jd_jin_tie.log 2>&1
 # 跳跳乐瓜分京豆
@@ -133,6 +136,8 @@
 34 7,12,19 * * * node /scripts/myActions/jd_bookshop.js >>/scripts/logs/jd_bookshop.log 2>&1
 # 京东摇钱树助力
 03 5-23/1 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1
+09 5 * * * node /scripts/myActions/jd_moneyTree_help.js >>/scripts/logs/jd_moneyTree_help.log 2>&1
+
 # 闪购盲盒
 47 7,21 * * * node /scripts/myActions/jd_sgmh.js >>/scripts/logs/jd_sgmh.log 2>&1
 # 京东汽车(签到满500赛点可兑换500京豆)
