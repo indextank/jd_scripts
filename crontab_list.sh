@@ -1,8 +1,8 @@
 # Page1
-# 每1天的23:50分清理一次日志(互助码不清理，proc_file.sh对该文件进行了去重)
-50 23 */1 * * find /scripts/logs -name '*.log' | grep -v 'sharecodeCollection' | xargs rm -rf
+# 每天的23:50分清理一次日志(互助码不清理，proc_file.sh对该文件进行了去重)
+58 23 */1 * * find /scripts/logs -name '*.log' | grep -v 'sharecodeCollection' | xargs rm -rf
 # 取关京东店铺商品
-30 11,23 * * * node /scripts/myActions/jd_unsubscribe.js >>/scripts/logs/jd_unsubscribe.log 2>&1
+30 11,22 * * * node /scripts/myActions/jd_unsubscribe.js >>/scripts/logs/jd_unsubscribe.log 2>&1
 
 # 收集助力码
 30 * * * * sh +x /scripts/myActions/docker/auto_help.sh collect >>/scripts/logs/auto_help_collect.log 2>&1
@@ -12,7 +12,7 @@
 # 删除优惠券(默认注释，如需要自己开启，如有误删，已删除的券可以在回收站中还原，慎用)
 #20 9 * * 6 node /scripts/myActions/jd_delCoupon.js >> /scripts/logs/jd_delCoupon.log 2>&1
 # 新品试用
-0 10 * * * node /scripts/myActions/jd_try.js >>/scripts/logs/jd_try.log 2>&1
+10 10,20 * * * node /scripts/myActions/jd_try.js >>/scripts/logs/jd_try.log 2>&1
 # 京东保价
 # 41 0,11 * * * node /scripts/myActions/jd_priceProtect.js >>/scripts/logs/jd_priceProtect.log 2>&1
 
@@ -185,7 +185,7 @@
 # 京东秒秒币
 10 6,21 * * * node /scripts/myActions/jd_ms.js >>/scripts/logs/jd_ms.log 2>&1
 # 5G超级盲盒(活动时间：2021-06-2到2021-07-31)
-0 0-23/4 * * * node /scripts/myActions/jd_mohe.js >>/scripts/logs/jd_mohe.log 2>&1
+0 0,1-23/3 * * * node /scripts/myActions/jd_mohe.js >>/scripts/logs/jd_mohe.log 2>&1
 # 0 0-23/4 * * * node /scripts/myActions/jd_super5g.js >>/scripts/logs/jd_super5g.log 2>&1
 # 女装盲盒
 35 1,22 * * * node /scripts/myActions/jd_nzmh.js >>/scripts/logs/jd_nzmh.log 2>&1
