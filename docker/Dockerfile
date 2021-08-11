@@ -11,6 +11,10 @@ ENV DEFAULT_LIST_FILE=crontab_list.sh \
     REPO_URL=git@github.com:indextank/jd_scripts.git \
     REPO_BRANCH=master
 
+RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g" /etc/apk/repositories && \
+    apk update && apk add --no-cache tzdata && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone
+
 RUN set -ex \
     && apk update \
     && apk upgrade \
