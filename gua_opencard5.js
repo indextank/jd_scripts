@@ -1,39 +1,42 @@
 /*
-8.4-8.12 大牌联合 冰爽一夏 [gua_opencard4.js]
+8.5-8.12 冰爽夏日 钜惠送好礼 [gua_opencard5.js]
 新增开卡脚本
 一次性脚本
 
 邀请一人20豆 被邀请也有20豆(有可能没有豆
 开2组卡 每组50豆(有可能有抽到空气💨
-关注10京豆 (有可能有抽到空气💨
-加购5京豆 (默认不加购 如需加购请设置环境变量[guaopencard_addSku4]为"true"
+关注20京豆 (有可能有抽到空气💨
+加购5京豆 (默认不加购 如需加购请设置环境变量[guaopencard_addSku5]为"true"
 
 第一个账号助力作者 其他依次助力CK1
 第一个CK失效会退出脚本
 
 默认脚本不执行
 如需执行脚本请设置环境变量
-guaopencard4="true"
-
+guaopencard5="true"
+————————————————
+若是手机用户(不是nodejs环境) 是默认直接执行脚本的
+没有适配加购变量 所有是不加购
+————————————————
 入口
-https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/832865?activityId=c225ad5922cf4ac8b4a68fd37f486088&shareUuid=8eef88dbbb5e4a11b04f222b78b195c8
+8.5-8.12 冰爽夏日 钜惠送好礼 (https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=5a1b7bc1f22e4bc5b5686bb54749de2e&shareUuid=e3b48e5703544ec094b727e3e65b6672)
 
 ============Quantumultx===============
 [task_local]
-#8.4-8.12 大牌联合 冰爽一夏
-36 0,8 4-12 8 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard4.js, tag=8.4-8.12 大牌联合 冰爽一夏, enabled=true
+#8.5-8.12 冰爽夏日 钜惠送好礼
+38 0,8 5-12 8 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard4.js, tag=8.5-8.12 冰爽夏日 钜惠送好礼, enabled=true
 
 ================Loon==============
 [Script]
-cron "36 0,8 4-12 8 *" script-path=gua_opencard4.js,tag=8.4-8.12 大牌联合 冰爽一夏
+cron "38 0,8 5-12 8 *" script-path=gua_opencard4.js,tag=8.5-8.12 冰爽夏日 钜惠送好礼
 
 ===============Surge=================
-8.4-8.12 大牌联合 冰爽一夏 = type=cron,cronexp="36 0,8 4-12 8 *",wake-system=1,timeout=3600,script-path=gua_opencard4.js
+8.5-8.12 冰爽夏日 钜惠送好礼 = type=cron,cronexp="38 0,8 5-12 8 *",wake-system=1,timeout=3600,script-path=gua_opencard4.js
 
 ============小火箭=========
-8.4-8.12 大牌联合 冰爽一夏 = type=cron,script-path=gua_opencard4.js, cronexpr="36 0,8 4-12 8 *", timeout=3600, enable=true
+8.5-8.12 冰爽夏日 钜惠送好礼 = type=cron,script-path=gua_opencard4.js, cronexpr="38 0,8 5-12 8 *", timeout=3600, enable=true
 */
-const $ = new Env('8.4-8.12 大牌联合 冰爽一夏');
+const $ = new Env('8.5-8.12 冰爽夏日 钜惠送好礼');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -48,7 +51,7 @@ if ($.isNode()) {
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
-let guaopencard_addSku4 = false
+let guaopencard_addSku = false
 const JD_API_HOST = `https://api.m.jd.com/client.action`;
 message = ""
 !(async () => {
@@ -59,17 +62,18 @@ message = ""
     return;
   }
   if ($.isNode()) {
-    // if (!process.env.guaopencard4 || process.env.guaopencard4 == "false") {
-    //   console.log('如需执行脚本请设置环境变量[guaopencard4]为"true"')
+    // if (!process.env.guaopencard5 || process.env.guaopencard5 == "false") {
+    //   console.log('如需执行脚本请设置环境变量[guaopencard5]为"true"')
     //   return
     // }
-    guaopencard_addSku4 = true
-    // if (!process.env.guaopencard_addSku4 || process.env.guaopencard_addSku4 == "false") {
-    //   console.log('如需加购请设置环境变量[guaopencard_addSku4]为"true"')
+    guaopencard_addSku = true
+    // if (!process.env.guaopencard_addSku5 || process.env.guaopencard_addSku5 == "false") {
+    //   console.log('如需加购请设置环境变量[guaopencard_addSku5]为"true"')
     // }
   }
-  $.shareUuid = '8eef88dbbb5e4a11b04f222b78b195c8'
-  console.log(`入口:\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/832865?activityId=c225ad5922cf4ac8b4a68fd37f486088&shareUuid=${$.shareUuid}`)
+  $.shareUuid = 'e3b48e5703544ec094b727e3e65b6672'
+  $.activityId = '5a1b7bc1f22e4bc5b5686bb54749de2e'
+  console.log(`入口:\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`)
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
     if (cookie) {
@@ -92,8 +96,9 @@ message = ""
       $.LZ_TOKEN_KEY = wxCommonInfoTokenData.LZ_TOKEN_KEY
       $.LZ_TOKEN_VALUE = wxCommonInfoTokenData.LZ_TOKEN_VALUE
       $.isvObfuscatorToken = await getIsvObfuscatorToken();
+      await getSimpleActInfoVo()
       $.myPingData = await getMyPing()
-      if ($.myPingData === "" || $.myPingData === '400001') {
+      if ($.myPingData === "" || $.myPingData === '400001' || typeof $.shopId == 'undefined' || typeof $.venderId == 'undefined') {
         $.log("获取活动信息失败！")
         if (i === 0) {
           return
@@ -116,6 +121,7 @@ message = ""
       await drawContent();
       await $.wait(1000)
       let checkOpenCardData = await checkOpenCard();
+      $.log($.actorUuid)
       $.log("开完卡: " + checkOpenCardData.allOpenCard)
       if (checkOpenCardData && !checkOpenCardData.allOpenCard) {
         let flag = true
@@ -123,6 +129,7 @@ message = ""
           if (cardList1Element.status == 0) {
             if (flag) console.log('组1')
             if (flag) flag = false
+            console.log(cardList1Element.name)
             await join(cardList1Element.value)
             await $.wait(1000)
             await drawContent();
@@ -133,6 +140,7 @@ message = ""
           if (cardList1Element.status == 0) {
             if (flag) console.log('组2')
             if (flag) flag = false
+            console.log(cardList1Element.name)
             await join(cardList1Element.value)
             await $.wait(1000)
             await drawContent();
@@ -141,6 +149,7 @@ message = ""
         await $.wait(1000)
         await drawContent();
         checkOpenCardData = await checkOpenCard();
+        await $.wait(1000)
       }
       if (checkOpenCardData && checkOpenCardData.score1 == 1) await startDraw(1)
       if (checkOpenCardData && checkOpenCardData.score2 == 1) await startDraw(2)
@@ -148,13 +157,14 @@ message = ""
       if (!$.followShop) await followShop();
       if (!$.followShop) await $.wait(1000)
       $.log("加购: " + $.addSku)
-      if (!$.addSku && guaopencard_addSku4) await addSku();
-      if (!$.addSku && guaopencard_addSku4) await $.wait(1000)
+      if (!$.addSku && guaopencard_addSku) await addSku();
+      if (!$.addSku && guaopencard_addSku) await $.wait(1000)
       await getActorUuid()
       await $.wait(1000)
       await getDrawRecordHasCoupon()
       await $.wait(1000)
       await getShareRecord()
+      // $.log($.actorUuid)
       $.log($.shareUuid)
       if (i === 0) {
         if ($.actorUuid) {
@@ -173,7 +183,7 @@ message = ""
 
 function getDrawRecordHasCoupon() {
   return new Promise(resolve => {
-    let body = `activityId=c225ad5922cf4ac8b4a68fd37f486088&actorUuid=${$.actorUuid}&pin=${encodeURIComponent($.myPingData.secretPin)}&num=0&sortSuatus=1`
+    let body = `activityId=${$.activityId}&actorUuid=${$.actorUuid}&pin=${encodeURIComponent($.myPingData.secretPin)}&num=0&sortSuatus=1`
     $.post(taskPostUrl('/dingzhi/taskact/openCardcommon/getDrawRecordHasCoupon', body), async (err, resp, data) => {
       try {
         if (err) {
@@ -200,7 +210,7 @@ function getDrawRecordHasCoupon() {
 }
 function getShareRecord() {
   return new Promise(resolve => {
-    let body = `activityId=c225ad5922cf4ac8b4a68fd37f486088&actorUuid=${$.actorUuid}&pin=${encodeURIComponent($.myPingData.secretPin)}&num=0&sortSuatus=1`
+    let body = `activityId=${$.activityId}&actorUuid=${$.actorUuid}&pin=${encodeURIComponent($.myPingData.secretPin)}&num=0&sortSuatus=1`
     $.post(taskPostUrl('/dingzhi/taskact/openCardcommon/getShareRecord', body), async (err, resp, data) => {
       try {
         if (err) {
@@ -220,7 +230,7 @@ function getShareRecord() {
 
 function addSku() {
   return new Promise(resolve => {
-    let body = `activityId=c225ad5922cf4ac8b4a68fd37f486088&pin=${encodeURIComponent($.myPingData.secretPin)}&actorUuid=${$.actorUuid}&taskType=2&taskValue=100022672084`
+    let body = `activityId=${$.activityId}&pin=${encodeURIComponent($.myPingData.secretPin)}&actorUuid=${$.actorUuid}&taskType=2&taskValue=100023397118`
     // https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/saveTask
     $.post(taskPostUrl('/dingzhi/dz/openCard/saveTask', body), async (err, resp, data) => {
       try {
@@ -249,7 +259,7 @@ function addSku() {
 }
 function followShop() {
   return new Promise(resolve => {
-    let body = `activityId=c225ad5922cf4ac8b4a68fd37f486088&pin=${encodeURIComponent($.myPingData.secretPin)}&actorUuid=${$.actorUuid}&taskType=23&taskValue=1000002701&shareUuid=${$.shareUuid}`
+    let body = `activityId=${$.activityId}&pin=${encodeURIComponent($.myPingData.secretPin)}&actorUuid=${$.actorUuid}&taskType=23&taskValue=${$.shopId}&shareUuid=${$.shareUuid}`
     // https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/followShop
     $.post(taskPostUrl('/dingzhi/dz/openCard/followShop', body), async (err, resp, data) => {
       try {
@@ -263,7 +273,7 @@ function followShop() {
             if (data.data.addBeanNum) {
               msg = `${data.data.addBeanNum}京豆`
             }
-            if (data.data.beanNumMember) {
+            if (data.data.beanNumMember && data.data.assistSendStatus) {
               msg += ` 额外获得:${data.data.beanNumMember}京豆`
             }
             console.log(`关注获得：${msg || '空气💨'}`)
@@ -286,7 +296,8 @@ function getshopactivityId(venderId) {
       try {
         data = JSON.parse(data);
         if (data.success == true) {
-          console.log(`入会:${data.result.shopMemberCardInfo.venderCardName || ''}`)
+          // console.log($.toStr(data.result))
+          // console.log(`入会:${data.result.shopMemberCardInfo.venderCardName || ''}`)
           $.shopactivityId = data.result.interestsRuleList && data.result.interestsRuleList[0] && data.result.interestsRuleList[0].interestsInfo && data.result.interestsRuleList[0].interestsInfo.activityId || ''
         }
       } catch (e) {
@@ -307,54 +318,10 @@ function shopactivityId(functionId) {
       'accept': '*/*',
       'User-Agent': $.UA,
       'content-type': 'application/x-www-form-urlencoded',
-      'Referer': `https://shopmember.m.jd.com/shopcard/?venderId=${functionId}&shopId=${functionId}&venderType=5&channel=401&returnUrl=https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/832865?activityId=c225ad5922cf4ac8b4a68fd37f486088&shareUuid=${$.shareUuid}`,
+      'Referer': `https://shopmember.m.jd.com/shopcard/?venderId=${functionId}&shopId=${functionId}&venderType=5&channel=401&returnUrl=https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
       'Cookie': cookie
     }
   }
-}
-function startDraw(type) {
-  return new Promise(resolve => {
-    let body = `activityId=c225ad5922cf4ac8b4a68fd37f486088&actorUuid=${$.actorUuid}&pin=${encodeURIComponent($.myPingData.secretPin)}&type=${type}`
-    // https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/startDraw
-    $.post(taskPostUrl('/dingzhi/dz/openCard/startDraw', body), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          // $.log($.toStr(data))
-          data = $.toObj(data);
-          if (data.errorMessage || data.data.errorMessage) console.log(`抽奖：${data.errorMessage || data.data.errorMessage || ''}`)
-          if (data.count == 0 && data.result == true) {
-            console.log(`抽奖获得：${data.data.drawOk && data.data.name || '空气💨'}`)
-          } else {
-            $.log($.toStr(data))
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data.data);
-      }
-    })
-  })
-}
-function checkOpenCard() {
-  return new Promise(resolve => {
-    let body = `activityId=c225ad5922cf4ac8b4a68fd37f486088&pin=${encodeURIComponent($.myPingData.secretPin)}&actorUuid=${$.actorUuid}&shareUuid=${$.shareUuid}`
-    $.post(taskPostUrl('/dingzhi/dz/openCard/checkOpenCard', body), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          data = $.toObj(data);
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data && data.data || '');
-      }
-    })
-  })
 }
 function join(venderId) {
   return new Promise(async resolve => {
@@ -395,12 +362,56 @@ function ruhui(functionId) {
       'accept': '*/*',
       'User-Agent': $.UA,
       'content-type': 'application/x-www-form-urlencoded',
-      'Referer': `https://shopmember.m.jd.com/shopcard/?venderId=${functionId}&shopId=${functionId}&venderType=5&channel=401&returnUrl=https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/832865?activityId=c225ad5922cf4ac8b4a68fd37f486088&shareUuid=${$.shareUuid}`,
+      'Referer': `https://shopmember.m.jd.com/shopcard/?venderId=${functionId}&shopId=${functionId}&venderType=5&channel=401&returnUrl=https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
       'Cookie': cookie
     }
   }
 }
 
+function startDraw(type) {
+  return new Promise(resolve => {
+    let body = `activityId=${$.activityId}&actorUuid=${$.actorUuid}&pin=${encodeURIComponent($.myPingData.secretPin)}&type=${type}`
+    // https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/startDraw
+    $.post(taskPostUrl('/dingzhi/dz/openCard/startDraw', body), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          // $.log($.toStr(data))
+          data = $.toObj(data);
+          if (data.errorMessage || data.data.errorMessage) console.log(`抽奖：${data.errorMessage || data.data.errorMessage || ''}`)
+          if (data.count == 0 && data.result == true) {
+            console.log(`抽奖获得：${data.data.drawOk && data.data.name || '空气💨'}`)
+          } else {
+            $.log($.toStr(data))
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data.data);
+      }
+    })
+  })
+}
+function checkOpenCard() {
+  return new Promise(resolve => {
+    let body = `activityId=${$.activityId}&pin=${encodeURIComponent($.myPingData.secretPin)}&actorUuid=${$.actorUuid}&shareUuid=${$.shareUuid}`
+    $.post(taskPostUrl('/dingzhi/dz/openCard/checkOpenCard', body), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          data = $.toObj(data);
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data && data.data || '');
+      }
+    })
+  })
+}
 
 function getWxCommonInfoToken() {
   return new Promise(resolve => {
@@ -411,7 +422,7 @@ function getWxCommonInfoToken() {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Host': 'lzdz1-isv.isvjcloud.com',
         'Origin': 'https://lzdz1-isv.isvjcloud.com',
-        'Referer': 'https://lzdz1-isv.isvjcloud.com/wxCommonInfo/token',
+        'Referer': `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
         'Cookie': cookie,
       }
     }, async (err, resp, data) => {
@@ -465,12 +476,12 @@ function getMyPing() {
   return new Promise(resolve => {
     $.post({
       url: `https://lzdz1-isv.isvjcloud.com/customer/getMyPing`,
-      body: `userId=1000002701&token=${$.isvObfuscatorToken}&fromType=APP`,
+      body: `userId=${$.shopId}&token=${$.isvObfuscatorToken}&fromType=APP`,
       headers: {
         'User-Agent': $.UA,
         'Content-Type': 'application/x-www-form-urlencoded',
         'Host': 'lzdz1-isv.isvjcloud.com',
-        'Referer': 'https://lzdz1-isv.isvjcloud.com/customer/getMyPing',
+        'Referer': `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
         'Cookie': `LZ_TOKEN_KEY=${$.LZ_TOKEN_KEY}; LZ_TOKEN_VALUE=${$.LZ_TOKEN_VALUE};`,
       }
     }, async (err, resp, data) => {
@@ -507,11 +518,46 @@ function getMyPing() {
   })
 }
 
+function getSimpleActInfoVo() {
+  return new Promise(resolve => {
+    $.post({
+      url: `https://lzdz1-isv.isvjcloud.com/dz/common/getSimpleActInfoVo`,
+      body: `activityId=${$.activityId}`,
+      headers: {
+        'User-Agent': $.UA,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Host': 'lzdz1-isv.isvjcloud.com',
+        'Referer': `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
+        'Cookie': `LZ_TOKEN_KEY=${$.LZ_TOKEN_KEY}; LZ_TOKEN_VALUE=${$.LZ_TOKEN_VALUE};`,
+      }
+    }, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          // console.log(data)
+          data = $.toObj(data)
+          if (typeof data === 'object') {
+            if (data.result == true && typeof data.data === 'object') {
+              $.shopId = data.data.shopId
+              $.venderId = data.data.venderId
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+
 function getHtml() {
   //await $.wait(20)
   return new Promise(resolve => {
     $.get({
-      url: `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/832865?activityId=c225ad5922cf4ac8b4a68fd37f486088&shareUuid=${$.shareUuid}`,
+      url: `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
       headers: {
         'User-Agent': $.UA,
         'Host': 'lzdz1-isv.isvjcloud.com',
@@ -536,10 +582,10 @@ function getHtml() {
 
 function adLog() {
   return new Promise(resolve => {
-    let pageurl = `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/832865?activityId=c225ad5922cf4ac8b4a68fd37f486088&shareUuid=${$.shareUuid}`
+    let pageurl = `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`
     $.post({
       url: `https://lzdz1-isv.isvjcloud.com/common/accessLogWithAD`,
-      body: `venderId=1000002701&code=99&pin=${encodeURIComponent($.myPingData.secretPin)}&activityId=c225ad5922cf4ac8b4a68fd37f486088&pageUrl=${encodeURIComponent(pageurl)}&subType=APP&adSource=null`,
+      body: `venderId=${$.venderId}&code=99&pin=${encodeURIComponent($.myPingData.secretPin)}&activityId=${$.activityId}&pageUrl=${encodeURIComponent(pageurl)}&subType=APP&adSource=null`,
       headers: {
         'User-Agent': $.UA,
         'Host': 'lzdz1-isv.isvjcloud.com',
@@ -584,12 +630,12 @@ function drawContent() {
   return new Promise(resolve => {
     $.post({
       url: `https://lzdz1-isv.isvjcloud.com/dingzhi/taskact/openCardcommon/drawContent`,
-      body: `activityId=c225ad5922cf4ac8b4a68fd37f486088&pin=${encodeURIComponent($.myPingData.secretPin)}`,
+      body: `activityId=${$.activityId}&pin=${encodeURIComponent($.myPingData.secretPin)}`,
       headers: {
         'User-Agent': $.UA,
         'Host': 'lzdz1-isv.isvjcloud.com',
         'Content-Type': 'application/x-www-form-urlencoded; Charset=UTF-8',
-        'Referer': `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/832865?activityId=c225ad5922cf4ac8b4a68fd37f486088&shareUuid=${$.shareUuid}`,
+        'Referer': `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
         'Cookie': `LZ_TOKEN_KEY=${$.LZ_TOKEN_KEY}; LZ_TOKEN_VALUE=${$.LZ_TOKEN_VALUE}; AUTH_C_USER=${$.myPingData.secretPin}; ${$.lz_jdpin_token}`,
       }
     }, async (err, resp, data) => {
@@ -618,7 +664,7 @@ function getUserInfo() {
         'User-Agent': $.UA,
         'Host': 'lzdz1-isv.isvjcloud.com',
         'Content-Type': 'application/x-www-form-urlencoded; Charset=UTF-8',
-        'Referer': `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/832865?activityId=c225ad5922cf4ac8b4a68fd37f486088&shareUuid=${$.shareUuid}`,
+        'Referer': `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
         'Cookie': `LZ_TOKEN_KEY=${$.LZ_TOKEN_KEY}; LZ_TOKEN_VALUE=${$.LZ_TOKEN_VALUE}; AUTH_C_USER=${$.myPingData.secretPin}; ${$.lz_jdpin_token}`,
       }
     }, async (err, resp, data) => {
@@ -646,12 +692,12 @@ function getActorUuid() {
   return new Promise(resolve => {
     $.post({
       url: `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activityContent`,
-      body: `activityId=c225ad5922cf4ac8b4a68fd37f486088&pin=${encodeURIComponent($.myPingData.secretPin)}&pinImg=${encodeURIComponent($.attrTouXiang)}&nick=${encodeURIComponent($.myPingData.nickname)}&cjyxPin=&cjhyPin=&shareUuid=${$.shareUuid}`,
+      body: `activityId=${$.activityId}&pin=${encodeURIComponent($.myPingData.secretPin)}&pinImg=${encodeURIComponent($.attrTouXiang)}&nick=${encodeURIComponent($.myPingData.nickname)}&cjyxPin=&cjhyPin=&shareUuid=${$.shareUuid}`,
       headers: {
         'User-Agent': $.UA,
         'Host': 'lzdz1-isv.isvjcloud.com',
         'Content-Type': 'application/x-www-form-urlencoded; Charset=UTF-8',
-        "Referer": `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/832865?activityId=c225ad5922cf4ac8b4a68fd37f486088&shareUuid=${$.shareUuid}`,
+        "Referer": `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
         'Cookie': `LZ_TOKEN_KEY=${$.LZ_TOKEN_KEY}; LZ_TOKEN_VALUE=${$.LZ_TOKEN_VALUE}; AUTH_C_USER=${$.myPingData.secretPin}; ${$.lz_jdpin_token}`,
       }
     }, async (err, resp, data) => {
@@ -688,7 +734,7 @@ function taskPostUrl(url, body) {
       "Content-Type": "application/x-www-form-urlencoded",
       "Origin": "https://lzdz1-isv.isvjcloud.com",
       "Connection": "keep-alive",
-      "Referer": `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/832865?activityId=c225ad5922cf4ac8b4a68fd37f486088&shareUuid=${$.shareUuid}`,
+      "Referer": `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/2611148?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
       "User-Agent": $.UA,
       'Cookie': `${cookie} LZ_TOKEN_KEY=${$.LZ_TOKEN_KEY}; LZ_TOKEN_VALUE=${$.LZ_TOKEN_VALUE}; AUTH_C_USER=${$.myPingData.secretPin}; ${$.lz_jdpin_token}`,
     }

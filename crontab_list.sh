@@ -236,3 +236,37 @@
 0 6-23/4 * * * node /scripts/myActions/jd_tyt.js >>/scripts/logs/jd_tyt.log 2>&1
 # 我的-赚30
 13 6,21 * * * node /scripts/myActions/jd_earn30.js >>/scripts/logs/jd_earn30.log 2>&1
+#京东手机狂欢城
+0 0-18/6 * * * node /scripts/myActions/gua_carnivalcity.js >>/scripts/logs/gua_carnivalcity.log 2>&1
+
+#8.4-8.12 大牌联合 冰爽一夏
+36 0,8 4-12 8 * node /scripts/myActions/gua_opencard4.js >>/scripts/logs/gua_opencard4.log 2>&1
+#8.5-8.12 冰爽夏日 钜惠送好礼
+38 0,8 5-12 8 * node /scripts/myActions/gua_opencard5.js >>/scripts/logs/gua_opencard5.log 2>&1
+#七夕告白季-开卡 [gua_opencard6.js]
+30 0,8 * 8 * node /scripts/myActions/gua_opencard6.js >>/scripts/logs/gua_opencard6.log 2>&1
+#8.10-8.15 头号玩家 一起热8
+28 0,22 8-15 8 * node /scripts/myActions/gua_opencard8.js >>/scripts/logs/gua_opencard8.log 2>&1
+#8.11-8.15 星动七夕 纵享丝滑
+39 0,22 8-15 8 * node /scripts/myActions/gua_opencard9.js >>/scripts/logs/gua_opencard9.log 2>&1
+#8.11-8.18 大牌联合 约惠一夏
+30 0,22 11-18 8 * node /scripts/myActions/gua_opencard10.js >>/scripts/logs/gua_opencard10.log 2>&1
+
+# 活动路径  手机馆---》IQOO大牌日---〉左下角金机馆
+33 6,9 8-20 8 * node /scripts/myActions/jd_goldPhone.js >>/scripts/logs/jd_goldPhone.log 2>&1
+# 金机奖投票
+23 10 * * * node /scripts/myActions/jd_update_goldPhone.js >>/scripts/logs/jd_update_goldPhone.log 2>&1
+# 柠檬众筹许愿池
+23 5 * * * node /scripts/myActions/jd_xyc.js >>/scripts/logs/jd_xyc.log 2>&1
+
+# 京东到家鲜豆任务脚本
+35 0,6,12 * * * node /scripts/myActions/jd_jddj_bean.js >>/scripts/logs/jd_jddj_bean.log 2>&1
+# 京东到家果园任务脚本
+5 0,8,11,17 * * * node /scripts/myActions/jd_jddj_fruit.js >>/scripts/logs/jd_jddj_fruit.log 2>&1
+# 京东到家鲜豆庄园收水滴脚本
+45 6-23/1 * * * node /scripts/myActions/jd_jddj_getPoints.js >>/scripts/logs/jd_jddj_getPoints.log 2>&1
+
+# 荣耀焕新季
+0 1 * * * node /scripts/myActions/jd_ryhxj.js >>/scripts/logs/jd_ryhxj.log 2>&1
+# 来电好物季
+10 1 * * * node /scripts/myActions/jd_ldhwj.js >>/scripts/logs/jd_ldhwj.log 2>&1
