@@ -8,7 +8,7 @@ ARG KEY="-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAA
 ENV DEFAULT_LIST_FILE=crontab_list.sh \
     CUSTOM_LIST_MERGE_TYPE=append \
     COOKIES_LIST=/scripts/logs/cookies.list \
-    REPO_URL=git@gitee.com:lxk0301/jd_scripts.git \
+    REPO_URL=git@github.com:indextank/jd_scripts.git \
     REPO_BRANCH=master
 
 RUN set -ex \
@@ -30,6 +30,7 @@ RUN set -ex \
     && npm config set registry https://registry.npm.taobao.org \
     && npm install \
     && npm install ts-node png-js date-fns \
+    && npm install -g ts-md5 dotenv \
     && npm install -g typescript \
     && npm install axios --save \
     && cp /scripts/docker/docker_entrypoint.sh /usr/local/bin \
