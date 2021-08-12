@@ -27,6 +27,7 @@ RUN set -ex \
     && ssh-keyscan github.com > /root/.ssh/known_hosts \
     && git clone -b $REPO_BRANCH $REPO_URL /scripts \
     && cd /scripts \
+    && rm -fr *.js *.ts \
     && mkdir logs \
     && npm config set registry https://registry.npm.taobao.org \
     && npm install \
@@ -34,7 +35,9 @@ RUN set -ex \
     && npm install -g ts-md5 dotenv \
     && npm install -g typescript \
     && npm install axios --save \
-    && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py \
+    && cp /scripts/docker/get-pip.py . \
+    && python3 get-pip.py \
+    #&& curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py \
     && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple requests rsa \
     && cp /scripts/docker/docker_entrypoint.sh /usr/local/bin \
     && chmod +x /usr/local/bin/docker_entrypoint.sh

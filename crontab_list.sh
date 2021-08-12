@@ -267,3 +267,6 @@
 0 1 * * * node /scripts/myActions/jd_ryhxj.js >>/scripts/myActions/logs/jd_ryhxj.log 2>&1
 # 来电好物季
 10 1 * * * node /scripts/myActions/jd_ldhwj.js >>/scripts/myActions/logs/jd_ldhwj.log 2>&1
+
+# 入口 京东APP >> 玩一玩 >> 汽车生活节#8.12-8.20 汽车生活节
+30 9,21 12-20 8 * node /scripts/myActions/jd_qcshj.js >>/scripts/myActions/logs/jd_qcshj.log 2>&1
