@@ -70,7 +70,7 @@
 # 宠汪汪喂食
 35 */1 * * * node /scripts/myActions/jd_joy_feedPets.js >>/scripts/myActions/logs/jd_joy_feedPets.log 2>&1
 # 宠汪汪邀请助力
-# 10 13-20/1 * * * node /scripts/myActions/jd_joy_run.js >>/scripts/myActions/logs/jd_joy_run.log 2>&1
+10 13-20/1 * * * node /scripts/myActions/jd_joy_run.js >>/scripts/myActions/logs/jd_joy_run.log 2>&1
 # 宠汪汪偷狗粮🐕
 10 1-23/3 * * * node /scripts/myActions/jd_joy_steal.js >>/scripts/myActions/logs/jd_joy_steal.log 2>&1
 
@@ -120,6 +120,8 @@
 0 0 * * * node /scripts/myActions/jd_blueCoin.js >>/scripts/myActions/logs/jd_blueCoin.log 2>&1
 # 签到领现金
 10 */4 * * * node /scripts/myActions/jd_cash.js >>/scripts/myActions/logs/jd_cash.log 2>&1
+# 领现金兑换红包
+0 0 * * * node /scripts/myActions/jd_cash_exchange.js >>/scripts/myActions/logs/jd_cash_exchange.log 2>&1
 # 摇京豆
 22 0,16 * * * node /scripts/myActions/jd_club_lottery.js >>/scripts/myActions/logs/jd_club_lottery.log 2>&1
 # 10 15,16,23 * * * node /scripts/myActions/jd_shake.js >>/scripts/myActions/logs/jd_shake.log 2>&1
@@ -233,8 +235,9 @@
 0 6-23/4 * * * node /scripts/myActions/jd_tyt.js >>/scripts/myActions/logs/jd_tyt.log 2>&1
 # 我的-赚30
 13 6,21 * * * node /scripts/myActions/jd_earn30.js >>/scripts/myActions/logs/jd_earn30.log 2>&1
-#京东手机狂欢城
+# 京东手机狂欢城
 0 0-18/6 * * * node /scripts/myActions/gua_carnivalcity.js >>/scripts/myActions/logs/gua_carnivalcity.log 2>&1
+11 1,8 * * * node /scripts/myActions/jd_carnivalcity_help.js >>/scripts/myActions/logs/jd_carnivalcity_help.log 2>&1
 
 #8.4-8.12 大牌联合 冰爽一夏
 36 0,8 4-12 8 * node /scripts/myActions/gua_opencard4.js >>/scripts/myActions/logs/gua_opencard4.log 2>&1
@@ -260,8 +263,12 @@
 35 0,6,12 * * * node /scripts/myActions/jd_jddj_bean.js >>/scripts/myActions/logs/jd_jddj_bean.log 2>&1
 # 京东到家果园任务脚本
 5 0,8,11,17 * * * node /scripts/myActions/jd_jddj_fruit.js >>/scripts/myActions/logs/jd_jddj_fruit.log 2>&1
+# 京东到家鲜豆庄园脚本
+45 6-23/1 * * * node /scripts/myActions/jd_jddj_plantBeans.js >>/scripts/myActions/logs/jd_jddj_plantBeans.log 2>&1
+# 京东到家果园水车收水滴任务
+0-59/59 * * * * node /scripts/myActions/jd_jddj_collectWater.js >>/scripts/myActions/logs/jd_jddj_collectWater.log 2>&1
 # 京东到家鲜豆庄园收水滴脚本
-45 6-23/1 * * * node /scripts/myActions/jd_jddj_getPoints.js >>/scripts/myActions/logs/jd_jddj_getPoints.log 2>&1
+40 * * * * node /scripts/myActions/jd_jddj_getPoints.js >>/scripts/myActions/logs/jd_jddj_getPoints.log 2>&1
 
 # 荣耀焕新季
 0 1 * * * node /scripts/myActions/jd_ryhxj.js >>/scripts/myActions/logs/jd_ryhxj.log 2>&1
@@ -270,3 +277,21 @@
 
 # 入口 京东APP >> 玩一玩 >> 汽车生活节#8.12-8.20 汽车生活节
 30 9,21 12-20 8 * node /scripts/myActions/jd_qcshj.js >>/scripts/myActions/logs/jd_qcshj.log 2>&1
+
+# 送豆得豆
+45 0,8 * * * node /scripts/myActions/jd_sddd.js >>/scripts/myActions/logs/jd_sddd.log 2>&1
+
+#8.13-8.25 骁龙品牌日
+18 9,19 13-25 8 * node /scripts/myActions/jd_xl.js >>/scripts/myActions/logs/jd_xl.log 2>&1
+
+# 家电，一天执行一次就可以了，最多10个豆子
+54 5 9-15 8 * node /scripts/myActions/jd_appliances.js >>/scripts/myActions/logs/jd_appliances.log 2>&1
+
+# 蚊子腿豆子，24号应该可以参与瓜分, 活动到24号。一天可以跑2次
+25 5,11 12-24 8 * node /scripts/myActions/jd_decompression.js >>/scripts/myActions/logs/jd_decompression.log 2>&1
+
+# 活动路径  首页搜索 金机馆
+33 3,6 8-20 8 * node /scripts/myActions/jd_golden_machine.js >>/scripts/myActions/logs/jd_golden_machine.log 2>&1
+
+# 明星小店
+10 9,18 9-25 8 * node /scripts/myActions/jd_star_shop.js >>/scripts/myActions/logs/jd_star_shop.log 2>&1

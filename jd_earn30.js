@@ -4,7 +4,7 @@
 入口：我的-赚30
 备注：赚30元每日签到红包、天降红包助力，在earn30Pins环境变量中填入需要签到和接受助力的账号。
 技巧：每月可以提现100元，但需要邀请一个新人下首单。可以用已注册手机号重新注册为新人账号，切换ip可以提高成功率。
-助力逻辑：优先账号内互助
+助力逻辑：优先账号内互助，再帮zero205助力
 TG学习交流群：https://t.me/cdles
 3 1,6 * * * https://raw.githubusercontent.com/cdle/jd_study/main/jd_earn30.js
 */
@@ -99,38 +99,38 @@ var tools = [];
                }
           }
      }
-     // if ($.isNode()) {
-     //      console.log(`内部互助已完成`)
-     //      tools = tools_temp;
-     //      await getCode()
-     //      for (let help of $.zero205) {
-     //           while (tools.length) {
-     //                var tool = tools.pop()
-     //                var data = await requestApi('splitRedPacket', tool.cookie, { shareCode: help.shareCode, groupCode: help.redPacketId });
-     //                if (data) {
-     //                     if (tool.id == help.id) {
-     //                          continue
-     //                     }
-     //                     console.log(`${tool.id + 1}->${help.id + 1} ${data.text}`)
-     //                     if (tool.helps.indexOf(help.id) != -1) {
-     //                          break
-     //                     }
-     //                     if (data.text == "我的红包已拆完啦") {
-     //                          tools.unshift(tool)
-     //                          break
-     //                     }
-     //                     if (data.text.indexOf("帮拆出错") != -1) {
-     //                          continue
-     //                     }
-     //                     if (data.text.indexOf("帮拆次数已达上限") != -1) {
-     //                          continue
-     //                     }
-     //                     tool.helps.push(help.id)
-     //                     tools.unshift(tool)
-     //                }
-     //           }
-     //      }
-     // }
+     if ($.isNode()) {
+          console.log(`内部互助已完成`)
+          tools = tools_temp;
+          // await getCode()
+          // for (let help of $.zero205) {
+          //      while (tools.length) {
+          //           var tool = tools.pop()
+          //           var data = await requestApi('splitRedPacket', tool.cookie, { shareCode: help.shareCode, groupCode: help.redPacketId });
+          //           if (data) {
+          //                if (tool.id == help.id) {
+          //                     continue
+          //                }
+          //                console.log(`${tool.id + 1}->${help.id + 1} ${data.text}`)
+          //                if (tool.helps.indexOf(help.id) != -1) {
+          //                     break
+          //                }
+          //                if (data.text == "我的红包已拆完啦") {
+          //                     tools.unshift(tool)
+          //                     break
+          //                }
+          //                if (data.text.indexOf("帮拆出错") != -1) {
+          //                     continue
+          //                }
+          //                if (data.text.indexOf("帮拆次数已达上限") != -1) {
+          //                     continue
+          //                }
+          //                tool.helps.push(help.id)
+          //                tools.unshift(tool)
+          //           }
+          //      }
+          // }
+     }
 })().catch((e) => {
      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
 })

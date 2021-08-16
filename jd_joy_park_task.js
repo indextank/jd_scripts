@@ -33,7 +33,7 @@ if ($.isNode()) {
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
-$.invitePinTaskList = []
+$.invitePinTaskList = ['7zG4VHS99AUEoX1mQTkC9Q']
 $.invitePin = [
   "eH9Bd7RZX4v_CvaKA6GnarAS9aW-nZJys6DAbJIRUT0",
   "LJ9_OCKMl-dFrkPPmV265w",
@@ -87,6 +87,8 @@ message = ""
         $.log(`${$.name} - ${$.UserName}  助力码: null`);
         $.invitePinTaskList.push('');
         $.isLogin = false
+        $.log("服务端异常，不知道为啥有时候这样，后面再观察一下，手动执行应该又没问题了")
+        continue
       }
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
