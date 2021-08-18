@@ -1,7 +1,7 @@
 #set -e
 
 #日志路径
-logDir="/scripts/myActions/logs"
+logDir="/scripts/logs"
 
 # 处理后的log文件
 logFile=${logDir}/sharecodeCollection.log
