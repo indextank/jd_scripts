@@ -239,8 +239,6 @@
 #七夕告白季-开卡 [gua_opencard6.js]
 30 0,8 * 8 * node /scripts/myActions/gua_opencard6.js >>/scripts/logs/gua_opencard6.log 2>&1
 
-# 活动路径  手机馆---》IQOO大牌日---〉左下角金机馆
-33 6,9 8-20 8 * node /scripts/myActions/jd_goldPhone.js >>/scripts/logs/jd_goldPhone.log 2>&1
 # 金机奖投票
 23 10 * * * node /scripts/myActions/jd_update_goldPhone.js >>/scripts/logs/jd_update_goldPhone.log 2>&1
 # 柠檬众筹许愿池
@@ -280,5 +278,11 @@
 # 明星小店
 10 9,18 9-25 8 * node /scripts/myActions/jd_star_shop.js >>/scripts/logs/jd_star_shop.log 2>&1
 
+# 京东工业品抽奖
+10 5 17,31 8 * node /scripts/myActions/jd_industryLottery.js >>/scripts/logs/jd_industryLottery.log 2>&1
+
 #活动：京小鸽吾悦寄 活动路径：首页搜索边玩边赚-》京小鸽吾悦寄
 8 4,11 * * * node /scripts/myActions/jd_jxg.js >>/scripts/logs/jd_jxg.log 2>&1
+
+#8.18-8.25 全民818 一“促”即发
+30 9,21 18-25 8 * node /scripts/myActions/gua_opencard12.js >>/scripts/logs/gua_opencard12.log 2>&1
