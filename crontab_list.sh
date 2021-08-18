@@ -34,7 +34,7 @@
 42 6-23/4 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
 # 30 1,3,23 * * * node /scripts/myActions/gua_wealth_island.js >>/scripts/logs/gua_wealth_island.log 2>&1
 # 京喜签到
-22 1,23 * * * node /scripts/myActions/jx_sign.js >>/scripts/logs/jx_sign.log 2>&1
+22 1,10 * * * node /scripts/myActions/jx_sign.js >>/scripts/logs/jx_sign.log 2>&1
 # 京喜领88元红包(6.31到期)
 30 1,6,12,21 * * * node /scripts/myActions/jd_jxlhb.js >>/scripts/logs/jd_jxlhb.log 2>&1
 
@@ -281,8 +281,12 @@
 # 京东工业品抽奖
 10 5 17,31 8 * node /scripts/myActions/jd_industryLottery.js >>/scripts/logs/jd_industryLottery.log 2>&1
 
-#活动：京小鸽吾悦寄 活动路径：首页搜索边玩边赚-》京小鸽吾悦寄
+# 活动：京小鸽吾悦寄 活动路径：首页搜索边玩边赚-》京小鸽吾悦寄
 8 4,11 * * * node /scripts/myActions/jd_jxg.js >>/scripts/logs/jd_jxg.log 2>&1
 
-#8.18-8.25 全民818 一“促”即发
+# 8.18-8.25 全民818 一“促”即发
 30 9,21 18-25 8 * node /scripts/myActions/gua_opencard12.js >>/scripts/logs/gua_opencard12.log 2>&1
+# 8.18-8.26 全民发一发 大牌狂欢趴
+30 9,21 18-26 8 * node /scripts/myActions/gua_opencard13.js >>/scripts/logs/gua_opencard13.log 2>&1
+# 8.18-8.31 冰爽来袭 玩撞一夏
+18 9,22 18-31 8 * node /scripts/myActions/gua_opencard14.js >>/scripts/logs/gua_opencard14.log 2>&1
