@@ -22,17 +22,13 @@
 # ts-node myActions/jd_jxmc.ts
 # 京喜农场
 30 9,12,18 * * * node /scripts/myActions/jd_jxnc.js >>/scripts/myActions/logs/jd_jxnc.log 2>&1
-# 财富岛提现
-0 0 * * * node /scripts/myActions/jx_cfdtx.js >>/scripts/myActions/logs/jx_cfdtx.log 2>&1
-0 0 * * * node /scripts/myActions/jd_cfd_cashOut.js >>/scripts/myActions/logs/jd_cfd_cashOut.log 2>&1
+
 # 京喜工厂
 50 * * * * node /scripts/myActions/jd_dreamFactory.js >>/scripts/myActions/logs/jd_dreamFactory.log 2>&1
 # 京喜工厂开团
 # 20 1,6,22 * * * node /scripts/myActions/jd_dreamFactorytuan.js >>/scripts/myActions/logs/jd_dreamFactorytuan.log 2>&1
 # 京喜财富岛
 5 7,12,18 * * * node /scripts/myActions/jd_cfd.js >/scripts/myActions/logs/jd_cfd.log 2>&1
-# 京喜财富岛提现
-0 0 * * * node /scripts/myActions/jd_cfdtx.js >>/scripts/myActions/logs/jd_cfdtx.log 2>&1
 # 财富岛热气球挂后台 - 挂机 手动执行为好
 # 28 6-23/2 * * * ts-node /scripts/myActions/jd_cfd_loop.ts >>/scripts/myActions/logs/jd_cfd_loop.log 2>&1
 42 6-23/4 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/myActions/logs/jd_cfd_loop.log 2>&1
@@ -66,7 +62,7 @@
 45 */2 * * * node /scripts/myActions/jd_joy.js >>/scripts/myActions/logs/jd_joy.log 2>&1
 # 05 */2 * * * node /scripts/myActions/jd_joy_new.js >>/scripts/myActions/logs/jd_joy_new.log 2>&1
 # 宠汪汪积分兑换京豆
-# 0 0-16/8 * * * node /scripts/myActions/jd_joy_reward.js >>/scripts/myActions/logs/jd_joy_reward.log 2>&1
+0 0-16/8 * * * node /scripts/myActions/jd_joy_reward.js >>/scripts/myActions/logs/jd_joy_reward.log 2>&1
 # 宠汪汪喂食
 35 */1 * * * node /scripts/myActions/jd_joy_feedPets.js >>/scripts/myActions/logs/jd_joy_feedPets.log 2>&1
 # 宠汪汪邀请助力
@@ -94,8 +90,6 @@
 0 0 * * * node /scripts/myActions/jd_car_reward.js >>/scripts/myActions/logs/jd_car_reward.log 2>&1
 1 0 * * * node /scripts/myActions/jd_bean_box.js >>/scripts/myActions/logs/jd_bean_box.log 2>&1
 
-# 入口：首页-领京豆-升级赚京豆
-1 0 * * * node /scripts/myActions/gua_MMdou.js >>/scripts/myActions/logs/gua_MMdou.log 2>&1
 # 店铺签到，各类店铺签到，有新的店铺直接添加token即可
 1 0 * * * node /scripts/myActions/jd_dpqd.js >>/scripts/myActions/logs/jd_dpqd.log 2>&1
 # 京豆变动通知【昨日收益】
@@ -125,8 +119,12 @@
 # 摇京豆
 22 0,16 * * * node /scripts/myActions/jd_club_lottery.js >>/scripts/myActions/logs/jd_club_lottery.log 2>&1
 # 10 15,16,23 * * * node /scripts/myActions/jd_shake.js >>/scripts/myActions/logs/jd_shake.log 2>&1
-# MM领京豆
-20 0,20 * * * node /scripts/myActions/jd_ljd.js >>/scripts/myActions/logs/jd_ljd.log 2>&1
+
+# MM领京豆 - 入口：首页-领京豆-升级赚京豆
+20 0 * * * node /scripts/myActions/jd_ljd.js >>/scripts/myActions/logs/jd_ljd.log 2>&1
+# 1 0 * * * node /scripts/myActions/gua_MMdou.js >>/scripts/myActions/logs/gua_MMdou.log 2>&1
+10 18 * * * node /scripts/myActions/jd_mdou.js >>/scripts/myActions/logs/jd_ljd.log 2>&1
+
 # 领金贴
 5 6 * * * node /scripts/myActions/jd_jin_tie.js >>/scripts/myActions/logs/jd_jin_tie.log 2>&1
 # 跳跳乐瓜分京豆
@@ -199,7 +197,7 @@
 # 泡泡大战
 30 0 1-6 6 * node /scripts/myActions/jd_ppdz.js >>/scripts/myActions/logs/jd_ppdz.log 2>&1
 # 全民抢京豆 - 活动地址: 京东-领京豆-抢京豆 [活动时间：7.2-7.15]
-0 12 * * * node /scripts/myActions/jd_qjd.js >>/scripts/myActions/logs/jd_qjd.log 2>&1
+# 0 12 * * * node /scripts/myActions/jd_qjd.js >>/scripts/myActions/logs/jd_qjd.log 2>&1
 # 京东全民开红包
 12 0-23/4 * * * node /scripts/myActions/jd_redPacket.js >>/scripts/myActions/logs/jd_redPacket.log 2>&1
 # 店铺大转盘
@@ -207,7 +205,7 @@
 # 特物ZX联想
 # 30 3 * * * node /scripts/myActions/jd_superBrand.js >>/scripts/myActions/logs/jd_superBrand.log 2>&1
 # 赚京豆 - 活动入口：赚京豆(微信小程序)-赚京豆-签到领京豆
-# 17 * * * * node /scripts/myActions/jd_syj.js >>/scripts/myActions/logs/jd_syj.log 2>&1
+17 6-23/4 * * * node /scripts/myActions/jd_syj.js >>/scripts/myActions/logs/jd_syj.log 2>&1
 # 全民挖现金
 30 9 * * * node /scripts/myActions/jd_wxj.js >>/scripts/myActions/logs/jd_wxj.log 2>&1
 
@@ -236,21 +234,10 @@
 # 我的-赚30
 13 6,21 * * * node /scripts/myActions/jd_earn30.js >>/scripts/myActions/logs/jd_earn30.log 2>&1
 # 京东手机狂欢城
-0 0-18/6 * * * node /scripts/myActions/gua_carnivalcity.js >>/scripts/myActions/logs/gua_carnivalcity.log 2>&1
-11 1,8 * * * node /scripts/myActions/jd_carnivalcity_help.js >>/scripts/myActions/logs/jd_carnivalcity_help.log 2>&1
+11 1,8 9-28 8 * node /scripts/myActions/jd_carnivalcity.js >>/scripts/myActions/logs/jd_carnivalcity.log 2>&1
 
-#8.4-8.12 大牌联合 冰爽一夏
-36 0,8 4-12 8 * node /scripts/myActions/gua_opencard4.js >>/scripts/myActions/logs/gua_opencard4.log 2>&1
-#8.5-8.12 冰爽夏日 钜惠送好礼
-38 0,8 5-12 8 * node /scripts/myActions/gua_opencard5.js >>/scripts/myActions/logs/gua_opencard5.log 2>&1
 #七夕告白季-开卡 [gua_opencard6.js]
 30 0,8 * 8 * node /scripts/myActions/gua_opencard6.js >>/scripts/myActions/logs/gua_opencard6.log 2>&1
-#8.10-8.15 头号玩家 一起热8
-28 0,22 8-15 8 * node /scripts/myActions/gua_opencard8.js >>/scripts/myActions/logs/gua_opencard8.log 2>&1
-#8.11-8.15 星动七夕 纵享丝滑
-39 0,22 8-15 8 * node /scripts/myActions/gua_opencard9.js >>/scripts/myActions/logs/gua_opencard9.log 2>&1
-#8.11-8.18 大牌联合 约惠一夏
-30 0,22 11-18 8 * node /scripts/myActions/gua_opencard10.js >>/scripts/myActions/logs/gua_opencard10.log 2>&1
 
 # 活动路径  手机馆---》IQOO大牌日---〉左下角金机馆
 33 6,9 8-20 8 * node /scripts/myActions/jd_goldPhone.js >>/scripts/myActions/logs/jd_goldPhone.log 2>&1
@@ -279,13 +266,10 @@
 30 9,21 12-20 8 * node /scripts/myActions/jd_qcshj.js >>/scripts/myActions/logs/jd_qcshj.log 2>&1
 
 # 送豆得豆
-45 0,8 * * * node /scripts/myActions/jd_sddd.js >>/scripts/myActions/logs/jd_sddd.log 2>&1
+# 45 0,8 * * * node /scripts/myActions/jd_sddd.js >>/scripts/myActions/logs/jd_sddd.log 2>&1
 
 #8.13-8.25 骁龙品牌日
 18 9,19 13-25 8 * node /scripts/myActions/jd_xl.js >>/scripts/myActions/logs/jd_xl.log 2>&1
-
-# 家电，一天执行一次就可以了，最多10个豆子
-54 5 9-15 8 * node /scripts/myActions/jd_appliances.js >>/scripts/myActions/logs/jd_appliances.log 2>&1
 
 # 蚊子腿豆子，24号应该可以参与瓜分, 活动到24号。一天可以跑2次
 25 5,11 12-24 8 * node /scripts/myActions/jd_decompression.js >>/scripts/myActions/logs/jd_decompression.log 2>&1
@@ -295,3 +279,6 @@
 
 # 明星小店
 10 9,18 9-25 8 * node /scripts/myActions/jd_star_shop.js >>/scripts/myActions/logs/jd_star_shop.log 2>&1
+
+#活动：京小鸽吾悦寄 活动路径：首页搜索边玩边赚-》京小鸽吾悦寄
+8 4,11 * * * node /scripts/myActions/jd_jxg.js >>/scripts/myActions/logs/jd_jxg.log 2>&1
