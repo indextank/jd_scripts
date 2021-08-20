@@ -73,6 +73,15 @@ if ($.isNode()) {
       UAInfo[$.UserName] = UA
     }
   }
+  const author = ['efd4878e63f925b74eaa568bd99d00c2', '1b081e839eb8b5240d9991bdbf66d31d', '24b48b969ee6f3812727adaacb7263c6', '17de12ee9e0a33bbad72db94465eb3b5', 'c0ce6d383f59b37751b35f3566070945', '02523dd838bbab3ee2b6a60fe7bcb852']
+  for (let i = 0; i < author.length; i++) {
+    $.shareCodes.push({
+      'use': 'zero205',
+      'smp': author[i],
+      'num': 0,
+      'max': false
+    })
+  }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -192,7 +201,7 @@ function signhb(type = 1) {
               for (let key of Object.keys(signlist)) {
                 let vo = signlist[key]
                 if (vo.istoday === 1) {
-                  if (vo.status === 1 && vo.tasklist.signtask.status === 1) {
+                  if (vo.status === 1 && data.signtask.status === 1) {
                     console.log(`今日已签到`)
                     $.canHelp = false
                   } else {
@@ -241,7 +250,7 @@ function helpSignhb(smp = '') {
           for (let key of Object.keys(signlist)) {
             let vo = signlist[key]
             if (vo.istoday === 1) {
-              if (vo.status === 1 && vo.tasklist.signtask.status === 1) {
+              if (vo.status === 1 && data.signtask.status === 1) {
                 // console.log(`今日已签到`)
               } else {
                 console.log(`此账号已黑`)

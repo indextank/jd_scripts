@@ -290,3 +290,6 @@
 30 9,21 18-26 8 * node /scripts/myActions/gua_opencard13.js >>/scripts/logs/gua_opencard13.log 2>&1
 # 8.18-8.31 冰爽来袭 玩撞一夏
 18 9,22 18-31 8 * node /scripts/myActions/gua_opencard14.js >>/scripts/logs/gua_opencard14.log 2>&1
+
+#众筹许愿池
+40 0,21 * * * node /scripts/myActions/jd_wish.js >>/scripts/logs/jd_wish.log 2>&1

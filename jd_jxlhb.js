@@ -45,7 +45,8 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
     return;
   }
   console.log('京喜领88元红包\n' +
-    '活动入口：京喜app-》我的-》京喜领88元红包')
+    '活动入口：京喜app-》我的-》京喜领88元红包\n' +
+    '助力逻辑：脚本会助力作者，介意请取消脚本')
   let res = await getAuthorShareCode() || [];
   let res2 = await getAuthorShareCode('https://raw.githubusercontent.com/indextank/jd_scripts/main/shareCodes/jxhb.json') || [];
   if (res && res.activeId) $.activeId = res.activeId;
@@ -96,8 +97,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       if (!$.packetIdArr[i]) continue;
       console.log(`\n【${$.UserName}】去拆第${grade}个红包`);
       await openRedPack($.packetIdArr[i]['strUserPin'], grade);
-      await $.wait(2000);
-      if (!$.canOpenGrade) break;
+      await $.wait(1000);
     }
   }
 })()
@@ -199,7 +199,8 @@ function enrollFriend(strPin) {
               $.canHelp = false;//助力火爆
               console.log(`温馨提示：如提示助力火爆，可尝试寻找京东客服`);
             }
-            if (data.iRet === 2013) $.canHelp = false;
+            if (data.iRet === 2013) $.max = true;
+            if (data.iRet === 2000) $.canHelp = false;//未登录,可能未开通京喜
             console.log(`助力失败:${data.sErrMsg}\n`);
           }
         }
@@ -285,7 +286,7 @@ function TotalBean() {
         Accept: "*/*",
         Connection: "keep-alive",
         Cookie: cookie,
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./utils/USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
         "Accept-Language": "zh-cn",
         "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
         "Accept-Encoding": "gzip, deflate, br"
