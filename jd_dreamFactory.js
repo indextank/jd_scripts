@@ -1,10 +1,12 @@
 /*
 京东京喜工厂
-更新时间：2021-6-25
+更新时间：2021-8-20
 修复做任务、收集电力出现火爆，不能完成任务，重新计算h5st验证
 参考自 ：https://www.orzlee.com/web-development/2021/03/03/lxk0301-jingdong-signin-scriptjingxi-factory-solves-the-problem-of-unable-to-signin.html
 活动入口：京东APP-游戏与互动-查看更多-京喜工厂
 或者: 京东APP首页搜索 "玩一玩" ,造物工厂即可
+
+// zero205：已添加自己账号内部互助，有剩余助力次数再帮我助力
 
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
@@ -41,7 +43,7 @@ let notifyLevel = $.isNode() ? process.env.JXGC_NOTIFY_LEVEL || 2 : 2;
 const randomCount = $.isNode() ? 20 : 0;
 let tuanActiveId = ``, hasSend = false;
 const jxOpenUrl = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D`;
-let cookiesArr = [], cookie = '', message = '', allMessage = '';
+let cookiesArr = [], cookie = '', message = '', allMessage = '', jdDreamFactoryShareArr = [], newShareCodes;
 const inviteCodes = [
   'nw5UBvpTilQFdZAxANxjuQ==', '0vdPdVKsaqfyq87GKvM3gg==', 'vcoKyxy3ZR--_lTqdoFtSw==', 'dS_CQSaOBndRRB5UQ9DsolgaRjsyf1XgAC0mW-mK938=', 'pJjYgZSb_6_YOZVw6neYig=='
 ];
@@ -93,6 +95,13 @@ if ($.isNode()) {
       await jdDreamFactory()
     }
   }
+  for (let j = 0; j < cookiesArr.length; j++) {
+    if (cookiesArr[j]) {
+      cookie = cookiesArr[j];
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+      await helpFriends();
+    }
+  }
   if (tuanActiveId) {
     for (let i = 0; i < cookiesArr.length; i++) {
       if (cookiesArr[i]) {
@@ -130,7 +139,6 @@ async function jdDreamFactory() {
     await userInfo();
     await QueryFriendList();//查询今日招工情况以及剩余助力次数
     // await joinLeaderTuan();//参团
-    await helpFriends();
     if (!$.unActive) return
     // await collectElectricity()
     await getUserElectricity();
@@ -447,7 +455,13 @@ async function helpFriends() {
   }
   if ($.canHelpFlag) {
     await shareCodesFormat();
-    for (let code of $.newShareCodes) {
+    if ($.isNode() && !process.env.DREAM_FACTORY_SHARE_CODES) {
+      console.log(`未填写助力码变量，开始账号内互助，再帮【zero205】助力`);
+      newShareCode = [...(jdDreamFactoryShareArr || []), ...(newShareCodes || [])]
+    } else {
+      newShareCode = newShareCodes
+    }
+    for (let code of newShareCode) {
       if (code) {
         if ($.encryptPin === code) {
           console.log(`不能为自己助力,跳过`);
@@ -647,6 +661,7 @@ function userInfo() {
                 console.log(`当前电力：${data.user.electric}`)
                 console.log(`当前等级：${data.user.currentLevel}`)
                 console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${data.user.encryptPin}`);
+                jdDreamFactoryShareArr.push(data.user.encryptPin)
                 console.log(`已投入电力：${production.investedElectric}`);
                 console.log(`所需电力：${production.needElectric}`);
                 console.log(`生产进度：${((production.investedElectric / production.needElectric) * 100).toFixed(2)}%`);
@@ -1023,20 +1038,20 @@ async function tuanActivity() {
     }
   }
 }
-async function joinLeaderTuan() {
-  let res = await updateTuanIdsCDN('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/jd_updateFactoryTuanId.json')
-  if (!res) res = await updateTuanIdsCDN('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jd_updateFactoryTuanId.json')
-  $.authorTuanIds = [...(res && res.tuanIds || [])]
-  if ($.authorTuanIds && $.authorTuanIds.length) {
-    for (let tuanId of $.authorTuanIds) {
-      if (!tuanId) continue
-      if (!$.canHelp) break;
-      console.log(`\n账号${$.UserName} 参加zero205的团 【${tuanId}】`);
-      await JoinTuan(tuanId);
-      await $.wait(1000);
-    }
-  }
-}
+// async function joinLeaderTuan() {
+//   let res = await updateTuanIdsCDN('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/jd_updateFactoryTuanId.json')
+//   if (!res) res = await updateTuanIdsCDN('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jd_updateFactoryTuanId.json')
+//   $.authorTuanIds = [...(res && res.tuanIds || [])]
+//   if ($.authorTuanIds && $.authorTuanIds.length) {
+//     for (let tuanId of $.authorTuanIds) {
+//       if (!tuanId) continue
+//       if (!$.canHelp) break;
+//       console.log(`\n账号${$.UserName} 参加zero205的团 【${tuanId}】`);
+//       await JoinTuan(tuanId);
+//       await $.wait(1000);
+//     }
+//   }
+// }
 //可获取开团后的团ID，如果团ID为空并且surplusOpenTuanNum>0，则可继续开团
 //如果团ID不为空，则查询QueryTuan()
 function QueryActiveConfig() {
@@ -1377,19 +1392,19 @@ async function showMsg() {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = [];
+    newShareCodes = [];
     if ($.shareCodesArr[$.index - 1]) {
-      $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
+      newShareCodes = $.shareCodesArr[$.index - 1].split('@');
     } else {
-      console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
+      // console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
-      $.newShareCodes = inviteCodes[tempIndex].split('@');
+      newShareCodes = inviteCodes[tempIndex].split('@');
     }
     // const readShareCodeRes = await readShareCode();
     // if (readShareCodeRes && readShareCodeRes.code === 200) {
-    //   $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];
+    //   newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
     // }
-    console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)
+    // console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
     resolve();
   })
 }

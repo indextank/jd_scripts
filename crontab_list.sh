@@ -24,7 +24,7 @@
 30 9,12,18 * * * node /scripts/myActions/jd_jxnc.js >>/scripts/logs/jd_jxnc.log 2>&1
 
 # 京喜工厂
-50 * * * * node /scripts/myActions/jd_dreamFactory.js >>/scripts/logs/jd_dreamFactory.log 2>&1
+50 * * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
 # 京喜工厂开团
 # 20 1,6,22 * * * node /scripts/myActions/jd_dreamFactorytuan.js >>/scripts/logs/jd_dreamFactorytuan.log 2>&1
 # 京喜财富岛
@@ -293,3 +293,6 @@
 
 #众筹许愿池
 40 0,21 * * * node /scripts/myActions/jd_wish.js >>/scripts/logs/jd_wish.log 2>&1
+
+#来电好物季
+10 1 * * * node /scripts/myActions/jd_ldhwj.js >>/scripts/logs/jd_ldhwj.log 2>&1
