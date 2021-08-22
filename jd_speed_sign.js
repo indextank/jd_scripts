@@ -1,4 +1,5 @@
 /*
+0 7 * * * jd_speed_sign.js
 京东极速版签到+赚现金任务
 每日9毛左右，满3，10，50可兑换无门槛红包
 ⚠️⚠️⚠️一个号需要运行40分钟左右
@@ -95,9 +96,8 @@ async function jdGlobal() {
     await signInit()
     await sign()
     if ($.canhelp) {
-      console.log(`\n京东账号${$.index}开始助力【zero205】邀请有礼，感谢！\n`);
-      await invite()
-      await invite2()
+      //console.log(`\n京东账号${$.index}开始助力【zero205】邀请有礼，感谢！\n`);
+      //await invite()
     }
     $.score = 0
     $.total = 0
@@ -683,44 +683,9 @@ function taskGetUrl(function_id, body) {
   }
 }
 
-function invite2() {
-  let t = +new Date()
-  let inviterId = [
-    "/eNHdfn6fP+TFwVda3ipjWwvTFqeKBZaRG38adWABKk=",
-    "R+eeS9UrTadw7yIF7ubkxBOARQK0BNXiQLVF0TyAf4Q=",
-    "Sev6JWjut6GyaEHJIWpSQQ=="
-  ][Math.floor((Math.random() * 3))]
-  let headers = {
-    'Host': 'api.m.jd.com',
-    'accept': 'application/json, text/plain, */*',
-    'content-type': 'application/x-www-form-urlencoded',
-    'origin': 'https://assignment.jd.com',
-    'accept-language': 'zh-cn',
-    'user-agent': $.isNode() ? (process.env.JS_USER_AGENT ? process.env.JS_USER_AGENT : (require('./utils/JS_USER_AGENTS').USER_AGENT)) : ($.getdata('JSUA') ? $.getdata('JSUA') : "'jdltapp;iPad;3.1.0;14.4;network/wifi;Mozilla/5.0 (iPad; CPU OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-    'referer': `https://assignment.jd.com/?inviterId=${encodeURIComponent(inviterId)}`,
-    'Cookie': cookie
-  }
-
-  let dataString = `functionId=TaskInviteService&body={"method":"participateInviteTask","data":{"channel":"1","encryptionInviterPin":"${encodeURIComponent(inviterId)}","type":1}}&appid=market-task-h5&uuid=&_t=${t}`;
-
-  var options = {
-    url: 'https://api.m.jd.com/',
-    headers: headers,
-    body: dataString
-  }
-  $.post(options, (err, resp, data) => {
-    // console.log(data)
-  })
-}
-
 function invite() {
   let t = +new Date()
-  let inviterId = [
-    "/eNHdfn6fP+TFwVda3ipjWwvTFqeKBZaRG38adWABKk=",
-    "R+eeS9UrTadw7yIF7ubkxBOARQK0BNXiQLVF0TyAf4Q=",
-    "Cg7WMrLsk/PPSHaOd9q2ULzDByNly0QecJ4K7QiZhLk=",
-    "Sev6JWjut6GyaEHJIWpSQQ=="
-  ][Math.floor((Math.random() * 4))]
+  let inviterId = [][Math.floor((Math.random() * 7))]
   var headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',

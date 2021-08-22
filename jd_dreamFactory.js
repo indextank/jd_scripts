@@ -13,17 +13,17 @@
 ============Quantumultx===============
 [task_local]
 #京喜工厂
-10 * * * * jd_dreamFactory.js, tag=京喜工厂, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
+10 0,6-23 * * * jd_dreamFactory.js, tag=京喜工厂, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 * * * *" script-path=jd_dreamFactory.js,tag=京喜工厂
+cron "10 0,6-23 * * *" script-path=jd_dreamFactory.js,tag=京喜工厂
 
 ===============Surge=================
-京喜工厂 = type=cron,cronexp="10 * * * *",wake-system=1,timeout=3600,script-path=jd_dreamFactory.js
+京喜工厂 = type=cron,cronexp="10 0,6-23 * * *",wake-system=1,timeout=3600,script-path=jd_dreamFactory.js
 
 ============小火箭=========
-京喜工厂 = type=cron,script-path=jd_dreamFactory.js, cronexpr="10 * * * *", timeout=3600, enable=true
+京喜工厂 = type=cron,script-path=jd_dreamFactory.js, cronexpr="10 0,6-23 * * *", timeout=3600, enable=true
 
  */
 // prettier-ignore
@@ -44,9 +44,7 @@ const randomCount = $.isNode() ? 20 : 0;
 let tuanActiveId = ``, hasSend = false;
 const jxOpenUrl = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D`;
 let cookiesArr = [], cookie = '', message = '', allMessage = '', jdDreamFactoryShareArr = [], newShareCodes;
-const inviteCodes = [
-  'nw5UBvpTilQFdZAxANxjuQ==', '0vdPdVKsaqfyq87GKvM3gg==', 'vcoKyxy3ZR--_lTqdoFtSw==', 'dS_CQSaOBndRRB5UQ9DsolgaRjsyf1XgAC0mW-mK938=', 'pJjYgZSb_6_YOZVw6neYig=='
-];
+const inviteCodes = ["nw5UBvpTilQFdZAxANxjuQ==@0vdPdVKsaqfyq87GKvM3gg==@vcoKyxy3ZR--_lTqdoFtSw==@dS_CQSaOBndRRB5UQ9DsolgaRjsyf1XgAC0mW-mK938=@pJjYgZSb_6_YOZVw6neYig=="];
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 $.tuanIds = [];
 $.appId = 10001;
@@ -119,7 +117,7 @@ if ($.isNode()) {
             await $.wait(1000);
           }
         }
-        //if ($.canHelp) await joinLeaderTuan();//参团
+        if ($.canHelp) await joinLeaderTuan();//参团
       }
     }
   }
@@ -1038,20 +1036,20 @@ async function tuanActivity() {
     }
   }
 }
-// async function joinLeaderTuan() {
-//   let res = await updateTuanIdsCDN('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/jd_updateFactoryTuanId.json')
-//   if (!res) res = await updateTuanIdsCDN('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jd_updateFactoryTuanId.json')
-//   $.authorTuanIds = [...(res && res.tuanIds || [])]
-//   if ($.authorTuanIds && $.authorTuanIds.length) {
-//     for (let tuanId of $.authorTuanIds) {
-//       if (!tuanId) continue
-//       if (!$.canHelp) break;
-//       console.log(`\n账号${$.UserName} 参加zero205的团 【${tuanId}】`);
-//       await JoinTuan(tuanId);
-//       await $.wait(1000);
-//     }
-//   }
-// }
+async function joinLeaderTuan() {
+  let res = await updateTuanIdsCDN('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/jd_updateFactoryTuanId.json')
+  if (!res) res = await updateTuanIdsCDN('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jd_updateFactoryTuanId.json')
+  $.authorTuanIds = [...(res && res.tuanIds || [])]
+  if ($.authorTuanIds && $.authorTuanIds.length) {
+    for (let tuanId of $.authorTuanIds) {
+      if (!tuanId) continue
+      if (!$.canHelp) break;
+      console.log(`\n账号${$.UserName} 参加zero205的团 【${tuanId}】`);
+      await JoinTuan(tuanId);
+      await $.wait(1000);
+    }
+  }
+}
 //可获取开团后的团ID，如果团ID为空并且surplusOpenTuanNum>0，则可继续开团
 //如果团ID不为空，则查询QueryTuan()
 function QueryActiveConfig() {

@@ -102,7 +102,7 @@
 # 领京豆额外奖励(每日可获得3京豆)
 20 0,12,22 * * * node /scripts/myActions/jd_bean_home.js >>/scripts/logs/jd_bean_home.log 2>&1
 # 签到
-7 0,7,18 * * * node /scripts/myActions/jd_bean_sign.js >>/scripts/logs/jd_bean_sign.log 2>&1
+7 0,18 * * * node /scripts/myActions/jd_bean_sign.js >>/scripts/logs/jd_bean_sign.log 2>&1
 # 京东签到图形验证
 5 0 * * * node /scripts/myActions/jd_sign_graphics.js >>/scripts/logs/jd_sign_graphics.log 2>&1
 5 17 * * * node /scripts/myActions/jd_NewSign.js >>/scripts/logs/jd_NewSign.log 2>&1
@@ -203,7 +203,7 @@
 # 店铺大转盘
 57 15 * * * node /scripts/myActions/jd_shop_lottery.js >>/scripts/logs/jd_shop_lottery.log 2>&1
 # 特物ZX联想
-# 30 3 * * * node /scripts/myActions/jd_superBrand.js >>/scripts/logs/jd_superBrand.log 2>&1
+30 1,8 * * * node /scripts/myActions/jd_superBrand.js >>/scripts/logs/jd_superBrand.log 2>&1
 # 赚京豆 - 活动入口：赚京豆(微信小程序)-赚京豆-签到领京豆
 17 6-23/4 * * * node /scripts/myActions/jd_syj.js >>/scripts/logs/jd_syj.log 2>&1
 # 全民挖现金
@@ -291,8 +291,20 @@
 # 8.18-8.31 冰爽来袭 玩撞一夏
 18 9,22 18-31 8 * node /scripts/myActions/gua_opencard14.js >>/scripts/logs/gua_opencard14.log 2>&1
 
-#众筹许愿池
+# 众筹许愿池
 40 0,21 * * * node /scripts/myActions/jd_wish.js >>/scripts/logs/jd_wish.log 2>&1
 
-#来电好物季
+# 来电好物季
 10 1 * * * node /scripts/myActions/jd_ldhwj.js >>/scripts/logs/jd_ldhwj.log 2>&1
+
+# 开学充电站
+30 1 * * * node /scripts/myActions/jd_kxcdz.js >>/scripts/logs/jd_kxcdz.log 2>&1
+
+# 取关主播
+15 6 * * * node /scripts/myActions/jd_unsubscriLive.js >>/scripts/logs/jd_unsubscriLive.log 2>&1
+
+# 健康社区-收能量
+25 0,6-23 * * * node /scripts/myActions/jd_z_health_energy.js >>/scripts/logs/jd_z_health_energy.log 2>&1
+
+# 早起福利
+30 6 * * * node /scripts/myActions/jd_zqfl.js >>/scripts/logs/jd_zqfl.log 2>&1

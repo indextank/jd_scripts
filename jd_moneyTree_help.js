@@ -9,17 +9,17 @@
 ============Quantumultx===============
 [task_local]
 #摇钱树助力
-30 * * * * https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_moneyTree_help.js, tag=摇钱树助力, enabled=true
+30 0,6-23 * * * https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_moneyTree_help.js, tag=摇钱树助力, enabled=true
 
 ================Loon==============
 [Script]
-cron "30 * * * *" script-path=https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_moneyTree_help.js,tag=摇钱树助力
+cron "30 0,6-23 * * *" script-path=https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_moneyTree_help.js,tag=摇钱树助力
 
 ===============Surge=================
-摇钱树助力 = type=cron,cronexp="30 * * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_moneyTree_help.js
+摇钱树助力 = type=cron,cronexp="30 0,6-23 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_moneyTree_help.js
 
 ============小火箭=========
-摇钱树助力 = type=cron,script-path=https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_moneyTree_help.js, cronexpr="30 * * * *", timeout=200, enable=true
+摇钱树助力 = type=cron,script-path=https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_moneyTree_help.js, cronexpr="30 0,6-23 * * *", timeout=200, enable=true
 *
 */
 const $ = new Env('京东摇钱树助力');
@@ -259,7 +259,7 @@ function shareCodesFormat() {
     if ($.shareCodesArr[$.index - 1]) {
       $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
     } else {
-      console.log(`由于您第${$.index}个京东账号未提供shareCode,将为本脚本作者助力\n`)
+      console.log(`由于您第${$.index}个京东账号未提供shareCode,将为本脚本作者【zero205】助力\n`)
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
       $.newShareCodes = inviteCodes[tempIndex].split('@');
     }
