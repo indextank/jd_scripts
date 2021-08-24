@@ -71,11 +71,11 @@
 10 1-23/3 * * * node /scripts/myActions/jd_joy_steal.js >>/scripts/logs/jd_joy_steal.log 2>&1
 
 # 汪汪乐园养joy
-20 0-23/3 * * * node /scripts/myActions/jd_joy_park.js >>/scripts/logs/jd_joy_park.log 2>&1
+# 20 0-23/3 * * * node /scripts/myActions/jd_joy_park.js >>/scripts/logs/jd_joy_park.log 2>&1
 # 汪汪乐园开工位
-50 7 * * * node /scripts/myActions/jd_joy_park_open.js >>/scripts/logs/jd_joy_park_open.log 2>&1
+# 50 7 * * * node /scripts/myActions/jd_joy_park_open.js >>/scripts/logs/jd_joy_park_open.log 2>&1
 # 汪汪乐园每日任务
-40 9 * * * node /scripts/myActions/jd_joy_park_task.js >>/scripts/logs/jd_joy_park_task.log 2>&1
+# 40 9 * * * node /scripts/myActions/jd_joy_park_task.js >>/scripts/logs/jd_joy_park_task.log 2>&1
 
 # 京东极速版红包(活动时间：2021-5-5至2021-5-31)
 14 0,23 * * * node /scripts/myActions/jd_speed_redpocke.js >>/scripts/logs/jd_speed_redpocke.log 2>&1
@@ -163,6 +163,8 @@
 0 1,22 * * * node /scripts/myActions/jd_gold_creator.js >>/scripts/logs/jd_gold_creator.log 2>&1
 # 早起福利
 30 5 * * * node /scripts/myActions/jd_goodMorning.js >>/scripts/logs/jd_goodMorning.log 2>&1
+30 6 * * * node /scripts/myActions/jd_zqfl.js >>/scripts/logs/jd_zqfl.log 2>&1
+
 # 京东健康社区
 14 0-23/4 * * * node /scripts/myActions/jd_health.js >>/scripts/logs/jd_health.log 2>&1
 # 京东健康社区收集健康能量
@@ -306,5 +308,11 @@
 # 健康社区-收能量
 25 0,6-23 * * * node /scripts/myActions/jd_z_health_energy.js >>/scripts/logs/jd_z_health_energy.log 2>&1
 
-# 早起福利
-30 6 * * * node /scripts/myActions/jd_zqfl.js >>/scripts/logs/jd_zqfl.log 2>&1
+# 入口：首页-生活·缴费-积分换话费
+33 5,17 * * * node /scripts/myActions/jd_dwapp.js >>/scripts/logs/jd_dwapp.log 2>&1
+
+# 领券中心签到
+10 0 * * * node /scripts/myActions/jd_ccSign.js >>/scripts/logs/jd_ccSign.log 2>&1
+
+# 入口 极速版 赚金币 种水果 - 柠檬我是大老板农场
+3 0-23/6 * * * node /scripts/myActions/jd_wsdlb.js >>/scripts/logs/jd_wsdlb.log 2>&1

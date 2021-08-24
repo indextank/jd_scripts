@@ -47,7 +47,7 @@ if ($.isNode()) {
         continue
       }
       await bean();
-      await showMsg();
+      //await showMsg();
     }
   }
 

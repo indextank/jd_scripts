@@ -31,14 +31,7 @@ console.log('\n====================Hello World====================\n')
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let appId = '1EFRXxg', homeDataFunPrefix = 'interact_template', collectScoreFunPrefix = 'harmony', message = ''
 let lotteryResultFunPrefix = homeDataFunPrefix, browseTime = 6
-const inviteCodes = [
-  "T0205KkcIkxckBO_WGiKyo1oCjVQmoaT5kRrbA",
-  "T024uvh2SRkQ9VHXPRvwlv8NcNb9CjVQmoaT5kRrbA",
-  "T0205KkcFmN7ozyEWmKu9ohuCjVQmoaT5kRrbA",
-  "T0225KkcR08R8QCCIhrxkPRfJgCjVQmoaT5kRrbA",
-  "T0205KkcAkVQqSKGVWOv0oV2CjVQmoaT5kRrbA",
-  "T0084qAiHhYeCjVQmoaT5kRrbA"
-];
+const inviteCodes = ["T0205KkcIkxckBO_WGiKyo1oCjVQmoaT5kRrbA@T024uvh2SRkQ9VHXPRvwlv8NcNb9CjVQmoaT5kRrbA@T0205KkcFmN7ozyEWmKu9ohuCjVQmoaT5kRrbA@T0225KkcR08R8QCCIhrxkPRfJgCjVQmoaT5kRrbA@T0205KkcAkVQqSKGVWOv0oV2CjVQmoaT5kRrbA@T0084qAiHhYeCjVQmoaT5kRrbA"];
 const randomCount = $.isNode() ? 20 : 5;
 const notify = $.isNode() ? require('./sendNotify') : '';
 let merge = {}
@@ -305,11 +298,11 @@ function shareCodesFormat() {
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
       $.newShareCodes = inviteCodes[tempIndex].split('@');
     }
-    const readShareCodeRes = await readShareCode();
+    // const readShareCodeRes = await readShareCode();
     // console.log(readShareCodeRes)
-    if (readShareCodeRes && readShareCodeRes.code === 200) {
-      $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];
-    }
+    // if (readShareCodeRes && readShareCodeRes.code === 200) {
+    //   $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];
+    // }
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)
     resolve();
   })
