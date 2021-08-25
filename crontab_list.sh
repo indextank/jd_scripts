@@ -7,15 +7,11 @@
 # 收集助力码
 30 * * * * sh +x /scripts/myActions/docker/auto_help.sh collect >>/scripts/logs/auto_help_collect.log 2>&1
 
-50 * * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
-
-0 0 * * * node /scripts/myActions/jd_car_reward.js >>/scripts/logs/jd_car_reward.log 2>&1
-
 # 0 0 * * * node /scripts/myActions/jd_blueCoin.js >>/scripts/logs/jd_blueCoin.log 2>&1
-0 0 * * * node /scripts/myActions/jd_car.js >>/scripts/logs/jd_car.log 2>&1
 # 0 0 * * * node /scripts/myActions/jd_car_exchange.js >>/scripts/logs/jd_car_exchange.log 2>&1
+0 0 * * * node /scripts/myActions/jd_car_reward.js >>/scripts/logs/jd_car_reward.log 2>&1
+0 0 * * * node /scripts/myActions/jd_car.js >>/scripts/logs/jd_car.log 2>&1
 0 0 * * * node /scripts/myActions/jd_cash_exchange.js >>/scripts/logs/jd_cash_exchange.log 2>&1
-0 0 * * * node /scripts/myActions/jd_joy_reward.js >>/scripts/logs/jd_joy_reward.log 2>&1
 4 0 * * * node /scripts/myActions/jd_jddj_fruit.js >>/scripts/logs/jd_jddj_fruit.log 2>&1
 7 0 * * * node /scripts/myActions/jd_dpqd.js >>/scripts/logs/jd_dpqd.log 2>&1
 8 0 * * * node /scripts/myActions/jd_jddj_bean.js >>/scripts/logs/jd_jddj_bean.log 2>&1
@@ -24,7 +20,8 @@
 18 0 * * * node /scripts/myActions/jd_market_lottery.js >>/scripts/logs/jd_market_lottery.log 2>&1
 20 0 * * * node /scripts/myActions/jd_speed_redpocke.js >>/scripts/logs/jd_speed_redpocke.log 2>&1
 25 0 * * * node /scripts/myActions/jd_ms.js >>/scripts/logs/jd_ms.log 2>&1
-30 0 * * * node /scripts/myActions/jd_fcdyj.js >>/scripts/logs/jd_fcdyj.log 2>&1
+28 0 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
+33 0 * * * node /scripts/myActions/jd_fcdyj.js >>/scripts/logs/jd_fcdyj.log 2>&1
 38 0 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1
 41 0 * * * node /scripts/myActions/jd_nzmh.js >>/scripts/logs/jd_nzmh.log 2>&1
 44 0 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1
@@ -41,8 +38,9 @@
 15 1 * * * node /scripts/myActions/jd_kd.js >>/scripts/logs/jd_kd.log 2>&1
 18 1 * * * node /scripts/myActions/jd_redPacket.js >>/scripts/logs/jd_redPacket.log 2>&1
 22 1 * * * node /scripts/myActions/jx_sign.js >>/scripts/logs/jx_sign.log 2>&1
-27 1 * * * node /scripts/myActions/jd_pigPet.js >>/scripts/logs/jd_pigPet.log 2>&1
-30 1 9-28 8 * node /scripts/myActions/jd_carnivalcity.js >>/scripts/logs/jd_carnivalcity.log 2>&1
+25 1 * * * node /scripts/myActions/jd_pigPet.js >>/scripts/logs/jd_pigPet.log 2>&1
+28 1 9-28 8 * node /scripts/myActions/jd_carnivalcity.js >>/scripts/logs/jd_carnivalcity.log 2>&1
+30 1 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
 35 1 * * * node /scripts/myActions/jd_joy_feedPets.js >>/scripts/logs/jd_joy_feedPets.log 2>&1
 40 1 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1
 43 1 * * * node /scripts/myActions/jd_kxcdz.js >>/scripts/logs/jd_kxcdz.log 2>&1
@@ -50,6 +48,7 @@
 50 1 * * * node /scripts/myActions/jd_cash.js >>/scripts/logs/jd_cash.log 2>&1
 53 1 * * * node /scripts/myActions/jd_jddj_collectWater.js >>/scripts/logs/jd_jddj_collectWater.log 2>&1
 55 1 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1
+58 1 * * * node /scripts/myActions/jd_decompression.js >>/scripts/logs/jd_decompression.log 2>&1
 
 1 2 * * * node /scripts/myActions/jd_plantBean.js >>/scripts/logs/jd_plantBean.log 2>&1
 5 2 * * * node /scripts/myActions/jd_jin_tie.js >>/scripts/logs/jd_jin_tie.log 2>&1
@@ -79,10 +78,11 @@
 45 4 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
 55 4 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1
 
+# 3 5 * * * node /scripts/myActions/jd_zqfl.js >>/scripts/logs/jd_zqfl.log 2>&1
 0 5 * * * node /scripts/myActions/jd_earn30.js >>/scripts/logs/jd_earn30.log 2>&1
 3 5 * * * node /scripts/myActions/jd_goodMorning.js >>/scripts/logs/jd_goodMorning.log 2>&1
-# 3 5 * * * node /scripts/myActions/jd_zqfl.js >>/scripts/logs/jd_zqfl.log 2>&1
-09 5 * * * node /scripts/myActions/jd_moneyTree_help.js >>/scripts/logs/jd_moneyTree_help.log 2>&1
+5 5 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
+9 5 * * * node /scripts/myActions/jd_moneyTree_help.js >>/scripts/logs/jd_moneyTree_help.log 2>&1
 12 5 * * * node /scripts/myActions/jd_try2.js >>/scripts/logs/jd_try2.log 2>&1
 17 5 * * * node /scripts/myActions/jd_dwapp.js >>/scripts/logs/jd_dwapp.log 2>&1
 20 5 * * * node /scripts/myActions/jd_jxmc.js >>/scripts/logs/jd_jxmc.log 2>&1
@@ -93,6 +93,7 @@
 01 6 * * * node /scripts/myActions/jd_jddj_plantBeans.js >>/scripts/logs/jd_jddj_plantBeans.log 2>&1
 07 6 * * * node /scripts/myActions/jd_jxmc1.js >>/scripts/logs/jd_jxmc1.log 2>&1
 15 6 * * * node /scripts/myActions/jd_fruit.js >>/scripts/logs/jd_fruit.log 2>&1
+18 6 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
 21 6 * * * node /scripts/myActions/jd_unsubscriLive.js >>/scripts/logs/jd_unsubscriLive.log 2>&1
 27 6 * * * node /scripts/myActions/jd_pet.js >>/scripts/logs/jd_pet.log 2>&1
 31 6 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
@@ -113,7 +114,8 @@
 0 8 * * * node /scripts/myActions/jd_joy_reward.js >>/scripts/logs/jd_joy_reward.log 2>&1
 5 8 * * * node /scripts/myActions/jd_jddj_plantBeans.js >>/scripts/logs/jd_jddj_plantBeans.log 2>&1
 8 8 * * * node /scripts/myActions/jd_bean_change.js >>/scripts/logs/jd_bean_change.log 2>&1
-11 8 * * * node /scripts/myActions/jd_mohe.js >>/scripts/logs/jd_mohe.log 2>&1
+10 8 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
+15 8 * * * node /scripts/myActions/jd_mohe.js >>/scripts/logs/jd_mohe.log 2>&1
 22 8 * * * node /scripts/myActions/jd_superMarket.js >>/scripts/logs/jd_superMarket.log 2>&1
 35 8 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
 44 8 * * * node /scripts/myActions/jd_health.js >>/scripts/logs/jd_health.log 2>&1
@@ -133,6 +135,7 @@
 57 9 18-26 8 * node /scripts/myActions/gua_opencard13.js >>/scripts/logs/gua_opencard13.log 2>&1
 59 9 18-31 8 * node /scripts/myActions/gua_opencard14.js >>/scripts/logs/gua_opencard14.log 2>&1
 
+5 10 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
 27 10 * * * node /scripts/myActions/jd_pigPet.js >>/scripts/logs/jd_pigPet.log 2>&1
 10 10 * * * node /scripts/myActions/jd_djjl2.js >>/scripts/logs/jd_djjl2.log 2>&1
 22 10 * * * node /scripts/myActions/jx_sign.js >>/scripts/logs/jx_sign.log 2>&1
@@ -161,6 +164,7 @@
 0 13 * * * node /scripts/myActions/jd_daydlt.js >>/scripts/logs/jd_daydlt.log 2>&1
 3 13 * * * node /scripts/myActions/jd_market_lottery.js >>/scripts/logs/jd_market_lottery.log 2>&1
 5 13 * * * node /scripts/myActions/jd_joy_feedPets.js >>/scripts/logs/jd_joy_feedPets.log 2>&1
+15 13 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
 20 13 * * * node /scripts/myActions/jd_jxmc.js >>/scripts/logs/jd_jxmc.log 2>&1
 55 13 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1
 
@@ -175,6 +179,7 @@
 0 15 * * * node /scripts/myActions/jd_mohe.js >>/scripts/logs/jd_mohe.log 2>&1
 5 15 * * * node /scripts/myActions/jd_jddj_plantBeans.js >>/scripts/logs/jd_jddj_plantBeans.log 2>&1
 12 15 * * * node /scripts/myActions/jd_jddj_collectWater.js >>/scripts/logs/jd_jddj_collectWater.log 2>&1
+20 15 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
 26 15 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1
 15 15 * * * node /scripts/myActions/jd_fruit.js >>/scripts/logs/jd_fruit.log 2>&1
 10 15 * * * node /scripts/myActions/jd_cash.js >>/scripts/logs/jd_cash.log 2>&1
@@ -188,6 +193,7 @@
 
 5 17 * * * node /scripts/myActions/jd_NewSign.js >>/scripts/logs/jd_NewSign.log 2>&1
 7 17 * * * node /scripts/myActions/jd_bean_sign.js >>/scripts/logs/jd_bean_sign.log 2>&1
+11 17 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
 15 17 * * * node /scripts/myActions/jd_fruit.js >>/scripts/logs/jd_fruit.log 2>&1
 20 17 * * * node /scripts/myActions/jd_DrawEntrance.js >>/scripts/logs/jd_DrawEntrance.log 2>&1
 22 17 * * * node /scripts/myActions/jd_club_lottery.js >>/scripts/logs/jd_club_lottery.log 2>&1
@@ -213,8 +219,9 @@
 2 20 * * * node /scripts/myActions/jd_jddj_fruit.js >>/scripts/logs/jd_jddj_fruit.log 2>&1
 7 20 * * * node /scripts/myActions/jd_jxmc1.js >>/scripts/logs/jd_jxmc1.log 2>&1
 13 20 9-28 8 * node /scripts/myActions/jd_carnivalcity.js >>/scripts/logs/jd_carnivalcity.log 2>&1
-31 20 * * * node /scripts/myActions/jd_superMarket.js >>/scripts/logs/jd_superMarket.log 2>&1
 20 20 * * * node /scripts/myActions/jd_bean_home.js >>/scripts/logs/jd_bean_home.log 2>&1
+24 20 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
+31 20 * * * node /scripts/myActions/jd_superMarket.js >>/scripts/logs/jd_superMarket.log 2>&1
 55 20 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1
 
 5 21 * * * node /scripts/myActions/jd_flipcards.js >>/scripts/logs/jd_flipcards.log 2>&1
@@ -240,6 +247,7 @@
 14 23 * * * node /scripts/myActions/jd_speed_redpocke.js >>/scripts/logs/jd_speed_redpocke.log 2>&1
 31 23 * * * node /scripts/myActions/jd_superMarket.js >>/scripts/logs/jd_superMarket.log 2>&1
 46 23 * * * node /scripts/myActions/jd_small_home.js >>/scripts/logs/jd_small_home.log 2>&1
+59 23 * * * node /scripts/myActions/jd_joy_reward.js >>/scripts/logs/jd_joy_reward.log 2>&1
 
 # 宠汪汪喂食
 

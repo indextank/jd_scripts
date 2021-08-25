@@ -36,7 +36,7 @@ let shareCodes = [ // IOS本地脚本用户这个列表填入你要助力的好�
   "MTE1NDAxNzcwMDAwMDAwMzg2Njk1OTc=", "MTAxODc2NTEzOTAwMDAwMDAyMjUyNjQ5Nw==", "MTAxODc2NTEzOTAwMDAwMDAyMTgwOTY2OQ==", "MTE1NDAxNzYwMDAwMDAwMzg2Njk3MzU=", "MTE1NDAxNzYwMDAwMDAwMzg2Njk3MzU=", "MTEyMTY4MjgwMDAwMDAwNDk2NDc0MjU="
 ]
 let message = '', subTitle = '', option = {};
-let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
+let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let goodsUrl = '', taskInfoKey = [];
 let randomCount = $.isNode() ? 20 : 5;

@@ -125,8 +125,6 @@ async function ccSignInNew(functionId, body) {
             data = JSON.parse(data)
             if (data.busiCode === '0') {
               console.log(`签到成功：获得 ${data.result.signResult.signData.amount} 红包`)
-            } else if (data.busiCode === '1002') {
-              console.log(`今日已签到`)
             } else {
               console.log(`签到失败：${data.message}`)
             }
