@@ -17,7 +17,7 @@ const $ = new Env('天天优惠大乐透');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
+let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message = '';
 if ($.isNode()) {
@@ -68,9 +68,9 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
   }
   if (message !== "") {
     if ($.isNode()) {
-      await notify.sendNotify($.name,message)
-    }else{
-      $.msg($.name,'',message)
+      await notify.sendNotify($.name, message)
+    } else {
+      $.msg($.name, '', message)
     }
   }
 })()
@@ -82,7 +82,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
   })
 function extend() {
   return new Promise(resolve => {
-    $.post(taskUrl("getLuckyDrawResourceConfig", {"platformType":"1"}), async (err, resp, data) => {
+    $.post(taskUrl("getLuckyDrawResourceConfig", { "platformType": "1" }), async (err, resp, data) => {
       try {
         if (err) {
           console.log(err)
@@ -90,7 +90,7 @@ function extend() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            $.extend=data.result.luckyDrawConfig.extend
+            $.extend = data.result.luckyDrawConfig.extend
           }
         }
       } catch (e) {
@@ -102,7 +102,7 @@ function extend() {
   })
 }
 function doLuckDrawEntrance() {
-  let body = {"platformType":"1","extend":$.extend}
+  let body = { "platformType": "1", "extend": $.extend }
   return new Promise(resolve => {
     $.post(taskUrl("doLuckDrawEntrance", body), async (err, resp, data) => {
       try {

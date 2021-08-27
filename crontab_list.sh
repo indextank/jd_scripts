@@ -25,7 +25,7 @@
 38 0 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1
 41 0 * * * node /scripts/myActions/jd_nzmh.js >>/scripts/logs/jd_nzmh.log 2>&1
 44 0 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1
-48 0 * 8 * node /scripts/myActions/gua_opencard6.js >>/scripts/logs/gua_opencard6.log 2>&1
+# 48 0 * 8 * node /scripts/myActions/gua_opencard6.js >>/scripts/logs/gua_opencard6.log 2>&1
 50 0 * * * node /scripts/myActions/jd_jddj_getPoints.js >>/scripts/logs/jd_jddj_getPoints.log 2>&1
 53 0 * * * node /scripts/myActions/jd_jddj_collectWater.js >>/scripts/logs/jd_jddj_collectWater.log 2>&1
 55 0 * * * node /scripts/myActions/jd_z_health_energy.js >>/scripts/logs/jd_z_health_energy.log 2>&1
@@ -119,7 +119,7 @@
 22 8 * * * node /scripts/myActions/jd_superMarket.js >>/scripts/logs/jd_superMarket.log 2>&1
 35 8 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
 44 8 * * * node /scripts/myActions/jd_health.js >>/scripts/logs/jd_health.log 2>&1
-54 8 * 8 * node /scripts/myActions/gua_opencard6.js >>/scripts/logs/gua_opencard6.log 2>&1
+# 54 8 * 8 * node /scripts/myActions/gua_opencard6.js >>/scripts/logs/gua_opencard6.log 2>&1
 57 8 * * * node /scripts/myActions/jd_z_health_energy.js >>/scripts/logs/jd_z_health_energy.log 2>&1
 
 3 9 * * * node /scripts/myActions/jd_wxj.js >>/scripts/logs/jd_wxj.log 2>&1
@@ -131,7 +131,7 @@
 38 9 * * * node /scripts/myActions/jd_pet.js >>/scripts/logs/jd_pet.log 2>&1
 48 9 13-25 8 * node /scripts/myActions/jd_xl.js >>/scripts/logs/jd_xl.log 2>&1
 52 9 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1
-55 9 18-25 8 * node /scripts/myActions/gua_opencard12.js >>/scripts/logs/gua_opencard12.log 2>&1
+# 55 9 18-25 8 * node /scripts/myActions/gua_opencard12.js >>/scripts/logs/gua_opencard12.log 2>&1
 57 9 18-26 8 * node /scripts/myActions/gua_opencard13.js >>/scripts/logs/gua_opencard13.log 2>&1
 59 9 18-31 8 * node /scripts/myActions/gua_opencard14.js >>/scripts/logs/gua_opencard14.log 2>&1
 
@@ -226,13 +226,14 @@
 
 5 21 * * * node /scripts/myActions/jd_flipcards.js >>/scripts/logs/jd_flipcards.log 2>&1
 15 21 * * * node /scripts/myActions/jd_jddj_plantBeans.js >>/scripts/logs/jd_jddj_plantBeans.log 2>&1
+18 21 * * * node /scripts/myActions/jd_cfd.js >/scripts/logs/jd_cfd.log 2>&1
 35 21 * * * node /scripts/myActions/jd_pet.js >>/scripts/logs/jd_pet.log 2>&1
 20 21 * * * node /scripts/myActions/jd_jxmc.js >>/scripts/logs/jd_jxmc.log 2>&1
 15 21 * * * node /scripts/myActions/jd_fruit.js >>/scripts/logs/jd_fruit.log 2>&1
 45 21 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1
 49 21 * * * node /scripts/myActions/jd_wish.js >>/scripts/logs/jd_wish.log 2>&1
 55 21 18-25 8 * node /scripts/myActions/gua_opencard12.js >>/scripts/logs/gua_opencard12.log 2>&1
-57 21 18-26 8 * node /scripts/myActions/gua_opencard13.js >>/scripts/logs/gua_opencard13.log 2>&1
+# 57 21 18-26 8 * node /scripts/myActions/gua_opencard13.js >>/scripts/logs/gua_opencard13.log 2>&1
 59 21 18-31 8 * node /scripts/myActions/gua_opencard14.js >>/scripts/logs/gua_opencard14.log 2>&1
 
 07 22 * * * node /scripts/myActions/jd_jxmc1.js >>/scripts/logs/jd_jxmc1.log 2>&1
