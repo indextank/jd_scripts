@@ -1,12 +1,8 @@
 /*
-Last Modified time: 2021-07-27 01:42:50
-搬运自Aaron大佬，仅修改兑换逻辑
+Last Modified time: 2021-06-06 21:22:37
 宠汪汪积分兑换奖品脚本, 目前脚本只兑换京豆，兑换京豆成功，才会发出通知提示，其他情况不通知。
 活动入口：京东APP我的-更多工具-宠汪汪
 兑换规则：一个账号一天只能兑换一次京豆。
-
-兑换逻辑：0，8点场次默认兑换500京豆，16点场次默认兑换20京豆
-
 兑换奖品成功后才会有系统弹窗通知
 每日京豆库存会在0:00、8:00、16:00更新。
 脚本兼容: Quantumult X, Surge, Loon, JSBox, Node.js
@@ -25,14 +21,13 @@ cron "59 7,15,23 * * *" script-path=jd_joy_reward.js,tag=宠汪汪积分兑换�
 ===============小火箭==========
 宠汪汪积分兑换奖品 = type=cron,script-path=jd_joy_reward.js, cronexpr="59 7,15,23 * * *", timeout=3600, enable=true
  */
-// @grant    require
 // prettier-ignore
 const $ = new Env('宠汪汪积分兑换奖品');
 const zooFaker = require('./utils/JDJRValidator_Pure');
 // $.get = zooFaker.injectToRequest2($.get.bind($));
 // $.post = zooFaker.injectToRequest2($.post.bind($));
 let allMessage = '';
-// let joyRewardName = 500;//是否兑换京豆，默认0不兑换京豆，其中20为兑换20京豆,500为兑换500京豆，0为不兑换京豆.数量有限先到先得
+let joyRewardName = 20;//是否兑换京豆，默认0不兑换京豆，其中20为兑换20京豆,500为兑换500京豆，0为不兑换京豆.数量有限先到先得
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -63,11 +58,9 @@ Date.prototype.Format = function (fmt) { //author: meizz
   return fmt;
 }
 !(async () => {
-  console.log(`宠汪汪脚本兑换逻辑：0，8点场次默认兑换500京豆，16点场次默认兑换20京豆`);
   if (!cookiesArr[0]) {
-    $.msg('【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
+    $.msg('【京东账号一】宠汪汪积分兑换奖品失败', '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
   }
-  $.validate = []
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -79,24 +72,16 @@ Date.prototype.Format = function (fmt) { //author: meizz
       console.log(`\n*****开始【京东账号${$.index}】${$.nickName || $.UserName}****\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
+
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
         continue
       }
-      $.validate[i] = await zooFaker.injectToRequest()
-    }
-  }
-  console.log(`脚本开始请求时间 ${(new Date()).Format("yyyy-MM-dd hh:mm:ss | S")}`);
-  for (let i = 0; i < cookiesArr.length; i++) {
-    if (cookiesArr[i]) {
-      cookie = cookiesArr[i];
-      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-      $.index = i + 1;
-      $.isLogin = true;
-      $.nickName = '' || $.UserName;
-      await TotalBean();
-      console.log(`\n*****【京东账号${$.index}】${$.nickName || $.UserName}开始兑换*****\n`);
+      // console.log(`本地时间与京东服务器时间差(毫秒)：${await get_diff_time()}`);
+      $.validate = '';
+      $.validate = await zooFaker.injectToRequest()
+      console.log(`脚本开始请求时间 ${(new Date()).Format("yyyy-MM-dd hh:mm:ss | S")}`);
       await joyReward();
     }
   }
@@ -111,15 +96,16 @@ Date.prototype.Format = function (fmt) { //author: meizz
     $.done();
   })
 
-
 async function joyReward() {
   try {
-    let starttime = process.env.JOY_STARTTIME ? process.env.JOY_STARTTIME : 59.8;
-    let nowtime = new Date().Format("s.S")
-    if ($.index == 1 && nowtime < starttime) {
-      let sleeptime = (starttime - nowtime) * 1000;
-      console.log(`等待时间 ${sleeptime / 1000}`);
-      await zooFaker.sleep(sleeptime)
+    if (new Date().getMinutes() === 59) {
+      let nowtime = new Date().Format("s.S")
+      let starttime = process.env.JOY_STARTTIME ? process.env.JOY_STARTTIME : 60;
+      if (nowtime < 59) {
+        let sleeptime = (starttime - nowtime) * 1000;
+        console.log(`等待时间 ${sleeptime / 1000}`);
+        await zooFaker.sleep(sleeptime)
+      }
     }
     for (let j = 0; j <= 10; j++) {
       await getExchangeRewards();
@@ -132,40 +118,30 @@ async function joyReward() {
         // console.log(`宠物等级 ${data.level}\n`);
         let saleInfoId = '', giftValue = '', extInfo = '', leftStock = 0, salePrice = 0;
         let rewardNum = 0;
-        // if ($.isNode() && process.env.JD_JOY_REWARD_NAME) {
-        //   rewardNum = process.env.JD_JOY_REWARD_NAME * 1;
-        // } else if ($.getdata('joyRewardName')) {
-        //   if ($.getdata('joyRewardName') * 1 === 1) {
-        //     //兼容之前的BoxJs设置
-        //     rewardNum = 20;
-        //   } else {
-        //     rewardNum = $.getdata('joyRewardName') * 1;
-        //   }
-        // } else {
-        //   rewardNum = joyRewardName;
-        // }
+        if ($.isNode() && process.env.JD_JOY_REWARD_NAME) {
+          rewardNum = process.env.JD_JOY_REWARD_NAME * 1;
+        } else if ($.getdata('joyRewardName')) {
+          if ($.getdata('joyRewardName') * 1 === 1) {
+            //兼容之前的BoxJs设置
+            rewardNum = 20;
+          } else {
+            rewardNum = $.getdata('joyRewardName') * 1;
+          }
+        } else {
+          rewardNum = joyRewardName;
+        }
         let giftSaleInfos = 'beanConfigs0';
         let time = new Date($.getExchangeRewardsRes['currentTime']).getHours();
         if (time >= 0 && time < 8) {
           giftSaleInfos = 'beanConfigs0';
-          $.Num = 0
-          rewardNum = 500
         }
         if (time >= 8 && time < 16) {
           giftSaleInfos = 'beanConfigs8';
-          $.Num = 8
-          rewardNum = 500
         }
         if (time >= 16 && time < 24) {
           giftSaleInfos = 'beanConfigs16';
-          $.Num = 16
-          rewardNum = 20
         }
-        if ($.isNode() && process.env.JD_JOY_REWARD_NAME) {
-          rewardNum = process.env.JD_JOY_REWARD_NAME * 1;
-        }
-        console.log(`兑换${rewardNum}`)
-        console.log(`\n当前为${$.Num}点场次\n`)
+        console.log(`\ndebug场次:${giftSaleInfos}\n`)
         for (let item of data[giftSaleInfos]) {
           console.log(`${item['giftName']}当前库存:${item['leftStock']}，id：${item.id}`)
           if (item.giftType === 'jd_bean' && item['giftValue'] === rewardNum) {
@@ -245,7 +221,7 @@ async function joyReward() {
 }
 function getExchangeRewards() {
   let opt = {
-    url: "//jdjoy.jd.com/common/gift/getBeanConfigs?reqSource=h5&invokeKey=ztmFUCxcPMNyUq0P",
+    url: "//jdjoy.jd.com/common/gift/getBeanConfigs?reqSource=h5&invokeKey=RtKLB8euDo7KwsO0",
     method: "GET",
     data: {},
     credentials: "include",
@@ -253,9 +229,9 @@ function getExchangeRewards() {
   }
   return new Promise((resolve) => {
     let lkt = new Date().getTime()
-    let lks = $.md5('' + 'ztmFUCxcPMNyUq0P' + lkt).toString()
+    let lks = $.md5('' + 'RtKLB8euDo7KwsO0' + lkt).toString()
     const option = {
-      url: "https:" + taroRequest(opt)['url'] + $.validate[$.index - 1],
+      url: "https:" + taroRequest(opt)['url'] + $.validate,
       headers: {
         "Host": "jdjoy.jd.com",
         "Content-Type": "application/json",
@@ -293,15 +269,15 @@ function getExchangeRewards() {
 function exchange(saleInfoId, orderSource) {
   let body = { "buyParam": { "orderSource": orderSource, "saleInfoId": saleInfoId }, "deviceInfo": {} }
   let opt = {
-    "url": "//jdjoy.jd.com/common/gift/new/exchange?reqSource=h5&invokeKey=ztmFUCxcPMNyUq0P",
+    "url": "//jdjoy.jd.com/common/gift/new/exchange?reqSource=h5&invokeKey=RtKLB8euDo7KwsO0",
     "data": body,
     "credentials": "include", "method": "POST", "header": { "content-type": "application/json" }
   }
   return new Promise((resolve) => {
     let lkt = new Date().getTime()
-    let lks = $.md5('' + 'ztmFUCxcPMNyUq0P' + lkt).toString()
+    let lks = $.md5('' + 'RtKLB8euDo7KwsO0' + lkt).toString()
     const option = {
-      url: "https:" + taroRequest(opt)['url'] + $.validate[$.index - 1],
+      url: "https:" + taroRequest(opt)['url'] + $.validate,
       body: `${JSON.stringify(body)}`,
       headers: {
         "Host": "jdjoy.jd.com",
@@ -438,8 +414,7 @@ function safeGet(data) {
   }
 }
 function taroRequest(e) {
-  // const a = $.isNode() ? require('crypto-js') : CryptoJS;
-  const a = require('crypto-js');
+  const a = $.isNode() ? require('crypto-js') : CryptoJS;
   const i = "98c14c997fde50cc18bdefecfd48ceb7"
   const o = a.enc.Utf8.parse(i)
   const r = a.enc.Utf8.parse("ea653f4f3c5eda12");
