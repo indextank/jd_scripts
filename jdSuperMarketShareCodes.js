@@ -56,7 +56,7 @@ let shareCodes = [ // IOS本地脚本用户这个列表填入你要助力的好�
       $.coinerr = "";
       $.blueCionTimes = 0;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       await TotalBean();
       console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
       if (!$.isLogin) {

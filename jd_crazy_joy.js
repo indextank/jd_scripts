@@ -62,7 +62,7 @@ if ($.isNode()) {
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       message = '';
       $.GROWTH_REWARD_BEAN = 0;//解锁等级奖励的京豆
       await TotalBean();
@@ -89,7 +89,7 @@ if ($.isNode()) {
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
         $.index = i + 1;
         $.isLogin = true;
-        $.nickName = '';
+        $.nickName = $.UserName;
         await TotalBean();
         console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
         if (!$.isLogin) {
@@ -111,7 +111,7 @@ if ($.isNode()) {
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
         $.index = i + 1;
         $.isLogin = true;
-        $.nickName = '';
+        $.nickName = $.UserName;
         await TotalBean();
         console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
         if (!$.isLogin) {

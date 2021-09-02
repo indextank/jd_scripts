@@ -7,17 +7,17 @@
 ===================quantumultx================
 [task_local]
 #金榜创造营
-13 0,22 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_gold_creator.js, tag=金榜创造营, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+13 1,22 * * * jd_gold_creator.js, tag=金榜创造营, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 =====================Loon================
 [Script]
-cron "13 0,22 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_gold_creator.js, tag=金榜创造营
+cron "13 1,22 * * *" script-path=jd_gold_creator.js, tag=金榜创造营
 
 ====================Surge================
-金榜创造营 = type=cron,cronexp="13 0,22 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_gold_creator.js
+金榜创造营 = type=cron,cronexp="13 1,22 * * *",wake-system=1,timeout=3600,script-path=jd_gold_creator.js
 
 ============小火箭=========
-金榜创造营 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_gold_creator.js, cronexpr="13 0,22 * * *", timeout=3600, enable=true
+金榜创造营 = type=cron,script-path=jd_gold_creator.js, cronexpr="13 1,22 * * *", timeout=3600, enable=true
  */
 const $ = new Env('金榜创造营');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -52,20 +52,9 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
       $.index = i + 1;
       $.isLogin = true;
       $.beans = 0
-      $.nickName = '';
+      $.nickName = $.UserName;
       message = '';
-      await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
-      if (!$.isLogin) {
-        $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/`, { "open-url": "https://bean.m.jd.com/" });
-
-        if ($.isNode()) {
-          await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
-        } else {
-          $.setdata('', `CookieJD${i ? i + 1 : ""}`);//cookie失效，故清空cookie。$.setdata('', `CookieJD${i ? i + 1 : "" }`);//cookie失效，故清空cookie。
-        }
-        continue
-      }
       await main()
     }
   }
@@ -80,7 +69,7 @@ async function main() {
   try {
     await goldCreatorTab();//获取顶部主题
     await getDetail();
-    // await showMsg();
+    await showMsg();
   } catch (e) {
     $.logErr(e)
   }
@@ -261,47 +250,6 @@ function taskUrl(function_id, body = {}) {
   }
 }
 
-function TotalBean() {
-  return new Promise(async resolve => {
-    const options = {
-      url: "https://me-api.jd.com/user_new/info/GetJDUserInfoUnion",
-      headers: {
-        Host: "me-api.jd.com",
-        Accept: "*/*",
-        Connection: "keep-alive",
-        Cookie: cookie,
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./utils/USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-        "Accept-Language": "zh-cn",
-        "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
-        "Accept-Encoding": "gzip, deflate, br"
-      }
-    }
-    $.get(options, (err, resp, data) => {
-      try {
-        if (err) {
-          $.logErr(err)
-        } else {
-          if (data) {
-            data = JSON.parse(data);
-            if (data['retcode'] === "1001") {
-              $.isLogin = false; //cookie过期
-              return;
-            }
-            if (data['retcode'] === "0" && data.data && data.data.hasOwnProperty("userInfo")) {
-              $.nickName = data.data.userInfo.baseInfo.nickname;
-            }
-          } else {
-            $.log('京东服务器返回空数据');
-          }
-        }
-      } catch (e) {
-        $.logErr(e)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
 function safeGet(data) {
   try {
     if (typeof JSON.parse(data) == "object") {

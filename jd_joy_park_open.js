@@ -43,7 +43,7 @@ $.shareuuid = "" //助力码
             $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
             $.index = i + 1;
             $.isLogin = true;
-            $.nickName = '';
+            $.nickName = $.UserName;
             console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
 
 

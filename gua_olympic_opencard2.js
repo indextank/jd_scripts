@@ -63,7 +63,7 @@ message = ""
       $.index = i + 1;
       $.isLogin = true;
       getUA()
-      $.nickName = '';
+      $.nickName = $.UserName;
       $.actorUuid = '';
       console.log(`\n\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {

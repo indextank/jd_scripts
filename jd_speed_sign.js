@@ -1,5 +1,4 @@
 /*
-0 7 * * * jd_speed_sign.js
 京东极速版签到+赚现金任务
 每日9毛左右，满3，10，50可兑换无门槛红包
 ⚠️⚠️⚠️一个号需要运行40分钟左右
@@ -11,19 +10,18 @@
 ============Quantumultx===============
 [task_local]
 #京东极速版
-0 7 * * * jd_speed_sign.js, tag=京东极速版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+0 7 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed_sign.js, tag=京东极速版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "0 7 * * *" script-path=jd_speed_sign.js,tag=京东极速版
+cron "0 7 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed_sign.js,tag=京东极速版
 
 ===============Surge=================
-京东极速版 = type=cron,cronexp="0 7 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
+京东极速版 = type=cron,cronexp="0 7 * * *",wake-system=1,timeout=33600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed_sign.js
 
 ============小火箭=========
-京东极速版 = type=cron,script-path=jd_speed_sign.js, cronexpr="0 7 * * *", timeout=33600, enable=true
+京东极速版 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed_sign.js, cronexpr="0 7 * * *", timeout=33600, enable=true
 */
-
 const $ = new Env('京东极速版');
 
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -44,16 +42,12 @@ if ($.isNode()) {
 
 const JD_API_HOST = 'https://api.m.jd.com/', actCode = 'visa-card-001';
 
+await $.wait(parseInt(Math.random() * 1000 + 8000, 10))
 
 !(async () => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
     return;
-  }
-  $.canhelp = true;
-  if ($.isNode()) {
-    if (process.env.HELP_YQYL && process.env.HELP_YQYL === 'false')
-      $.canhelp = false
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -61,7 +55,7 @@ const JD_API_HOST = 'https://api.m.jd.com/', actCode = 'visa-card-001';
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       message = '';
       await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
@@ -95,17 +89,15 @@ async function jdGlobal() {
 
     await signInit()
     await sign()
-    if ($.canhelp) {
-      //console.log(`\n京东账号${$.index}开始助力【zero205】邀请有礼，感谢！\n`);
-      //await invite()
-    }
+    await invite()
+    await invite2()
     $.score = 0
     $.total = 0
     await taskList()
     await queryJoy()
     await signInit()
     await cash()
-    // await showMsg()
+    await showMsg()
   } catch (e) {
     $.logErr(e)
   }
@@ -125,10 +117,7 @@ async function signInit() {
     $.get(taskUrl('speedSignInit', {
       "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
       "kernelPlatform": "RN",
-      "inviterId": [
-        "4Ea5Rk54jwWdzUlDSMQQPYOn8bJjlhOf",
-        "lYWW84hrUq/vNS+xjDyh5g=="
-      ][Math.floor((Math.random() * 2))]
+      "inviterId": "aKIygK8y83zhxs2LmpQv46conKGFsMrny570tt6IEhU="
     }), async (err, resp, data) => {
       try {
         if (err) {
@@ -683,9 +672,39 @@ function taskGetUrl(function_id, body) {
   }
 }
 
+function invite2() {
+  let t = +new Date()
+  let inviterId = [
+    "aKIygK8y83zhxs2LmpQv46conKGFsMrny570tt6IEhU=",
+  ][Math.floor((Math.random() * 1))]
+  let headers = {
+    'Host': 'api.m.jd.com',
+    'accept': 'application/json, text/plain, */*',
+    'content-type': 'application/x-www-form-urlencoded',
+    'origin': 'https://assignment.jd.com',
+    'accept-language': 'zh-cn',
+    'user-agent': $.isNode() ? (process.env.JS_USER_AGENT ? process.env.JS_USER_AGENT : (require('./utils/JS_USER_AGENTS').USER_AGENT)) : ($.getdata('JSUA') ? $.getdata('JSUA') : "'jdltapp;iPad;3.1.0;14.4;network/wifi;Mozilla/5.0 (iPad; CPU OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+    'referer': `https://assignment.jd.com/?inviterId=${encodeURIComponent(inviterId)}`,
+    'Cookie': cookie
+  }
+
+  let dataString = `functionId=TaskInviteService&body={"method":"participateInviteTask","data":{"channel":"1","encryptionInviterPin":"${encodeURIComponent(inviterId)}","type":1}}&appid=market-task-h5&uuid=&_t=${t}`;
+
+  var options = {
+    url: 'https://api.m.jd.com/',
+    headers: headers,
+    body: dataString
+  }
+  $.post(options, (err, resp, data) => {
+    // console.log(data)
+  })
+}
+
 function invite() {
   let t = +new Date()
-  let inviterId = [][Math.floor((Math.random() * 7))]
+  let inviterId = [
+    "aKIygK8y83zhxs2LmpQv46conKGFsMrny570tt6IEhU="
+  ][Math.floor((Math.random() * 2))]
   var headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',
@@ -697,9 +716,9 @@ function invite() {
     'Cookie': cookie
   };
 
-  var dataString = `functionId=InviteFriendChangeAssertsService&body={"method":"attendInviteActivity","data":{"inviterPin":"${encodeURIComponent(inviterId)}","channel":1,"token":"","frontendInitStatus":""}}&referer=-1&eid=eidIf3dd8121b7sdmiBLGdxRR46OlWyh62kFAZogTJFnYqqRkwgr63%2BdGmMlcv7EQJ5v0HBic81xHXzXLwKM6fh3i963zIa7Ym2v5ehnwo2B7uDN92Q0&aid=&client=ios&clientVersion=14.4&networkType=wifi&fp=-1&appid=market-task-h5&_t=${t}`;
+  var dataString = `functionId=InviteFriendChangeAssertsService&body={"method":"attendInviteActivity","data":{"inviterPin":"${encodeURIComponent(inviterId)}","channel":1,"token":"","frontendInitStatus":""}}&referer=-1&eid=eidI9b2981202fsec83iRW1nTsOVzCocWda3YHPN471AY78%2FQBhYbXeWtdg%2F3TCtVTMrE1JjM8Sqt8f2TqF1Z5P%2FRPGlzA1dERP0Z5bLWdq5N5B2VbBO&aid=&client=ios&clientVersion=14.4.2&networkType=wifi&fp=-1&uuid=ab048084b47df24880613326feffdf7eee471488&osVersion=14.4.2&d_brand=iPhone&d_model=iPhone10,2&agent=-1&pageClickKey=-1&platform=3&lang=zh_CN&appid=market-task-h5&_t=${t}`;
   var options = {
-    url: `https://api.m.jd.com/?t=${+new Date()}`,
+    url: `https://api.m.jd.com/?t=${t}`,
     headers: headers,
     body: dataString
   };

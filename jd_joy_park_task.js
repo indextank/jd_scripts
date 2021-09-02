@@ -33,7 +33,7 @@ if ($.isNode()) {
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
-$.invitePinTaskList = ['7zG4VHS99AUEoX1mQTkC9Q']
+$.invitePinTaskList = []
 $.invitePin = [
   "eH9Bd7RZX4v_CvaKA6GnarAS9aW-nZJys6DAbJIRUT0",
   "LJ9_OCKMl-dFrkPPmV265w",
@@ -57,7 +57,7 @@ message = ""
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       $.openIndex = 0
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if ($.isNode()) {
@@ -65,9 +65,7 @@ message = ""
         } else {
           for (let j = 0; j < $.invitePin.length; j++) {
             let resp = await getJoyBaseInfo(undefined, 2, $.invitePin[$.openIndex]);
-            if (resp.data && resp.data.helpState && resp.data.helpState === 1) {
-              $.log("帮【zero205】开工位成功，感谢！\n");
-            } else if (resp.data && resp.data.helpState && resp.data.helpState === 3) {
+            if (resp.data && resp.data.helpState && resp.data.helpState === 3) {
               $.log("你不是新用户！跳过\n");
               break
             } else if (resp.data && resp.data.helpState && resp.data.helpState === 2) {
@@ -77,6 +75,7 @@ message = ""
               $.log("开工位失败！\n");
             }
           }
+          await $.wait(1500)
         }
       }
       await getJoyBaseInfo()
@@ -164,6 +163,7 @@ message = ""
             $.log("领取助力奖励成功！")
           }
         }
+        await $.wait(2000)
       }
     }
   }
@@ -175,7 +175,7 @@ message = ""
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
@@ -206,7 +206,9 @@ message = ""
           $.log("数据异常 助力失败！\n\n")
           break
         }
+        await $.wait(2000)
       }
+      await $.wait(1000)
     }
   }
 })()

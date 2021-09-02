@@ -31,7 +31,7 @@ RUN set -ex \
     && mkdir logs \
     && npm config set registry https://registry.npm.taobao.org \
     && npm install \
-    && npm install ts-node png-js date-fns \
+    && npm install jsdom ts-node png-js date-fns \
     && npm install -g ts-md5 dotenv \
     && npm install -g typescript \
     && npm install axios --save \

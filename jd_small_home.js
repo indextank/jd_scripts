@@ -62,7 +62,7 @@ const JD_API_HOST = 'https://lkyl.dianpusoft.cn/api';
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       message = '';
       await TotalBean();
       console.log(`\n*******开始【京东账号${$.index}】${$.nickName || $.UserName}********\n`);

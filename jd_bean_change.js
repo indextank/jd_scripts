@@ -39,7 +39,7 @@ if ($.isNode()) {
             $.todayIncomeBean = 0;
             $.errorMsg = '';
             $.isLogin = true;
-            $.nickName = '';
+            $.nickName = $.UserName;
             $.message = '';
             $.balance = 0;
             $.expiredBalance = 0;

@@ -14,7 +14,6 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
-let helpAuthor = true;
 const randomCount = $.isNode() ? 5 : 5;
 let cash_exchange = false;//是否消耗2元红包兑换200京豆，默认否
 const inviteCodes = ["eU9Ya726Yqhz827Qz3BGhA@f0ZmMuS1@eU9YLrf7Oop3hBeOjQFv@eU9YOpHQMJR1ixaPqQx3@Jx4yZeu7Zvkm7G_RyXsU0ot2@eU9YDr73A7tOiRyrlQlx"]
@@ -46,7 +45,7 @@ let allMessage = '';
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       message = '';
       await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
@@ -239,14 +238,6 @@ async function helpFriends() {
     if (!$.canHelp) break
     await $.wait(1000)
   }
-  // if (helpAuthor && $.authorCode) {
-  //   for(let helpInfo of $.authorCode){
-  //     console.log(`去帮助好友${helpInfo['inviteCode']}`)
-  //     await helpFriend(helpInfo)
-  //     if(!$.canHelp) break
-  //     await $.wait(1000)
-  //   }
-  // }
 }
 function helpFriend(helpInfo) {
   return new Promise((resolve) => {
@@ -430,9 +421,10 @@ function getSign(functionid, body, uuid) {
       "client": "apple",
       "clientVersion": "10.1.0"
     }
+    let HostArr = ['jdsign.cf', 'signer.nz.lu']
     let Host = HostArr[Math.floor((Math.random() * HostArr.length))]
     let options = {
-      url: `https://cdn.jdsign.cf/ddo`,
+      url: `https://cdn.xia.me/ddo`,
       body: JSON.stringify(data),
       headers: {
         Host,

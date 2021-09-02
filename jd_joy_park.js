@@ -69,7 +69,7 @@ message = ""
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       $.maxJoyCount = 10
       console.log(`\n\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
 
@@ -93,7 +93,6 @@ message = ""
 
 
 function getJoyBaseInfo(taskId = '', inviteType = '', inviterPin = '', printLog = false) {
-  //await $.wait(20)
   return new Promise(resolve => {
     $.post(taskPostClientActionUrl(`body={"taskId":"${taskId}","inviteType":"${inviteType}","inviterPin":"${inviterPin}","linkId":"LsQNxL7iWDlXUs6cFl-AAg"}&_t=1625480372020&appid=activities_platform`, `joyBaseInfo`), async (err, resp, data) => {
       try {
@@ -117,7 +116,6 @@ function getJoyBaseInfo(taskId = '', inviteType = '', inviterPin = '', printLog 
 }
 
 function getJoyList(printLog = false) {
-  //await $.wait(20)
   return new Promise(resolve => {
     $.get(taskGetClientActionUrl(`appid=activities_platform&body={"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`, `joyList`), async (err, resp, data) => {
       try {
@@ -153,7 +151,6 @@ function getJoyList(printLog = false) {
 }
 
 function getGameShopList() {
-  //await $.wait(20)
   return new Promise(resolve => {
     $.get(taskGetClientActionUrl(`appid=activities_platform&body={"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`, `gameShopList`), async (err, resp, data) => {
       try {
@@ -244,7 +241,7 @@ async function doJoyMergeAll(activityJoyList) {
   let fastBuyLevel = joyBaseInfo.fastBuyLevel
   if (joyMinLevelArr.length >= 2) {
     $.log(`开始合成 ${minLevel} ${joyMinLevelArr[0].id} <=> ${joyMinLevelArr[1].id} 【限流严重，2秒后合成！如失败会重试】`);
-    await $.wait(2000)
+    await $.wait(parseInt(Math.random() * 2400 + 2000, 10))
     await doJoyMerge(joyMinLevelArr[0].id, joyMinLevelArr[1].id);
     await getJoyList()
     await doJoyMergeAll($.activityJoyList)
@@ -272,7 +269,6 @@ async function doJoyMergeAll(activityJoyList) {
 }
 
 function doJoyMove(joyId, location) {
-  //await $.wait(20)
   return new Promise(resolve => {
     $.post(taskGetClientActionUrl(`body={"joyId":${joyId},"location":${location},"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}&appid=activities_platform`, `joyMove`), async (err, resp, data) => {
       try {
@@ -295,7 +291,6 @@ function doJoyMove(joyId, location) {
 }
 
 function doJoyMerge(joyId1, joyId2) {
-  //await $.wait(20)
   return new Promise(resolve => {
     $.get(taskGetClientActionUrl(`body={"joyOneId":${joyId1},"joyTwoId":${joyId2},"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}&appid=activities_platform`, `joyMergeGet`), async (err, resp, data) => {
       try {
@@ -317,7 +312,6 @@ function doJoyMerge(joyId1, joyId2) {
 }
 
 async function doJoyBuy(level, activityJoyList) {
-  //await $.wait(20)
   return new Promise(resolve => {
     $.post(taskPostClientActionUrl(`body={"level":${level},"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}&appid=activities_platform`, `joyBuy`), async (err, resp, data) => {
       try {

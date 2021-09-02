@@ -43,7 +43,7 @@ let res = [];
         $.index = i + 1;
         $.cookie = cookiesArr[i];
         $.isLogin = true;
-        $.nickName = '';
+        $.nickName = $.UserName;
         $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
         await TotalBean();
         console.log(`\n*****开始【京东账号${$.index}】${$.nickName || $.UserName}*****\n`);

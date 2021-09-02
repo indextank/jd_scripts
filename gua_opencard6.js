@@ -73,7 +73,7 @@ message = ""
       $.index = i + 1;
       $.isLogin = true;
       await getUA()
-      $.nickName = '';
+      $.nickName = $.UserName;
       console.log(`\n\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       await run();
     }

@@ -13,8 +13,6 @@
 不会每次运行脚本都投入电力
 只有当心仪的商品存在，并且收集起来的电量满足当前商品所需电力，才投入
 
-// zero205：已添加自己账号内部互助，有剩余助力次数再帮我助力
-
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
@@ -66,7 +64,7 @@ let myInviteCode;
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       $.stop = false;
       message = '';
       await TotalBean();

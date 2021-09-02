@@ -48,7 +48,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       message = '';
       await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
@@ -291,9 +291,10 @@ function getSign(functionid, body, uuid) {
       "client": "apple",
       "clientVersion": "10.1.0"
     }
+    let HostArr = ['jdsign.cf', 'signer.nz.lu']
     let Host = HostArr[Math.floor((Math.random() * HostArr.length))]
     let options = {
-      url: `https://cdn.jdsign.cf/ddo`,
+      url: `https://cdn.xia.me/ddo`,
       body: JSON.stringify(data),
       headers: {
         Host,

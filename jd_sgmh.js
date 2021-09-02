@@ -59,7 +59,7 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       $.beans = 0
       message = ''
       await TotalBean();
@@ -117,7 +117,7 @@ function interact_template_getHomeData(timeout = 0) {
               for (let code of $.newShareCodes) {
                 if (!code) continue
                 await harmony_collectScore(code, data.data.result.taskVos[i].taskId);
-                await $.wait(2000)
+                await $.wait(parseInt(Math.random() * 1000 + 2000, 10))
               }
             }
             else if (data.data.result.taskVos[i].status === 3) {
@@ -236,7 +236,7 @@ function interact_template_getLotteryResult(taskId, timeout = 0) {
             }
             if (data.data.result.raiseInfo) scorePerLottery = parseInt(data.data.result.raiseInfo.nextLevelScore);
             if (parseInt(data.data.result.userScore) >= scorePerLottery && scorePerLottery) {
-              await interact_template_getLotteryResult(1000)
+              await interact_template_getLotteryResult(3000)
             }
           }
         } catch (e) {
@@ -330,7 +330,7 @@ function readShareCode() {
         resolve(data);
       }
     })
-    await $.wait(2000);
+    await $.wait(3500);
     resolve()
   })
 }

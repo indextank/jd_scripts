@@ -61,7 +61,7 @@ $.post = validator.injectToRequest($.post.bind($), 'channelSign', $.UA)
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
       $.index = i + 1;
-      $.nickName = '';
+      $.nickName = $.UserName;
       console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
       beanNum = 0
       successNum = 0

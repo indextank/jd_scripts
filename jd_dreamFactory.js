@@ -71,7 +71,7 @@ if ($.isNode()) {
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       message = '';
       $.ele = 0;
       $.pickEle = 0;
@@ -92,27 +92,27 @@ if ($.isNode()) {
       await jdDreamFactory()
     }
   }
-  if (tuanActiveId) {
-    for (let i = 0; i < cookiesArr.length; i++) {
-      if (cookiesArr[i]) {
-        cookie = cookiesArr[i];
-        $.isLogin = true;
-        $.canHelp = false;//能否参团
-        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+  // if (tuanActiveId) {
+  //   for (let i = 0; i < cookiesArr.length; i++) {
+  //     if (cookiesArr[i]) {
+  //       cookie = cookiesArr[i];
+  //       $.isLogin = true;
+  //       $.canHelp = false;//能否参团
+  //       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
 
-        if ((cookiesArr && cookiesArr.length >= ($.tuanNum || 5)) && $.canHelp) {
-          console.log(`\n账号${$.UserName} 内部相互进团\n`);
-          for (let item of $.tuanIds) {
-            console.log(`\n${$.UserName} 去参加团 ${item}`);
-            if (!$.canHelp) break;
-            await JoinTuan(item);
-            await $.wait(1000);
-          }
-        }
-        //if ($.canHelp) await joinLeaderTuan();//参团
-      }
-    }
-  }
+  //       if ((cookiesArr && cookiesArr.length >= ($.tuanNum || 5)) && $.canHelp) {
+  //         console.log(`\n账号${$.UserName} 内部相互进团\n`);
+  //         for (let item of $.tuanIds) {
+  //           console.log(`\n${$.UserName} 去参加团 ${item}`);
+  //           if (!$.canHelp) break;
+  //           await JoinTuan(item);
+  //           await $.wait(1000);
+  //         }
+  //       }
+  //       //if ($.canHelp) await joinLeaderTuan();//参团
+  //     }
+  //   }
+  // }
   if ($.isNode() && allMessage) {
     await notify.sendNotify(`${$.name}`, `${allMessage}`, { url: jxOpenUrl })
   }
@@ -138,10 +138,10 @@ async function jdDreamFactory() {
     await QueryHireReward();//收取招工电力
     await PickUp();//收取自家的地下零件
     await stealFriend();
-    if (tuanActiveId) {
-      await tuanActivity();
-      await QueryAllTuan();
-    }
+    // if (tuanActiveId) {
+    //   await tuanActivity();
+    //   await QueryAllTuan();
+    // }
     await exchangeProNotify();
     await showMsg();
   } catch (e) {

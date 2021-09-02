@@ -52,9 +52,9 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : {};
 //下面给出好友邀请助力的示例填写规则
 let invite_pins = [];
 //下面给出好友赛跑助力的示例填写规则
-let run_pins = [];
+let run_pins = ['lman87,变速箱2019,jd_152055zny,jd_fMRfXcJHjROT,jd_RbuUwXHBNnJR,455979050-14287437,jd_5f4d5dcf6c686'];
 //friendsArr内置太多会导致IOS端部分软件重启,可PR过来(此处目的:帮别人助力可得30g狗粮)
-let friendsArr = []
+let friendsArr = ["lman87", "变速箱2019", "jd_152055zny", "jd_fMRfXcJHjROT", "jd_RbuUwXHBNnJR", "455979050-14287437", "jd_5f4d5dcf6c686"]
 
 
 //IOS等用户直接用NobyDa的jd cookie
@@ -67,7 +67,7 @@ const headers = {
   'Lottery-Access-Signature': '',
   'Content-Type': 'application/json',
   'reqSource': 'weapp',
-  // 'User-Agent' : $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./utils/USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+  // 'User-Agent' : $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
   'User-Agent': "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1",
   'Cookie': '',
   'openId': '',
@@ -114,8 +114,7 @@ async function main() {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
     return;
   }
-  const readTokenRes = ''
-  // const readTokenRes = await readToken();
+  const readTokenRes = await readToken();
   if (readTokenRes && readTokenRes.code === 200) {
     $.LKYLToken = readTokenRes.data[0] || ($.isNode() ? (process.env.JOY_RUN_TOKEN ? process.env.JOY_RUN_TOKEN : jdJoyRunToken) : ($.getdata('jdJoyRunToken') || jdJoyRunToken));
   } else {
@@ -134,7 +133,7 @@ async function main() {
       // $.validate = await zooFaker.injectToRequest()
       if ($.isNode()) {
         if (process.env.JOY_RUN_HELP_MYSELF) {
-          console.log(`\n赛跑会先给账号内部助力\n`)
+          console.log(`\n赛跑会先给账号内部助力,如您当前账户有剩下助力机会则为lx0301作者助力\n`)
           let my_run_pins = [];
           Object.values(jdCookieNode).filter(item => item.match(/pt_pin=([^; ]+)(?=;?)/)).map(item => my_run_pins.push(decodeURIComponent(item.match(/pt_pin=([^; ]+)(?=;?)/)[1])))
           run_pins = [...new Set(my_run_pins), [...getRandomArrayElements([...run_pins[0].split(',')], [...run_pins[0].split(',')].length)]];
@@ -192,26 +191,26 @@ async function getToken() {
       $.log(`${$.name} token\n${LKYLToken}\n`);
       $.msg($.name, '更新Token: 成功🎉', ``);
       console.log(`\nToken，${LKYLToken}\n`)
-      // $.http.post({
-      //   url: `http://share.turinglabs.net/api/v3/create/sharecode/`,
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({
-      //     "activity_name": "joy",
-      //     "share_code": LKYLToken,
-      //   }),
-      //   timeout: 30000
-      // }).then((resp) => {
-      //   if (resp.statusCode === 200) {
-      //     try {
-      //       let { body } = resp;
-      //       console.log(`Token提交结果:${body}\n`)
-      //       body = JSON.parse(body);
-      //       console.log(`${body.message}`)
-      //     } catch (e) {
-      //       console.log(`提交Token异常:${e}`)
-      //     }
-      //   }
-      // }).catch((e) => console.log(`catch 宠汪汪TOKEN提交异常:${e}`));
+      $.http.post({
+        url: `http://share.turinglabs.net/api/v3/create/sharecode/`,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          "activity_name": "joy",
+          "share_code": LKYLToken,
+        }),
+        timeout: 30000
+      }).then((resp) => {
+        if (resp.statusCode === 200) {
+          try {
+            let { body } = resp;
+            console.log(`Token提交结果:${body}\n`)
+            body = JSON.parse(body);
+            console.log(`${body.message}`)
+          } catch (e) {
+            console.log(`提交Token异常:${e}`)
+          }
+        }
+      }).catch((e) => console.log(`catch 宠汪汪TOKEN提交异常:${e}`));
       // count = $.getdata('countFlag') ? $.getdata('countFlag') * 1 : 0;
       // count ++;
       // console.log(`count: ${count}`)
@@ -255,28 +254,28 @@ async function getToken() {
     $.done()
   }
 }
-// function readToken() {
-//   return new Promise(resolve => {
-//     $.get({ url: `http://share.turinglabs.net/api/v3/joy/query/1/`, 'timeout': 10000 }, (err, resp, data) => {
-//       try {
-//         if (err) {
-//           console.log(`${JSON.stringify(err)}`)
-//           console.log(`${$.name} API请求失败，请检查网路重试`)
-//         } else {
-//           if (data) {
-//             // if ($.isNode() && !run_pins[0].includes("被折叠的记忆33")) resolve(null);
-//             console.log(`\n\n搬运我脚本修改我内置互助码的，请不要盗取我服务器token\n\n\n`)
-//             data = JSON.parse(data);
-//           }
-//         }
-//       } catch (e) {
-//         $.logErr(e, resp)
-//       } finally {
-//         resolve(data);
-//       }
-//     })
-//   })
-// }
+function readToken() {
+  return new Promise(resolve => {
+    $.get({ url: `https://cdn.xia.me/gettoken`, headers: { 'Host': 'jdsign.cf' }, 'timeout': 10000 }, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          if (data) {
+            // if ($.isNode() && !run_pins[0].includes("被折叠的记忆33")) resolve(null);
+            console.log(`\n\n搬运我脚本修改我内置互助码的，请不要盗取我服务器token\n\n\n`)
+            data = JSON.parse(data);
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
 
 function showMsg() {
   return new Promise(async resolve => {

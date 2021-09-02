@@ -79,7 +79,7 @@ message = ""
       $.index = i + 1;
       $.bean = 0
       await getUA()
-      $.nickName = '';
+      $.nickName = $.UserName;
       console.log(`\n\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       await run();
       if ($.bean > 0) message += `【京东账号${$.index}】获得${$.bean}京豆\n`

@@ -91,7 +91,7 @@ async function run() {
       return
     }
     await getSimpleActInfoVo()
-    $.nickname = '';
+    $.nickName = $.UserName;
     await getMyPing()
     if ($.Pin === "" || typeof $.shopId == 'undefined' || typeof $.venderId == 'undefined') {
       $.log("获取活动信息失败！")

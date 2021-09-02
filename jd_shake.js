@@ -55,7 +55,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
       $.prizeBeanCount = 0;
       $.totalBeanCount = 0;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       message = ''
       await TotalBean();
       console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);

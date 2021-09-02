@@ -78,7 +78,7 @@ message = ""
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       getUA()
-      $.nickName = '';
+      $.nickName = $.UserName;
       console.log(`\n\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       await run();
       if (i == 0 && !$.actorUuid) return
