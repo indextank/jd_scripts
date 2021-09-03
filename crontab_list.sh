@@ -32,6 +32,7 @@
 42 0 * * * node /scripts/myActions/jd_dj_bean.js >>/scripts/logs/jd_dj_bean.log 2>&1                 # 2min
 44 0 * * * node /scripts/myActions/jd_foodRunning.js >>/scripts/logs/jd_foodRunning.log 2>&1         # 2min
 46 0 * * * node /scripts/myActions/jd_gold_creator.js >>/scripts/logs/jd_gold_creator.log 2>&1       # 2min
+48 0 * * * node /scripts/myActions/jd_jxsign.js >>/scripts/logs/jd_jxsign.log 2>&1                   # 1min
 
 # 20 0 * * * node /scripts/myActions/jd_speed_redpocke.js >>/scripts/logs/jd_speed_redpocke.log 2>&1 # 30s
 # 18 0 * * * node /scripts/myActions/jd_fcdyj.js >>/scripts/logs/jd_fcdyj.log 2>&1              # 2s   -- 暂停一段时间
@@ -76,11 +77,12 @@
 5 5 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
 11 5 * * * node /scripts/myActions/jd_joy_run.js >>/scripts/logs/jd_joy_run.log 2>&1
 # 12 5 * * * node /scripts/myActions/jd_try2.js >>/scripts/logs/jd_try2.log 2>&1
-17 5 * * * node /scripts/myActions/jd_dwapp.js >>/scripts/logs/jd_dwapp.log 2>&1               # 1min
-20 5 * * * node /scripts/myActions/jd_jxmc.js >>/scripts/logs/jd_jxmc.log 2>&1                 # 2min
-30 5 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1       # 2min
-35 5 * * * node /scripts/myActions/jd_joy_feedPets.js >>/scripts/logs/jd_joy_feedPets.log 2>&1 # 1min
-43 5 * * * node /scripts/myActions/jd_xyc.js >>/scripts/logs/jd_xyc.log 2>&1
+17 5 * * * node /scripts/myActions/jd_dwapp.js >>/scripts/logs/jd_dwapp.log 2>&1                  # 1min
+20 5 * * * node /scripts/myActions/jd_jxmc.js >>/scripts/logs/jd_jxmc.log 2>&1                    # 2min
+30 5 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1          # 2min
+35 5 * * * node /scripts/myActions/jd_joy_feedPets.js >>/scripts/logs/jd_joy_feedPets.log 2>&1    # 1min
+43 5 * * * node /scripts/myActions/jd_xyc.js >>/scripts/logs/jd_xyc.log 2>&1                      # 5min
+48 5,22 1-7 9 * node /scripts/myActions/gua_opencard21.js >>/scripts/logs/gua_opencard21.log 2>&1 # 7min
 # 53 5 * * * node /scripts/myActions/jd_jddj_collectWater.js >>/scripts/logs/jd_jddj_collectWater.log 2>&1
 
 1 6 * * * node /scripts/myActions/jd_jddj_plantBeans.js >>/scripts/logs/jd_jddj_plantBeans.log 2>&1
@@ -177,9 +179,9 @@
 
 0 15 * * * node /scripts/myActions/jd_mohe.js >>/scripts/logs/jd_mohe.log 2>&1 # 11min ~ 1min
 5 15 * * * node /scripts/myActions/jd_jddj_plantBeans.js >>/scripts/logs/jd_jddj_plantBeans.log 2>&1
-10 15 * * * node /scripts/myActions/jd_cash.js >>/scripts/logs/jd_cash.log 2>&1
+10 15 * * * node /scripts/myActions/jd_cash.js >>/scripts/logs/jd_cash.log 2>&1 # 1min
 # 12 15 * * * node /scripts/myActions/jd_jddj_collectWater.js >>/scripts/logs/jd_jddj_collectWater.log 2>&1
-15 15 * * * node /scripts/myActions/jd_fruit.js >>/scripts/logs/jd_fruit.log 2>&1
+11 15 * * * node /scripts/myActions/jd_fruit.js >>/scripts/logs/jd_fruit.log 2>&1
 20 15 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
 40 15 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1 # 2min
 45 15 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1
