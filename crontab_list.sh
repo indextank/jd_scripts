@@ -51,26 +51,27 @@
 10 1 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1      # 10s
 11 1 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1    # time long
 31 2 * * * node /scripts/myActions/jd_jin_tie.js >>/scripts/logs/jd_jin_tie.log 2>&1
-32 2 * * * node /scripts/myActions/jd_plantBean.js >>/scripts/logs/jd_plantBean.log 2>&1       # 13min
-45 2 * * * node /scripts/myActions/jd_sgmh.js >>/scripts/logs/jd_sgmh.log 2>&1                 # 4min
-49 2 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1       # 2min
-51 2 * * * node /scripts/myActions/jd_mohe.js >>/scripts/logs/jd_mohe.log 2>&1                 # 11min ~ 1min
-3 3 * * * node /scripts/myActions/jd_ljd.js >>/scripts/logs/jd_ljd.log 2>&1                    # 1min
-4 3 * * * node /scripts/myActions/jd_club_lottery.js >>/scripts/logs/jd_club_lottery.log 2>&1  # 4min ~ 1min
-9 3 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1                    # 10min
-20 3 * * * node /scripts/myActions/jd_health.js >>/scripts/logs/jd_health.log 2>&1             # 30min ~ 4min
-50 3 * * * node /scripts/myActions/jd_joy_feedPets.js >>/scripts/logs/jd_joy_feedPets.log 2>&1 # 1min
-51 3 * * * node /scripts/myActions/jd_jdzz.js >>/scripts/logs/jd_jdzz.log 2>&1                 # 2min
-53 3 * * * node /scripts/myActions/jd_live.js >>/scripts/logs/jd_live.log 2>&1                 # 1min
-54 3 * * * node /scripts/myActions/jd_syj.js >>/scripts/logs/jd_syj.log 2>&1                   # 1min
-55 3 * * * node /scripts/myActions/jd_tyt.js >>/scripts/logs/jd_tyt.log 2>&1                   # 1min
-56 3 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1       # 2min
-59 3 * * * node /scripts/myActions/jd_jddj_fruit.js >>/scripts/logs/jd_jddj_fruit.log 2>&1     # 3min
-3 4 * * * node /scripts/myActions/jd_wxFans.js >>/scripts/logs/jd_wxFans.log 2>&1              # 2min
-5 4 * * * node /scripts/myActions/jd_jxg.js >>/scripts/logs/jd_jxg.log 2>&1                    # 2min
-6 4 * * * node /scripts/myActions/jd_superMarket.js >>/scripts/logs/jd_superMarket.log 2>&1    # 24s
-7 4 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1                    # 10min
-18 4 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1       # 10s
+32 2 * * * node /scripts/myActions/jd_plantBean.js >>/scripts/logs/jd_plantBean.log 2>&1        # 13min
+45 2 * * * node /scripts/myActions/jd_sgmh.js >>/scripts/logs/jd_sgmh.log 2>&1                  # 4min
+49 2 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1        # 2min
+51 2 * * * node /scripts/myActions/jd_mohe.js >>/scripts/logs/jd_mohe.log 2>&1                  # 11min ~ 1min
+3 3 * * * node /scripts/myActions/jd_ljd.js >>/scripts/logs/jd_ljd.log 2>&1                     # 1min
+4 3 * * * node /scripts/myActions/jd_club_lottery.js >>/scripts/logs/jd_club_lottery.log 2>&1   # 4min ~ 1min
+9 3 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1                     # 10min
+20 3 * * * node /scripts/myActions/jd_health.js >>/scripts/logs/jd_health.log 2>&1              # 30min ~ 4min
+50 3 * * * node /scripts/myActions/jd_joy_feedPets.js >>/scripts/logs/jd_joy_feedPets.log 2>&1  # 1min
+51 3 * * * node /scripts/myActions/jd_jdzz.js >>/scripts/logs/jd_jdzz.log 2>&1                  # 2min
+53 3 * * * node /scripts/myActions/jd_live.js >>/scripts/logs/jd_live.log 2>&1                  # 1min
+54 3 * * * node /scripts/myActions/jd_syj.js >>/scripts/logs/jd_syj.log 2>&1                    # 1min
+55 3 * * * node /scripts/myActions/jd_tyt.js >>/scripts/logs/jd_tyt.log 2>&1                    # 1min
+56 3 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1        # 2min
+59 3 * * * node /scripts/myActions/jd_jddj_fruit.js >>/scripts/logs/jd_jddj_fruit.log 2>&1      # 3min
+3 4 * * * node /scripts/myActions/jd_wxFans.js >>/scripts/logs/jd_wxFans.log 2>&1               # 2min
+5 4 * * * node /scripts/myActions/jd_jxg.js >>/scripts/logs/jd_jxg.log 2>&1                     # 2min
+6 4 * * * node /scripts/myActions/jd_superMarket.js >>/scripts/logs/jd_superMarket.log 2>&1     # 24s
+7 4 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1                     # 10min
+18 4 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1        # 10s
+19 4 3-13 9 * node /scripts/myActions/gua_opencard22.js >>/scripts/logs/gua_opencard22.log 2>&1 # 6min
 
 # 3 5 * * * node /scripts/myActions/jd_zqfl.js >>/scripts/logs/jd_zqfl.log 2>&1
 3 5 * * * node /scripts/myActions/jd_goodMorning.js >>/scripts/logs/jd_goodMorning.log 2>&1
@@ -241,8 +242,9 @@
 14 22 * * * node /scripts/myActions/jd_wxFans.js >>/scripts/logs/jd_wxFans.log 2>&1
 19 22 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1 # 10s
 22 22 * * * node /scripts/myActions/jd_cfd_loop.js >>/scripts/logs/jd_cfd_loop.log 2>&1
-35 22 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1 # 2min
-40 22 * * * node /scripts/myActions/jd_try.js >>/scripts/logs/jd_try.log 2>&1
+35 22 * * * node /scripts/myActions/jd_jdfactory.js >>/scripts/logs/jd_jdfactory.log 2>&1        # 2min
+37 22 3-13 9 * node /scripts/myActions/gua_opencard22.js >>/scripts/logs/gua_opencard22.log 2>&1 # 6min
+# 37 22 * * * node /scripts/myActions/jd_try.js >>/scripts/logs/jd_try.log 2>&1
 55 22 * * * node /scripts/myActions/jd_z_health_energy.js >>/scripts/logs/jd_z_health_energy.log 2>&1
 
 # 2 23 * * * node /scripts/myActions/jd_jddj_collectWater.js >>/scripts/logs/jd_jddj_collectWater.log 2>&1
