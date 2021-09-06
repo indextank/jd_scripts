@@ -33,6 +33,7 @@
 44 0 * * * node /scripts/myActions/jd_foodRunning.js >>/scripts/logs/jd_foodRunning.log 2>&1         # 2min
 46 0 * * * node /scripts/myActions/jd_gold_creator.js >>/scripts/logs/jd_gold_creator.log 2>&1       # 2min
 48 0 * * * node /scripts/myActions/jd_jxsign.js >>/scripts/logs/jd_jxsign.log 2>&1                   # 1min
+49 0 3-10 9 * node /scripts/myActions/gua_opencard23.js >>/scripts/logs/gua_opencard23.log 2>&1      # 7min 9月3号 ~ 9月10号
 
 # 20 0 * * * node /scripts/myActions/jd_speed_redpocke.js >>/scripts/logs/jd_speed_redpocke.log 2>&1 # 30s
 # 18 0 * * * node /scripts/myActions/jd_fcdyj.js >>/scripts/logs/jd_fcdyj.log 2>&1              # 2s   -- 暂停一段时间
