@@ -102,7 +102,6 @@ function exchange_redpocket() {
       } finally {
         resolve();
       }
-      await $.wait(parseInt(Math.random() * 500, 10))
     })
   })
 }
