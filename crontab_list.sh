@@ -88,6 +88,7 @@
 54 5 * * * node /scripts/myActions/jd_joy_feedPets.js >>/scripts/logs/jd_joy_feedPets.log 2>&1      # 1min
 55 5 * * * node /scripts/myActions/jd_xyc.js >>/scripts/logs/jd_xyc.log 2>&1                        # 5min
 0 6 * * * node /scripts/myActions/jd_jddj_plantBeans.js >>/scripts/logs/jd_jddj_plantBeans.log 2>&1 # 4min
+4 6 6-12 9 * node /scripts/myActions/jd_jika.js >>/scripts/logs/jd_jika.log 2>&1                    # 5min 9月6号 ~ 9月12号
 
 12 6 * * * node /scripts/myActions/jd_fruit.js >>/scripts/logs/jd_fruit.log 2>&1                 # 6min
 18 6 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1    # 1min

@@ -6,17 +6,17 @@
 ============Quantumultx===============
 [task_local]
 #内容鉴赏官
-15 3,6 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_connoisseur.js, tag=内容鉴赏官, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+15 3,6,15 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_connoisseur.js, tag=内容鉴赏官, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "15 3,6 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_connoisseur.js,tag=内容鉴赏官
+cron "15 3,6,15 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_connoisseur.js,tag=内容鉴赏官
 
 ===============Surge=================
-内容鉴赏官 = type=cron,cronexp="15 3,6 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_connoisseur.js
+内容鉴赏官 = type=cron,cronexp="15 3,6,15 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_connoisseur.js
 
 ============小火箭=========
-内容鉴赏官 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_connoisseur.js, cronexpr="15 3,6 * * *", timeout=3600, enable=true
+内容鉴赏官 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_connoisseur.js, cronexpr="15 3,6,15 * * *", timeout=3600, enable=true
  */
 const $ = new Env('内容鉴赏官');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -87,7 +87,7 @@ let allMessage = '';
                         continue
                     }
                     $.delcode = false
-                    await getTaskInfo("2", $.projectCode, $.taskCode, "22", "2", $.shareCodes[j].code)
+                    await getTaskInfo("2", $.projectCode, $.taskCode, "24", "2", $.shareCodes[j].code)
                     await $.wait(2000)
                     if ($.delcode) {
                         $.shareCodes.splice(j, 1)
@@ -167,7 +167,7 @@ async function getActiveInfo(url = 'https://prodev.m.jd.com/mall/active/2y1S9xVY
 }
 async function getTaskInfo(type, projectId, assignmentId, ofn, helpType = '1', itemId = '') {
     let body = { "type": type, "projectId": projectId, "assignmentId": assignmentId, "doneHide": false }
-    if (ofn === "22") body['itemId'] = itemId; body['helpType'] = helpType
+    if (ofn === "24") body['itemId'] = itemId; body['helpType'] = helpType
     return new Promise(async resolve => {
         $.post(taskUrl('interactive_info', body), async (err, resp, data) => {
             try {
@@ -177,7 +177,7 @@ async function getTaskInfo(type, projectId, assignmentId, ofn, helpType = '1', i
                 } else {
                     if (data) {
                         data = JSON.parse(data)
-                        if (ofn === "3" || ofn === "10" || ofn === "14" || ofn === "16" || ofn === "18") {
+                        if (ofn === "3" || ofn === "10" || ofn === "14" || ofn === "16" || ofn === "18" || ofn === "20") {
                             if (ofn !== "3") console.log(`去做【${data.data[0].title}】`)
                             if (data.code === "0" && data.data) {
                                 if (data.data[0].status !== "2") {
@@ -206,7 +206,7 @@ async function getTaskInfo(type, projectId, assignmentId, ofn, helpType = '1', i
                                 console.log(`去做【${data.data[0].title}】`)
                                 if (data.data[0].status !== "2") {
                                     await interactive_accept(type, data.data[0].projectId, data.data[0].assignmentId, data.data[0].itemId)
-                                    await $.wait(2000)
+                                    await $.wait(10000)
                                     await qryViewkitCallbackResult(data.data[0].projectId, data.data[0].assignmentId, data.data[0].itemId)
                                 } else {
                                     console.log(`任务已完成`)
@@ -214,7 +214,7 @@ async function getTaskInfo(type, projectId, assignmentId, ofn, helpType = '1', i
                             } else {
                                 console.log(data.message)
                             }
-                        } else if (ofn === "22") {
+                        } else if (ofn === "24") {
                             if (helpType === '1') {
                                 if (data.code === "0" && data.data) {
                                     if (data.data[0].status !== "2") {
@@ -400,7 +400,10 @@ async function getshareCode() {
             "Content-Type": "application/x-www-form-urlencoded",
             "Origin": "https://prodev.m.jd.com",
             "Accept-Language": "zh-cn",
-            "Accept-Encoding": "gzip, deflate, br"
+            "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./utils/USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+            "Referer": "https://prodev.m.jd.com/mall/active/2y1S9xVYdTud2VmFqhHbkcoAYhJT/index.html",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Cookie": cookie
         }
     }
     return new Promise(async resolve => {
@@ -414,13 +417,15 @@ async function getshareCode() {
                         data = JSON.parse(data)
                         for (let key of Object.keys(data.floorList)) {
                             let vo = data.floorList[key]
-                            if (vo.ofn && vo.ofn === "22") {
+                            if (vo.ofn && vo.ofn === "20") {
+                                await getTaskInfo("1", vo.boardParams.projectCode, vo.boardParams.taskCode, vo.ofn)
+                                await $.wait(2000)
+                            } else if (vo.ofn && vo.ofn === "24") {
                                 $.projectCode = vo.boardParams.projectCode
                                 $.taskCode = vo.boardParams.taskCode
-                                break
                             }
                         }
-                        await getTaskInfo("2", $.projectCode, $.taskCode, "22")
+                        await getTaskInfo("2", $.projectCode, $.taskCode, "24")
                     }
                 }
             } catch (e) {
@@ -560,9 +565,9 @@ function getAuthorShareCode(url) {
 function TotalBean() {
     return new Promise(async resolve => {
         const options = {
-            url: "https://me-api.jd.com/user_new/info/GetJDUserInfoUnion",
+            url: "https://wq.jd.com/user_new/info/GetJDUserInfoUnion?sceneval=2",
             headers: {
-                Host: "me-api.jd.com",
+                Host: "wq.jd.com",
                 Accept: "*/*",
                 Connection: "keep-alive",
                 Cookie: cookie,
@@ -579,11 +584,11 @@ function TotalBean() {
                 } else {
                     if (data) {
                         data = JSON.parse(data);
-                        if (data['retcode'] === "1001") {
+                        if (data['retcode'] === 1001) {
                             $.isLogin = false; //cookie过期
                             return;
                         }
-                        if (data['retcode'] === "0" && data.data && data.data.hasOwnProperty("userInfo")) {
+                        if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
                             $.nickName = data.data.userInfo.baseInfo.nickname;
                         }
                     } else {
