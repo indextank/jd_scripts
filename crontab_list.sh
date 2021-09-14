@@ -50,6 +50,7 @@
 3 1 * * * node /scripts/myActions/jd_redPacket.js >>/scripts/logs/jd_redPacket.log 2>&1         # 1min
 4 1 * * * node /scripts/myActions/jd_dreamFactory.js >/scripts/logs/jd_dreamFactory.log 2>&1
 5 1 * * * node /scripts/myActions/jd_joy_feedPets.js >>/scripts/logs/jd_joy_feedPets.log 2>&1 # 1min
+6 1 13-19 9 * node /scripts/myActions/jd_jump.js >>/scripts/logs/jd_jump.log 2>&1             # 1min
 # 6 1 * * * node /scripts/myActions/jd_necklace.js >>/scripts/logs/jd_necklace.log 2>&1               # 3min
 9 1 * * * node /scripts/myActions/jd_wish.js >>/scripts/logs/jd_wish.log 2>&1                       # 3min
 10 1 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1            # 10s
@@ -275,16 +276,8 @@
 # 喜马拉雅极速版 (# sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk add --no-cache python3 && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && pip install requests rsa)
 31 */1 * * * python3 /scripts/myActions/xmly_speed.py
 
-# 领现金兑换红包
-
-# 摇京豆
-
 # 10 15,16,23 * * * node /scripts/myActions/jd_shake.js >>/scripts/logs/jd_shake.log 2>&1
 
-# 领金贴
-
-# 跳跳乐瓜分京豆
-# 15 0,12,22 * * * node /scripts/myActions/jd_jump.js >>/scripts/logs/jd_jump.log 2>&1
 # 天天提鹅
 # 28 0 * * * node /scripts/myActions/jd_daily_egg.js >>/scripts/logs/jd_daily_egg.log 2>&1
 # 美丽研究院
