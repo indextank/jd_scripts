@@ -1,4 +1,3 @@
-// @grant    require
 /*
 众筹许愿池
 活动入口：京东-京东众筹-众筹许愿池
@@ -6,17 +5,17 @@
 ===============Quantumultx===============
 [task_local]
 #众筹许愿池
-40 0,2 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+0 8,12 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "40 0,2 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js,tag=众筹许愿池
+cron "0 8,12 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js,tag=众筹许愿池
 
 ===============Surge=================
-众筹许愿池 = type=cron,cronexp="40 0,2 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js
+众筹许愿池 = type=cron,cronexp="0 8,12 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js
 
 ============小火箭=========
-众筹许愿池 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, cronexpr="40 0,2 * * *", timeout=3600, enable=true
+众筹许愿池 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, cronexpr="0 8,12 * * *", timeout=3600, enable=true
  */
 const $ = new Env('众筹许愿池');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -26,7 +25,9 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appId = '1E1NXxq0';
+let appIdArr = ['1E1NXxq0', '1ElBTx6o'];
+let appNameArr = ['众筹许愿池', '企有此礼'];
+let appId, appName;
 $.shareCode = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -47,7 +48,7 @@ if ($.isNode()) {
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = $.UserName;
+      $.nickName = '';
       message = '';
       await TotalBean();
       console.log(`\n*******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
@@ -59,35 +60,47 @@ if ($.isNode()) {
         }
         continue
       }
-      await jd_wish();
+      for (let j = 0; j < appIdArr.length; j++) {
+        appId = appIdArr[j]
+        appName = appNameArr[j]
+        console.log(`开始第${j + 1}个活动：${appName}\n`)
+        await jd_wish();
+      }
     }
   }
-  let res = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/wish.json')
+  let res = await getAuthorShareCode('')
   if (!res) {
-    $.http.get({ url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/wish.json' }).then((resp) => { }).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({ url: '' }).then((resp) => { }).catch((e) => console.log('', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/wish.json')
+    res = await getAuthorShareCode('')
   }
   $.shareCode = [...$.shareCode, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
-      $.canHelp = true
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       console.log(`开始内部助力\n`)
-      for (let j = 0; j < $.shareCode.length && $.canHelp; j++) {
-        console.log(`${$.UserName} 去助力 ${$.shareCode[j].use} 的助力码 ${$.shareCode[j].code}`)
-        if ($.UserName == $.shareCode[j].use) {
-          console.log(`不能助力自己\n`)
-          continue
-        }
-        $.delcode = false
-        await harmony_collectScore({ "appId": appId, "taskToken": $.shareCode[j].code, "actionType": "0", "taskId": "6" })
-        await $.wait(2000)
-        if ($.delcode) {
-          $.shareCode.splice(j, 1)
-          j--
-          continue
+      for (let v = 0; v < appIdArr.length; v++) {
+        $.canHelp = true
+        appId = appIdArr[v]
+        appName = appNameArr[v]
+        console.log(`开始助力第${v + 1}个活动：${appName}\n`)
+        for (let j = 0; j < $.shareCode.length && $.canHelp; j++) {
+          if ($.shareCode[j].appId === appId) {
+            console.log(`${$.UserName} 去助力 ${$.shareCode[j].use} 的助力码 ${$.shareCode[j].code}`)
+            if ($.UserName == $.shareCode[j].use) {
+              console.log(`不能助力自己\n`)
+              continue
+            }
+            $.delcode = false
+            await harmony_collectScore({ "appId": appId, "taskToken": $.shareCode[j].code, "actionType": "0", "taskId": "6" })
+            await $.wait(2000)
+            if ($.delcode) {
+              $.shareCode.splice(j, 1)
+              j--
+              continue
+            }
+          }
         }
       }
     }
@@ -109,9 +122,9 @@ async function jd_wish() {
     await $.wait(2000)
 
     if (forNum === 0) {
-      console.log(`\n没有抽奖机会\n`)
+      console.log(`没有抽奖机会\n\n`)
     } else {
-      console.log(`\n可以抽奖${forNum}次，去抽奖\n`)
+      console.log(`可以抽奖${forNum}次，去抽奖\n\n`)
     }
 
     for (let j = 0; j < forNum; j++) {
@@ -138,7 +151,7 @@ async function healthyDay_getHomeData(type = true) {
               for (let key of Object.keys(data.data.result.taskVos).reverse()) {
                 let vo = data.data.result.taskVos[key]
                 if (vo.status !== 2) {
-                  if (vo.taskType === 13) {
+                  if (vo.taskType === 13 || vo.taskType === 12) {
                     console.log(`签到`)
                     await harmony_collectScore({ "appId": appId, "taskToken": vo.simpleRecordInfoVo.taskToken, "taskId": vo.taskId, "actionType": "0" }, vo.taskType)
                   } else if (vo.taskType === 1) {
@@ -172,10 +185,11 @@ async function healthyDay_getHomeData(type = true) {
                       }
                     }
                   } else if (vo.taskType === 14) {
-                    console.log(`【京东账号${$.index}（${$.UserName}）的众筹许愿池好友互助码】${vo.assistTaskDetailVo.taskToken}\n`)
+                    console.log(`【京东账号${$.index}（${$.UserName}）的${appName}好友互助码】${vo.assistTaskDetailVo.taskToken}\n`)
                     if (vo.times !== vo.maxTimes) {
                       $.shareCode.push({
                         "code": vo.assistTaskDetailVo.taskToken,
+                        "appId": appId,
                         "use": $.UserName
                       })
                     }
@@ -247,6 +261,8 @@ function interact_template_getLotteryResult() {
             let userAwardsCacheDto = data.data.result.userAwardsCacheDto
             if (userAwardsCacheDto && userAwardsCacheDto.type === 2) {
               console.log(`抽中：${userAwardsCacheDto.jBeanAwardVo.quantity}${userAwardsCacheDto.jBeanAwardVo.ext}`)
+            } else if (userAwardsCacheDto && userAwardsCacheDto.type === 0) {
+              console.log(`很遗憾未中奖~`)
             } else {
               console.log(JSON.stringify(data))
             }
