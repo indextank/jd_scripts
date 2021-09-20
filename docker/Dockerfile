@@ -33,7 +33,7 @@ RUN set -ex \
     && npm install \
     && npm install jsdom ts-node png-js date-fns \
     && npm install -g ts-md5 dotenv \
-    && npm install -g typescript \
+    && npm install -g typescript form-data \
     && npm install axios --save \
     && cp /scripts/docker/get-pip.py . \
     && python3 get-pip.py \

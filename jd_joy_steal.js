@@ -45,7 +45,8 @@ let jdNotify = false;//是否开启静默运行，false关闭静默运行(即通
 let jdJoyHelpFeed = true;//是否给好友喂食，false为不给喂食，true为给好友喂食，默认给好友喂食
 let jdJoyStealCoin = true;//是否偷好友积分与狗粮，false为否，true为是，默认是偷
 let JD_API_HOST = 'https://jdjoy.jd.com'
-$.invokeKey = 'RtKLB8euDo7KwsO0'
+$.invokeKey = 'JL1VTNRadM68cIMQ'
+$.invokeKey = $.isNode() ? (process.env.JD_invokeKey ? process.env.JD_invokeKey : `${$.invokeKey}`) : ($.getdata('JD_invokeKey') ? $.getdata('JD_invokeKey') : `${$.invokeKey}`);
 let lkt = 0
 if (process.env.JOY_HOST) {
   JD_API_HOST = process.env.JOY_HOST
@@ -83,7 +84,7 @@ $.post = validator.injectToRequest($.post.bind($))
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = $.UserName;
+      $.nickName = '';
       $.HelpFeedFlag = ctrTemp;
       if (!ctrTemp) $.HelpFeedFlag = true
       console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);

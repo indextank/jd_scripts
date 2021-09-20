@@ -35,7 +35,7 @@ cron "13 9 15-21 9 *" script-path=https://raw.githubusercontent.com/smiek2221/sc
 */
 let guaopencard_addSku = "true"
 let guaopencard = "true"
-let guaopencard_draw = "3"
+let guaopencard_draw = "0"
 
 const $ = new Env('9.15~9.21 超店会员福利社');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

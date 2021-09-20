@@ -33,7 +33,8 @@ let signFlag = false
 let successNum = 0
 let errorNum = 0
 let JD_API_HOST = 'https://jdjoy.jd.com'
-$.invokeKey = "RtKLB8euDo7KwsO0"
+$.invokeKey = 'JL1VTNRadM68cIMQ'
+$.invokeKey = $.isNode() ? (process.env.JD_invokeKey ? process.env.JD_invokeKey : `${$.invokeKey}`) : ($.getdata('JD_invokeKey') ? $.getdata('JD_invokeKey') : `${$.invokeKey}`);
 let lkt = 0
 if (process.env.JOY_HOST) {
   JD_API_HOST = process.env.JOY_HOST
@@ -65,7 +66,7 @@ $.post = validator.injectToRequest($.post.bind($), 'channelSign', $.UA)
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
       $.index = i + 1;
-      $.nickName = $.UserName;
+      $.nickName = '';
       console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
       beanNum = 0
       successNum = 0
