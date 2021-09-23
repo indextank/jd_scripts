@@ -74,6 +74,8 @@
 44 3 * * * node /scripts/myActions/jd_superMarket.js >>/scripts/logs/jd_superMarket.log 2>&1   # 24s
 45 3 * * * node /scripts/myActions/jd_joy.js >>/scripts/logs/jd_joy.log 2>&1                   # 10min ~ 1min
 46 3 * * * node /scripts/myActions/jd_moneyTree.js >>/scripts/logs/jd_moneyTree.log 2>&1       # 10s
+47 3 * 9-10 * node /scripts/myActions/jd_decompression.js >>/scripts/logs/jd_decompression.log 2>&1       # 6min 9月21日-10月16号
+# 52 3 * * * node /scripts/myActions/jd_ddwj.js >>/scripts/logs/jd_ddwj.log 2>&1       #
 
 21 4 * * * node /scripts/myActions/jd_speed_sign.js >>/scripts/logs/jd_speed_sign.log 2>&1          # time long ~ 7730s
 46 5 * * * node /scripts/myActions/jd_goodMorning.js >>/scripts/logs/jd_goodMorning.log 2>&1        # 1min
