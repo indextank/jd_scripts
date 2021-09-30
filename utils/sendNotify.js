@@ -391,26 +391,26 @@ function ddBotNotify(text, desp) {
                     resolve(data);
                 }
             })
-        } else if (DD_BOT_TOKEN) {
-            $.post(options, (err, resp, data) => {
-                try {
-                    if (err) {
-                        console.log('钉钉发送通知消息失败！！\n')
-                        console.log(err);
-                    } else {
-                        data = JSON.parse(data);
-                        if (data.errcode === 0) {
-                            console.log('钉钉发送通知消息完成。\n')
-                        } else {
-                            console.log(`${data.errmsg}\n`)
-                        }
-                    }
-                } catch (e) {
-                    $.logErr(e, resp);
-                } finally {
-                    resolve(data);
-                }
-            })
+        // } else if (DD_BOT_TOKEN) {
+        //     $.post(options, (err, resp, data) => {
+        //         try {
+        //             if (err) {
+        //                 console.log('钉钉发送通知消息失败！！\n')
+        //                 console.log(err);
+        //             } else {
+        //                 data = JSON.parse(data);
+        //                 if (data.errcode === 0) {
+        //                     console.log('钉钉发送通知消息完成。\n')
+        //                 } else {
+        //                     console.log(`${data.errmsg}\n`)
+        //                 }
+        //             }
+        //         } catch (e) {
+        //             $.logErr(e, resp);
+        //         } finally {
+        //             resolve(data);
+        //         }
+        //     })
         } else {
             console.log('您未提供钉钉机器人推送所需的DD_BOT_TOKEN或者DD_BOT_SECRET，取消钉钉推送消息通知🚫\n');
             resolve()
