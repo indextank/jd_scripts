@@ -30,15 +30,14 @@ RUN set -ex \
     && rm -fr *.js *.ts \
     && mkdir logs \
     && npm config set registry https://registry.npm.taobao.org \
-    && npm install \
     && npm install jsdom ts-md5 form-data dotenv png-js date-fns typescript ts-node -g --save  --unsafe-perm=true --allow-root \
     && npm install axios --save \
     && cp /scripts/docker/get-pip.py . \
     && python3 get-pip.py \
     #&& curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py \
     && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple requests rsa \
-    && cp /scripts/docker/docker_entrypoint.sh /usr/local/bin
-# && chmod +x /usr/local/bin/docker_entrypoint.sh
+    && cp /scripts/docker/docker_entrypoint.sh /usr/local/bin \
+    && chmod +x /usr/local/bin/docker_entrypoint.sh
 
 WORKDIR /scripts
 
