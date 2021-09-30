@@ -31,9 +31,7 @@ RUN set -ex \
     && mkdir logs \
     && npm config set registry https://registry.npm.taobao.org \
     && npm install \
-    && npm install jsdom ts-node png-js date-fns \
-    && npm install -g ts-md5 dotenv \
-    && npm install -g typescript form-data \
+    && npm install jsdom ts-md5 form-data dotenv png-js date-fns typescript ts-node -g --save  --unsafe-perm=true --allow-root \
     && npm install axios --save \
     && cp /scripts/docker/get-pip.py . \
     && python3 get-pip.py \
