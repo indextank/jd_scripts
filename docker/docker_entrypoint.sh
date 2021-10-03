@@ -36,7 +36,7 @@ echo "------------------------------------------------执行定时任务任务sh
 #测试
 # sh /jd_docker/docker/default_task.sh "$ENABLE_BOT_COMMAND" "$run_cmd"
 #合并
-# sh /scripts/docker/default_task.sh "$ENABLE_BOT_COMMAND" "$run_cmd"
+sh /scripts/docker/default_task.sh "$ENABLE_BOT_COMMAND" "$run_cmd"
 echo "--------------------------------------------------默认定时任务执行完成---------------------------------------------------"
 
 if [ -n "$run_cmd" ]; then

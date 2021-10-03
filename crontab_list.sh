@@ -37,10 +37,10 @@
 49 0 * * * node /scripts/myActions/gua_ddworld.js >>/scripts/logs/gua_ddworld.log 2>&1           # 1min
 50 0 14-22 9 * node /scripts/myActions/gua_opencard18.js >>/scripts/logs/gua_opencard18.log 2>&1 # 1min 9月14号 ~ 9月22号
 51 0 * * * node /scripts/myActions/jd_mf.js >>/scripts/logs/jd_mf.log 2>&1                   # 1min
+52 0 * * * node /scripts/myActions/jd_nzmh.js >>/scripts/logs/jd_nzmh.log 2>&1
 
 # 20 0 * * * node /scripts/myActions/jd_speed_redpocke.js >>/scripts/logs/jd_speed_redpocke.log 2>&1 # 30s
 # 18 0 * * * node /scripts/myActions/jd_fcdyj.js >>/scripts/logs/jd_fcdyj.log 2>&1              # 2s   -- 暂停一段时间
-# 19 0 * * * node /scripts/myActions/jd_nzmh.js >>/scripts/logs/jd_nzmh.log 2>&1  # 出错
 # 50 0 * * * node /scripts/myActions/jd_jddj_getPoints.js >>/scripts/logs/jd_jddj_getPoints.log 2>&1 # 需要登录
 # 53 0 * * * node /scripts/myActions/jd_jddj_collectWater.js >>/scripts/logs/jd_jddj_collectWater.log 2>&1
 
