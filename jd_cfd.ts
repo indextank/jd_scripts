@@ -196,13 +196,13 @@ let UserName: string, index: number;
           await wait(1000)
         }
       }
-    }
-    // 珍珠奖励
-    res = await api(`user/ComposePearlAddProcess`, '__t,strBT,strLT,strZone', {__t: Date.now(), strBT: strDT, strLT: strLT})
-    if (res.iRet === 0) {
-      console.log(`合成成功：获得${res.ddwAwardHb / 100}红包，当前有${res.dwCurProgress}珍珠，${res.ddwVirHb / 100}红包`)
-    } else {
-      console.log('合成失败：', res)
+      // 珍珠奖励
+      res = await api(`user/ComposePearlAddProcess`, '__t,strBT,strLT,strZone', {__t: Date.now(), strBT: strDT, strLT: strLT})
+      if (res.iRet === 0) {
+        console.log(`合成成功：获得${res.ddwAwardHb / 100}红包，当前有${res.dwCurProgress}珍珠，${res.ddwVirHb / 100}红包`)
+      } else {
+        console.log('合成失败：', res)
+      }
     }
 
     // 签到 助力奖励
@@ -449,8 +449,8 @@ let UserName: string, index: number;
 
   // 获取随机助力码
   try {
-    let { data } = await axios.get('https://raw.githubusercontent.com/indextank/jd_scripts/main/shareCodes/jd_cfd.json', {timeout: 10000})
-    console.log('获取到20个随机助力码:', data.data)
+    let { data }: any = await axios.get('https://raw.githubusercontent.com/indextank/jd_scripts/main/shareCodes/jd_cfd.json', {timeout: 10000})
+    //console.log('获取到20个随机助力码:', data.data)
     shareCodes = [...shareCodes, ...data.data]
   } catch (e) {
     console.log('获取助力池失败')
@@ -490,7 +490,7 @@ function api(fn: string, stk: string, params: Params = {}, taskPosition = '') {
         'User-Agent': USER_AGENT,
         'Cookie': cookie
       }
-    }).then(res => {
+    }).then((res: any) => {
       resolve(res.data)
     }).catch(e => {
       reject(e)
@@ -551,7 +551,7 @@ function makeShareCodes() {
     let pin: string = cookie.match(/pt_pin=([^;]*)/)![1]
     pin = Md5.hashStr(pin)
     axios.get(`https://api.jdsharecode.xyz/api/autoInsert/jxcfd?sharecode=${res.strMyShareId}&bean=${bean}&farm=${farm}&pin=${pin}`, {timeout: 10000})
-      .then(res => {
+      .then((res: any) => {
         if (res.data.code === 200)
           console.log('已自动提交助力码')
         else

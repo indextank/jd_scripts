@@ -250,6 +250,5 @@ cat /scripts/docker/docker_entrypoint.sh >/usr/local/bin/docker_entrypoint.sh
 echo "发送通知"
 export NOTIFY_CONTENT=""
 cd /scripts/docker
-npm install jsdom date-fns png-js typescript ts-node
-npm install axios --save
-# node notify_docker_user.js
+npm install jsdom ts-md5 dotenv png-js date-fns typescript ts-node -g --save  --unsafe-perm=true --allow-root
+node notify_docker_user.js
